@@ -1,0 +1,9 @@
+<%= form_with(model: @room) do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+
+  <%= f.label :description %>
+  <%= f.text_area :description %>
+
+  <%= f.submit "Submit" %>
+<% end %>
