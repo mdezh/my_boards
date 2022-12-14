@@ -1,4 +1,8 @@
 <h1>Rooms:</h1>
+<% if flash[:notice] %>
+  <div><%= flash[:notice] %></div>
+  <p></p>
+<% end %>
 <%= render @rooms %>
 <p></p>
 <button>New room</button>
