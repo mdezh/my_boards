@@ -1,4 +1,8 @@
 <details>
-  <summary><%= room.name %> <button>Edit</button> <button>Delete</button> </summary>
+  <summary>
+    <%= room.name %>
+    <%= link_to "Edit", edit_room_path(room) %>
+    <%= link_to "Delete", "#" %>
+  </summary>
   <%= room.description %>
 </details>
