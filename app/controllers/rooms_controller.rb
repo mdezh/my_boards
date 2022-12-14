@@ -17,7 +17,8 @@ class RoomsController < ApplicationController
   private
 
   def set_room
-    @room = Room.find(params[:id])
+    @room = Room.find_by(id: params[:id])
+    redirect_to root_path unless @room
   end
 
   def room_params
