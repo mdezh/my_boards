@@ -2,7 +2,7 @@
   <summary>
     <%= room.name %>
     <%= link_to "Edit", edit_room_path(room) %>
-    <%= link_to "Delete", "#" %>
+    <%= link_to "Delete", room, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
   </summary>
   <%= room.description %>
 </details>

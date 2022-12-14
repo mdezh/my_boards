@@ -1,5 +1,5 @@
 class RoomsController < ApplicationController
-  before_action :set_room, only: %i[edit update]
+  before_action :set_room, only: %i[edit update destroy]
 
   def index
     @rooms = Room.all
@@ -7,11 +7,17 @@ class RoomsController < ApplicationController
 
   def update
     if @room.update(room_params)
-      flash[:success] = 'Room changed'
+      flash[:notice] = 'Room changed'
       redirect_to root_path
     else
       render 'edit', status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    @room.destroy
+    flash[:notice] = 'Room deleted'
+    redirect_to root_path, status: :see_other
   end
 
   private
