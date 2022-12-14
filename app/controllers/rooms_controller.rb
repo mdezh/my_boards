@@ -5,6 +5,20 @@ class RoomsController < ApplicationController
     @rooms = Room.all
   end
 
+  def new
+    @room = Room.new
+  end
+
+  def create
+    @room = Room.new(room_params)
+    if @room.save
+      flash[:notice] = 'New room created'
+      redirect_to root_path
+    else
+      render 'new', status: :unprocessable_entity
+    end
+  end
+
   def update
     if @room.update(room_params)
       flash[:notice] = 'Room changed'
