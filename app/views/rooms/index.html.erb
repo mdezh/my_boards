@@ -1,8 +1,5 @@
 <h1>Rooms:</h1>
-<% if flash[:notice] %>
-  <div><%= flash[:notice] %></div>
-  <p></p>
-<% end %>
+<%= render 'shared/flash' %>
 <%= render @rooms %>
 <p></p>
 <%= link_to "New room", new_room_path %>
