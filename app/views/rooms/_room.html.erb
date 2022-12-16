@@ -6,9 +6,9 @@
   </h2>
   <div id="<%= dom_id(room) %>-collapse" class="accordion-collapse collapse" data-bs-parent="#<%= parent_id %>">
     <div class="accordion-body">
-      <%= room.description %>
-      <%= link_to "Edit", edit_room_path(room) %>
-      <%= link_to "Delete", room, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+      <p><%= room.description %></p>
+      <%= link_to "Edit", edit_room_path(room), class: "btn btn-secondary", role: "button" %>
+      <%= link_to "Delete", room, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger", role: "button" %>
     </div>
   </div>
 </div>
