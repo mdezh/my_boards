@@ -1,5 +1,9 @@
 <h1>Rooms:</h1>
 <%= render 'shared/flash' %>
-<%= render @rooms %>
+
+<div class="accordion" id="rooms-accordion">
+  <%= render @rooms, parent_id: "rooms-accordion" %>
+</div>
+
 <p></p>
 <%= link_to "New room", new_room_path %>
