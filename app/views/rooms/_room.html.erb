@@ -1,17 +1,19 @@
-<div class="list-group-item">
+<div class="list-group-item list-group-item-action">
   <turbo-frame id="<%= dom_id(room) %>">
     <div class="hover-wrapper">
       <div class="d-flex w-100 justify-content-between align-items-center">
-        <a href="#" class="h6 my-2 text-truncate">
+        <a href="/" class="h6 my-2 text-truncate stretched-link">
           <%= room.name %>
         </a>
-        <div class="btn-group hover-content-flex" role="group">
-          <%= link_to "", edit_room_path(room), class: "btn btn-secondary btn-sm bi bi-pen", role: "button" %>
-          <%= link_to "", room, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
-            class: "btn btn-danger btn-sm bi bi-trash", role: "button" %>
+        <div class="hover-content-block">
+          <div class="btn-group" role="group">
+            <%= link_to "", edit_room_path(room), class: "btn btn-secondary btn-sm bi bi-pen", role: "button" %>
+            <%= link_to "", room, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
+              class: "btn btn-danger btn-sm bi bi-trash", role: "button" %>
+          </div>
         </div>
       </div>
-      <div class="card text-bg-light hover-content-block mt-3 w-75">
+      <div class="card text-bg-light hover-content-block w-75">
         <div class="card-body">
           <%= turbo_frame_tag dom_id(room, :details), loading: :lazy, src: details_room_path(room) do %>
             <div class="spinner-border" role="status">
