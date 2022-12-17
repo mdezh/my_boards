@@ -3,8 +3,9 @@
   <div class="d-flex w-100 justify-content-between">
     <h5 class="text-truncate"><%= room.name %></h5>
     <div class="btn-group" role="group" hidden data-show-on-hover-target="hidden">
-      <%= link_to "Edit", edit_room_path(room), class: "btn btn-secondary btn-sm", role: "button" %>
-      <%= link_to "Delete", room, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger btn-sm", role: "button" %>
+      <%= link_to "", edit_room_path(room), class: "btn btn-secondary btn-sm bi bi-pen", role: "button" %>
+      <%= link_to "", room, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
+        class: "btn btn-danger btn-sm bi bi-trash", role: "button" %>
     </div>
   </div>
 </div>
