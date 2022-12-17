@@ -1,10 +1,10 @@
 <div class="list-group-item" data-controller="show-on-hover"
      data-action="mouseenter->show-on-hover#show mouseleave->show-on-hover#hide">
-  <div class="d-flex w-100 justify-content-between">
-    <h5 class="text-truncate popover-with-html" id="<%= dom_id(room) %>-name"
+  <div class="d-flex w-100 justify-content-between align-items-center">
+    <h6 class="my-2 text-truncate popover-with-html" id="<%= dom_id(room) %>-name"
         data-bs-toggle="popover" data-bs-trigger="hover" data-bs-placement="bottom">
       <%= room.name %>
-    </h5>
+    </h6>
     <div class="btn-group" role="group" hidden data-show-on-hover-target="hidden">
       <%= link_to "", edit_room_path(room), class: "btn btn-secondary btn-sm bi bi-pen", role: "button" %>
       <%= link_to "", room, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
