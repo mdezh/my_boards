@@ -15,3 +15,12 @@
  */
 
 @import "bootstrap";
+
+.popover-without-arrow {
+  --bs-popover-arrow-width: 0rem;
+  --bs-popover-arrow-height: 0rem;
+}
+
+.hidden-content {
+  display: none;
+}
