@@ -1,12 +1,8 @@
-<div class="accordion-item">
-  <h2 class="accordion-header">
-    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#<%= dom_id(room) %>-collapse">
-      <%= room.name %>
-    </button>
-  </h2>
-  <div id="<%= dom_id(room) %>-collapse" class="accordion-collapse collapse" data-bs-parent="#<%= parent_id %>">
-    <div class="accordion-body">
-      <p><%= room.description %></p>
+<div class="list-group-item" data-controller="show-on-hover"
+     data-action="mouseenter->show-on-hover#show mouseleave->show-on-hover#hide">
+  <div class="d-flex w-100 justify-content-between">
+    <h5 class="text-truncate"><%= room.name %></h5>
+    <div class="btn-group" role="group" hidden data-show-on-hover-target="hidden">
       <%= link_to "Edit", edit_room_path(room), class: "btn btn-secondary btn-sm", role: "button" %>
       <%= link_to "Delete", room, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger btn-sm", role: "button" %>
     </div>
