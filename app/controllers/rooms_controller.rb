@@ -1,8 +1,16 @@
 class RoomsController < ApplicationController
-  before_action :set_room, only: %i[edit update destroy details]
+  before_action :set_room, only: %i[show edit update destroy details]
 
   def index
     @rooms = Room.all
+  end
+
+  def show
+    if request.headers.to_h['HTTP_TURBO_FRAME']
+      render @room
+    else
+      redirect_to root_path
+    end
   end
 
   def new
