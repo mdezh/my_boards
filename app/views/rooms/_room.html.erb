@@ -12,7 +12,9 @@
       <div class="card hover-content-block w-50">
         <div class="card-body">
           <%= turbo_frame_tag dom_id(room, :details), loading: :lazy, src: details_room_path(room) do %>
-            Loading...
+            <div class="spinner-border" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
           <% end %>
         </div>
       </div>
