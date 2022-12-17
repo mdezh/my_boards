@@ -18,11 +18,22 @@
 
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css");
 
-.popover-without-arrow {
-  --bs-popover-arrow-width: 0rem;
-  --bs-popover-arrow-height: 0rem;
+.hover-wrapper {
+  .hover-content-flex,
+  .hover-content-block {
+    display: none;
+  }
+  .hover-content-block {
+    position: absolute;
+    z-index: $zindex-popover;
+  }
 }
 
-.hidden-content {
-  display: none;
+.hover-wrapper:hover {
+  .hover-content-block {
+    display: block;
+  }
+  .hover-content-flex {
+    display: flex;
+  }
 }

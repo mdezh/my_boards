@@ -1,5 +1,5 @@
 class RoomsController < ApplicationController
-  before_action :set_room, only: %i[edit update destroy]
+  before_action :set_room, only: %i[edit update destroy details]
 
   def index
     @rooms = Room.all
