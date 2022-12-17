@@ -1,13 +1,13 @@
 <turbo-frame id="<%= dom_id(@room) %>">
   <%= form_with(model: @room) do |f| %>
-    <%= f.label :name %>
-    <%= f.text_field :name %>
+    <!-- <%= f.label :name, class: "form-label"%> -->
+    <%= f.text_field :name, class: "form-control mb-3", placeholder: "Room name" %>
 
-    <%= f.label :description %>
-    <%= f.text_area :description %>
+    <!-- <%= f.label :description, class: "form-label" %> -->
+    <%= f.text_area :description, class: "form-control mb-3", placeholder: "Description"  %>
 
-    <%= f.submit "Submit" %>
+    <%= f.submit "Submit", class: "btn btn-primary" %>
     <% cancel_path = @room.id ? room_path(@room) : root_path %>
-    <%= link_to "Cancel", cancel_path, class: "cancel-btn" %>
+    <%= link_to "Cancel", cancel_path, class: "btn btn-secondary cancel-btn" %>
   <% end %>
 </turbo-frame>
