@@ -5,5 +5,5 @@ import "controllers";
 import "@popperjs/core";
 import "bootstrap";
 
-import "./init_tooltips";
-import "./init_popovers";
+// import "./init_tooltips";
+// import "./init_popovers";
