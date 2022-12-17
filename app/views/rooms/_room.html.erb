@@ -5,7 +5,7 @@
         <a href="/" class="h6 my-2 text-truncate stretched-link">
           <%= room.name %>
         </a>
-        <div class="hover-content-block">
+        <div class="hover-content-block shadow">
           <div class="btn-group" role="group">
             <%= link_to "", edit_room_path(room), class: "btn btn-secondary btn-sm bi bi-pen", role: "button" %>
             <%= link_to "", room, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
@@ -13,7 +13,7 @@
           </div>
         </div>
       </div>
-      <div class="card text-bg-light hover-content-block w-75">
+      <div class="card text-bg-light hover-content-block w-75 shadow">
         <div class="card-body">
           <%= turbo_frame_tag dom_id(room, :details), loading: :lazy, src: details_room_path(room) do %>
             <div class="spinner-border" role="status">
