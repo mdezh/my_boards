@@ -31,6 +31,8 @@
 
 .hover-wrapper:hover {
   .hover-content-block {
+    left: 50%;
+    transform: translate(-50%, 0);
     display: block;
   }
   .hover-content-flex {
