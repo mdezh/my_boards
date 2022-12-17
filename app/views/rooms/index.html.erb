@@ -1,18 +1,21 @@
-<div class="row">
+<div class="row mt-3">
   <div class="col-md-6">
-    <h1 class="popover-with-html" id="header1"
-        data-bs-toggle="popover" data-bs-trigger="hover focus"
-        data-bs-custom-class="popover-without-arrow">
-      Rooms:
-    </h1>
+    <div class="d-flex w-100 justify-content-between">
+      <h1 class="popover-with-html" id="header1"
+          data-bs-toggle="popover" data-bs-trigger="hover focus"
+          data-bs-custom-class="popover-without-arrow">
+        Rooms:
+      </h1>
+      <div>
+        <%= link_to "", new_room_path, class: "btn btn-primary bi bi-plus-lg", role: "button" %>
+      </div>
+    </div>
+
     <%= render 'shared/flash' %>
 
     <div class="list-group">
       <%= render @rooms %>
     </div>
-
-    <p></p>
-    <%= link_to "Add room", new_room_path, class: "btn btn-primary", role: "button" %>
   </div>
 </div>
 
