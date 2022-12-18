@@ -20,7 +20,6 @@ class RoomsController < ApplicationController
   def create
     @room = Room.new(room_params)
     if @room.save
-      flash[:notice] = 'New room created'
       redirect_to root_path
     else
       render 'new', status: :unprocessable_entity
@@ -29,7 +28,6 @@ class RoomsController < ApplicationController
 
   def update
     if @room.update(room_params)
-      flash[:notice] = 'Room changed'
       redirect_to root_path
     else
       render 'edit', status: :unprocessable_entity
@@ -38,7 +36,6 @@ class RoomsController < ApplicationController
 
   def destroy
     @room.destroy
-    flash[:notice] = 'Room deleted'
     redirect_to root_path, status: :see_other
   end
 
