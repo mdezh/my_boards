@@ -1,13 +1,11 @@
-<turbo-frame id="<%= dom_id(@room) %>">
-  <%= form_with(model: @room) do |f| %>
-    <!-- <%= f.label :name, class: "form-label"%> -->
-    <%= f.text_field :name, class: "form-control mb-3", placeholder: "Room name" %>
+<%= form_with(model: @room, id: dom_id(@room)) do |f| %>
+  <!-- <%= f.label :name, class: "form-label"%> -->
+  <%= f.text_field :name, class: "form-control mb-3", placeholder: "Room name" %>
 
-    <!-- <%= f.label :description, class: "form-label" %> -->
-    <%= f.text_area :description, class: "form-control mb-3", placeholder: "Description"  %>
+  <!-- <%= f.label :description, class: "form-label" %> -->
+  <%= f.text_area :description, class: "form-control mb-3", placeholder: "Description"  %>
 
-    <%= f.submit "Submit", class: "btn btn-primary" %>
-    <% cancel_path = @room.id ? room_path(@room) : root_path %>
-    <%= link_to "Cancel", cancel_path, class: "btn btn-secondary cancel-btn" %>
-  <% end %>
-</turbo-frame>
+  <%= f.submit "Submit", class: "btn btn-primary" %>
+  <% cancel_path = @room.id ? room_path(@room) : cancel_new_room_path %>
+  <%= link_to "Cancel", cancel_path, class: "btn btn-secondary cancel-btn", data: { turbo_stream: ""} %>
+<% end %>
