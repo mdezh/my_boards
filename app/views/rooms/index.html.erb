@@ -1,6 +1,6 @@
 <div class="row mt-3">
   <div class="col-md-5">
-    <div class="d-flex w-100 justify-content-between">
+    <div class="d-flex w-100 justify-content-between mb-3">
       <h1>
         Rooms:
       </h1>
@@ -11,8 +11,14 @@
 
     <%= render 'shared/flash' %>
 
-    <div class="list-group">
-      <%= render @rooms %>
-    </div>
+    <% if @rooms.empty? %>
+      <div class="text-center">
+        <h5>No rooms now</h5>
+      </div>
+    <% else %>
+      <div class="list-group">
+        <%= render @rooms %>
+      </div>
+    <% end %>
   </div>
 </div>
