@@ -19,7 +19,7 @@ class RoomsController < ApplicationController
       format.turbo_stream do
         render turbo_stream: [
           turbo_stream.replace('add_room_btn', partial: 'add_room_btn', locals: { disabled: true }),
-          turbo_stream.append('new_room_wrapper', partial: 'form')
+          turbo_stream.before('room_list', partial: 'form')
         ]
       end
       format.html
