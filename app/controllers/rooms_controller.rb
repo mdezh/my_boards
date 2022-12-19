@@ -2,7 +2,7 @@ class RoomsController < ApplicationController
   before_action :set_room, only: %i[show edit update destroy details]
 
   def index
-    @rooms = Room.order(created_at: :desc)
+    @rooms = Room.all
   end
 
   def show
@@ -15,59 +15,14 @@ class RoomsController < ApplicationController
 
   def new
     @room = Room.new
-    respond_to do |format|
-      format.turbo_stream do
-        render turbo_stream: [
-          turbo_stream.replace('add_room_btn', partial: 'add_room_btn', locals: { disabled: true }),
-          turbo_stream.before('room_list', partial: 'form')
-        ]
-      end
-      format.html { render 'new' }
-    end
-  end
-
-  def cancel
-    respond_to do |format|
-      format.turbo_stream do
-        render turbo_stream: [
-          turbo_stream.remove('new_room'),
-          turbo_stream.replace(
-            'add_room_btn',
-            partial: 'add_room_btn',
-            locals: { disabled: false }
-          )
-        ]
-      end
-      format.html { redirect_to root_path }
-    end
   end
 
   def create
     @room = Room.new(room_params)
-    respond_to do |format|
-      if @room.save
-        format.turbo_stream do
-          render turbo_stream: [
-            turbo_stream.remove('new_room'),
-            turbo_stream.prepend('room_list', @room),
-            turbo_stream.replace(
-              'add_room_btn',
-              partial: 'add_room_btn',
-              locals: { disabled: false }
-            )
-          ]
-        end
-        format.html { redirect_to root_path }
-      else
-        format.turbo_stream do
-          render turbo_stream: turbo_stream.update(
-            'new_room',
-            partial: 'form',
-            status: :unprocessable_entity
-          )
-        end
-        format.html { render 'new', status: :unprocessable_entity }
-      end
+    if @room.save
+      redirect_to root_path
+    else
+      render 'new', status: :unprocessable_entity
     end
   end
 

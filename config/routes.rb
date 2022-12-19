@@ -4,6 +4,5 @@ Rails.application.routes.draw do
     member do
       get :details
     end
-    get 'cancel', on: :new
   end
 end
