@@ -15,14 +15,42 @@ class RoomsController < ApplicationController
 
   def new
     @room = Room.new
+    respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream: [
+          turbo_stream.append('new_room_wrapper', partial: 'form')
+        ]
+      end
+      format.html
+    end
+  end
+
+  def cancel
+    render 'shared/_empty_frame', locals: { id: 'new_room' }
   end
 
   def create
     @room = Room.new(room_params)
-    if @room.save
-      redirect_to root_path
-    else
-      render 'new', status: :unprocessable_entity
+    respond_to do |format|
+      if @room.save
+        format.turbo_stream do
+          render turbo_stream: [
+            turbo_stream.remove('no_rooms'),
+            turbo_stream.remove('new_room'),
+            turbo_stream.prepend('room_list', partial: 'room', locals: { room: @room })
+          ]
+        end
+        format.html { redirect_to root_path }
+      else
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace(
+            'new_room',
+            partial: 'form',
+            status: :unprocessable_entity
+          )
+        end
+        format.html { render 'new', status: :unprocessable_entity }
+      end
     end
   end
 
@@ -37,9 +65,12 @@ class RoomsController < ApplicationController
   def destroy
     @room.destroy
     respond_to do |format|
-      format.turbo_stream { render turbo_stream: turbo_stream.remove(helpers.dom_id(@room, :list_item)) }
+      format.turbo_stream do
+        render turbo_stream: [
+          turbo_stream.remove(helpers.dom_id(@room, :list_item))
+        ] + (Room.count.zero? ? [turbo_stream.prepend('room_list', partial: 'no_rooms')] : [])
+      end
     end
-    # redirect_to root_path, status: :see_other
   end
 
   private

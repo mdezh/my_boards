@@ -7,7 +7,7 @@
     <%= f.text_area :description, class: "form-control mb-3", placeholder: "Description"  %>
 
     <%= f.submit "Submit", class: "btn btn-primary" %>
-    <% cancel_path = @room.id ? room_path(@room) : root_path %>
+    <% cancel_path = @room.id ? room_path(@room) : cancel_new_room_path %>
     <%= link_to "Cancel", cancel_path, class: "btn btn-secondary cancel-btn" %>
   <% end %>
 </turbo-frame>

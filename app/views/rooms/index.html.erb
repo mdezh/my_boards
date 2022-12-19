@@ -1,22 +1,21 @@
 <div class="row mt-3">
   <div class="col-md-5">
     <div class="d-flex w-100 justify-content-between mb-3">
-      <h1>
-        Rooms:
-      </h1>
+      <h1>Rooms:</h1>
       <div>
-        <%= link_to "", new_room_path, class: "btn btn-primary bi bi-plus-lg", role: "button" %>
+        <%= link_to "", new_room_path, class: "btn btn-primary bi bi-plus-lg",
+          role: "button", data: { turbo_stream: ""} %>
       </div>
     </div>
 
-    <% if @rooms.empty? %>
-      <div class="text-center text-secondary">
-        <h5>No rooms now</h5>
-      </div>
-    <% else %>
-      <div class="list-group">
-        <%= render @rooms %>
-      </div>
-    <% end %>
+    <div id="new_room_wrapper">
+    </div>
+
+    <div id="room_list" class="list-group mt-3">
+      <% if @rooms.empty? %>
+        <%= render 'no_rooms' %>
+      <% end %>
+      <%= render @rooms %>
+    </div>
   </div>
 </div>
