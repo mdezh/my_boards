@@ -6,18 +6,10 @@ class RoomsController < ApplicationController
   end
 
   def show
-    respond_to do |format|
-      format.turbo_stream do
-        render turbo_stream: [
-          turbo_stream.replace(
-            helpers.dom_id(@room),
-            partial: 'room_inside',
-            locals: { room: @room }
-          ),
-          turbo_stream.replace('add_room_btn', partial: 'add_room_btn')
-        ]
-      end
-      format.html { redirect_to root_path }
+    if request.headers.to_h['HTTP_TURBO_FRAME']
+      render @room
+    else
+      redirect_to root_path
     end
   end
 
@@ -79,30 +71,11 @@ class RoomsController < ApplicationController
     end
   end
 
-  def edit
-    respond_to do |format|
-      format.turbo_stream do
-        render turbo_stream: [
-          turbo_stream.replace(helpers.dom_id(@room), partial: 'form'),
-          turbo_stream.replace('add_room_btn', partial: 'add_room_btn', locals: { disabled: true })
-        ]
-      end
-      format.html { render 'edit' }
-    end
-  end
-
   def update
     if @room.update(room_params)
-      show
+      redirect_to root_path
     else
-      respond_to do |format|
-        format.turbo_stream do
-          render turbo_stream: [
-            turbo_stream.replace(helpers.dom_id(@room), partial: 'form', status: :unprocessable_entity)
-          ]
-        end
-        format.html { render 'edit', status: :unprocessable_entity }
-      end
+      render 'edit', status: :unprocessable_entity
     end
   end
 
