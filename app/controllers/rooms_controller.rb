@@ -36,7 +36,10 @@ class RoomsController < ApplicationController
 
   def destroy
     @room.destroy
-    redirect_to root_path, status: :see_other
+    respond_to do |format|
+      format.turbo_stream { render turbo_stream: turbo_stream.remove(helpers.dom_id(@room, :list_item)) }
+    end
+    # redirect_to root_path, status: :see_other
   end
 
   private
