@@ -1,4 +1,11 @@
-<turbo-frame id="<%= dom_id(@room) %>">
+<% cancel_path = @room.id ? room_path(@room) : root_path %>
+<% prevent_cancel_request = @room.id ? false: true %>
+
+<%= turbo_frame_tag dom_id(@room), data: {
+    controller: "eraser class-changer", eraser_selector_value: "#new_room",
+    eraser_prevent_value: prevent_cancel_request,
+    class_changer_selector_value: "#add_room_btn",
+    class_changer_class_value: "disabled" } do %>
   <%= form_with(model: @room) do |f| %>
     <!-- <%= f.label :name, class: "form-label"%> -->
     <%= f.text_field :name, class: "form-control mb-3", placeholder: "Room name" %>
@@ -7,7 +14,7 @@
     <%= f.text_area :description, class: "form-control mb-3", placeholder: "Description"  %>
 
     <%= f.submit "Submit", class: "btn btn-primary" %>
-    <% cancel_path = @room.id ? room_path(@room) : cancel_new_room_path %>
-    <%= link_to "Cancel", cancel_path, class: "btn btn-secondary cancel-btn" %>
+    <%= link_to "Cancel", cancel_path, class: "btn btn-secondary cancel-btn",
+      data: { action: "click->class-changer#remove click->eraser#erase"} %>
   <% end %>
-</turbo-frame>
+<% end %>

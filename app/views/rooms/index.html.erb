@@ -2,9 +2,9 @@
   <div class="col-md-5">
     <div class="d-flex w-100 justify-content-between mb-3">
       <h1>Rooms:</h1>
-      <div>
-        <%= link_to "", new_room_path, class: "btn btn-primary bi bi-plus-lg",
-          role: "button", data: { turbo_stream: ""} %>
+      <div data-controller="clicker class-changer" data-clicker-selector-value=".cancel-btn"
+          data-class-changer-selector-value="#add_room_btn" data-class-changer-class-value="disabled">
+        <%= render 'add_room_btn' %>
       </div>
     </div>
 

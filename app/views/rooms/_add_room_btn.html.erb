@@ -1,0 +1,4 @@
+<%= link_to "", new_room_path, id: "add_room_btn",
+  class: "btn btn-primary bi bi-plus-lg #{defined?(disabled) && disabled ? 'disabled' : ''}",
+  role: "button", data: { turbo_stream: "",
+                          action: "click->class-changer#add click->clicker#click"} %>
