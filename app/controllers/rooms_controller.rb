@@ -53,10 +53,20 @@ class RoomsController < ApplicationController
   end
 
   def update
-    if @room.update(room_params)
-      redirect_to root_path
-    else
-      render 'edit', status: :unprocessable_entity
+    respond_to do |format|
+      if @room.update(room_params)
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace(helpers.dom_id(@room), partial: 'room_inner',
+                                                                           locals: { room: @room })
+        end
+        format.html { redirect_to root_path }
+      else
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace(helpers.dom_id(@room), partial: 'form',
+                                                                           status: :unprocessable_entity)
+        end
+        format.html { render 'edit', status: :unprocessable_entity }
+      end
     end
   end
 
