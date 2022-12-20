@@ -17,10 +17,7 @@ class RoomsController < ApplicationController
     @room = Room.new
     respond_to do |format|
       format.turbo_stream do
-        render turbo_stream: [
-          turbo_stream.replace('add_room_btn', partial: 'add_room_btn', locals: { disabled: true }),
-          turbo_stream.before('room_list', partial: 'form')
-        ]
+        render turbo_stream: turbo_stream.before('room_list', partial: 'form')
       end
       format.html
     end
@@ -34,7 +31,7 @@ class RoomsController < ApplicationController
           render turbo_stream: [
             turbo_stream.remove('no_rooms'),
             turbo_stream.remove('new_room'),
-            turbo_stream.replace('add_room_btn', partial: 'add_room_btn'),
+            turbo_stream.replace('add_room_btn', partial: 'add_room_btn'),    # reenable button
             turbo_stream.prepend('room_list', partial: 'room', locals: { room: @room })
           ]
         end
