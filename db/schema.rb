@@ -20,10 +20,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_14_203229) do
   end
 
   create_table "rooms", force: :cascade do |t|
-    t.string "name"
-    t.string "description"
+    t.string "name", null: false
+    t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_rooms_on_name", unique: true
   end
 
   add_foreign_key "posts", "rooms"
