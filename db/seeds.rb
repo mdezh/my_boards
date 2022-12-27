@@ -6,8 +6,8 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
-10.times do
+100.times do
   name = (1..rand(1..5)).map { Faker::Hobby.activity }.join(' ')
   description = Faker::Lorem.sentence(word_count: 1, supplemental: true, random_words_to_add: 30)
-  Room.create!(name:, description:)
+  Room.create(name:, description:)
 end
