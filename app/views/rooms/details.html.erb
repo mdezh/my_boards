@@ -4,7 +4,7 @@
     <% if @room.description.empty? %>
       <span class="text-secondary">No description</span>
     <% else %>
-      <%= @room.description %>
+      <span style="white-space: pre-wrap;"><%= @room.description %></span>
     <% end %>
   </p>
 <% end %>
