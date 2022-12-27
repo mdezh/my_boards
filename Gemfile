@@ -74,3 +74,5 @@ end
 gem "faker", "~> 3.0"
 
 gem "bootstrap", "~> 5.2"
+
+gem "pagy", "~> 6.0"
