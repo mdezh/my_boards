@@ -1,5 +1,5 @@
 <%= turbo_frame_tag dom_id(@room, :details) do %>
-  <h6 class="card-title fw-bold"><%= @room.id %> <%= @room.name %></h6>
+  <h6 class="card-title fw-bold"><%= @room.name %></h6>
   <p class="card-text">
     <% if @room.description.blank? %>
       <span class="text-secondary">No description</span>
