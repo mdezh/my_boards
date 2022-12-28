@@ -1,14 +1,26 @@
 class RoomsController < ApplicationController
   before_action :set_room, only: %i[show edit update destroy details]
 
-  ROOMS_PER_PAGE = 20
+  ROOMS_PER_FIRST_PAGE = 30
+  ROOMS_PER_NEXT_PAGE = 10
+  TRIGGER_FROM_BOTTOM = 3
 
   def index
     @cursor = params[:cursor]&.to_i || (Room.last&.id || 0) + 1
-    @rooms = Room.order(id: :desc).where('id < ?', @cursor).take(ROOMS_PER_PAGE)
+    amount = params[:cursor] ? ROOMS_PER_NEXT_PAGE : ROOMS_PER_FIRST_PAGE
+    @rooms = Room.order(id: :desc).where('id < ?', @cursor).take(amount)
     @next_cursor = @rooms.last&.id
-    @more_pages = @next_cursor.present? && @rooms.count == ROOMS_PER_PAGE
-    render 'scrollable_list' if params[:cursor]
+    @loading_trigger = if @rooms.empty?
+                         nil
+                       else
+                         @rooms.count < TRIGGER_FROM_BOTTOM ? @rooms.first.id : @rooms[-TRIGGER_FROM_BOTTOM].id
+                       end
+    @more_pages = @next_cursor.present? && @rooms.count == amount
+    return unless params[:cursor]
+
+    render turbo_stream: turbo_stream.after(
+      helpers.dom_id(Room.new(id: @cursor), :list_item), partial: 'room', collection: @rooms
+    )
   end
 
   def show

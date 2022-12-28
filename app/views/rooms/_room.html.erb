@@ -1,3 +1,8 @@
-<div id="<%= dom_id(room, :list_item) %>" class="list-group-item list-group-item-action">
+<div id="<%= dom_id(room, :list_item) %>" class="list-group-item list-group-item-action"
+  <% if @more_pages && room.id == @loading_trigger %>
+    data-controller="lazy-loader"
+    data-lazy-loader-src-value="<%= rooms_path(cursor: @next_cursor) %>"
+  <% end %>
+>
   <%= render "room_inner", room: %>
 </div>
