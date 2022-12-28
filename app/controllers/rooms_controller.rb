@@ -1,8 +1,14 @@
 class RoomsController < ApplicationController
   before_action :set_room, only: %i[show edit update destroy details]
 
+  ROOMS_PER_PAGE = 20
+
   def index
-    @rooms = Room.order(created_at: :desc)
+    @cursor = params[:cursor]&.to_i || (Room.last&.id || 0) + 1
+    @rooms = Room.order(id: :desc).where('id < ?', @cursor).take(ROOMS_PER_PAGE)
+    @next_cursor = @rooms.last&.id
+    @more_pages = @next_cursor.present? && @rooms.count == ROOMS_PER_PAGE
+    render 'scrollable_list' if params[:cursor]
   end
 
   def show
