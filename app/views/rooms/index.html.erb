@@ -1,6 +1,6 @@
-<div class="row mt-3 mb-5">
-  <div class="col-md-5">
-    <div class="d-flex w-100 justify-content-between mb-3">
+<div class="row mt-3">
+  <div class="full-column col-md-5 d-flex flex-column">
+    <div class="d-flex w-100 justify-content-between">
       <h1>Rooms:</h1>
       <div data-controller="clicker class-changer" data-clicker-selector-value=".cancel-btn"
           data-class-changer-selector-value="#add_room_btn" data-class-changer-class-value="disabled">
@@ -8,16 +8,15 @@
       </div>
     </div>
 
-    <div id="room_list" class="list-group mt-3">
+    <div id="room_list" class="list-group list-group-flush flex-grow-1 mt-3 border">
       <% if @rooms.empty? %>
         <%= render 'no_rooms' %>
       <% end %>
       <%= render @rooms %>
-    </div>
-
-    <div id="loading" class='mt-5 text-secondary text-center invisible' >
-      <div class="spinner-grow" style="width: 5rem; height: 5rem" role="status">
-        <span class="visually-hidden">Loading...</span>
+      <div id="loading" class="my-5 text-secondary text-center invisible">
+        <div class="spinner-grow" style="width: 5rem; height: 5rem" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
       </div>
     </div>
   </div>

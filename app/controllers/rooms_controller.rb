@@ -3,7 +3,7 @@ class RoomsController < ApplicationController
 
   ROOMS_PER_FIRST_PAGE = 30
   ROOMS_PER_NEXT_PAGE = 10
-  TRIGGER_FROM_BOTTOM = 3
+  TRIGGER_FROM_BOTTOM = 5
 
   def index
     @cursor = params[:cursor]&.to_i || (Room.last&.id || 0) + 1

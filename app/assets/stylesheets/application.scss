@@ -36,3 +36,12 @@
     display: block;
   }
 }
+
+.full-column {
+  height: calc(100vh - 3rem);
+}
+
+#room_list {
+  background-color: white;
+  overflow-y: auto;
+}
