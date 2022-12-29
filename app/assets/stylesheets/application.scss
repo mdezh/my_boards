@@ -45,3 +45,12 @@
   background-color: white;
   overflow-y: auto;
 }
+
+#note_list {
+  display: none !important;
+}
+@include media-breakpoint-up(md) {
+  #note_list {
+    display: flex !important;
+  }
+}
