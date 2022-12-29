@@ -1,5 +1,5 @@
 <div class="row mt-3">
-  <div class="full-column col-md-5 d-flex flex-column">
+  <div class="full-column col-md-6 d-flex flex-column">
     <div class="d-flex w-100 justify-content-between">
       <h1>Boards:</h1>
       <div data-controller="clicker class-changer" data-clicker-selector-value=".cancel-btn"
@@ -8,7 +8,7 @@
       </div>
     </div>
 
-    <div id="room_list" class="list-group list-group-flush flex-grow-1 mt-3 border">
+    <div id="room_list" class="items-list list-group list-group-flush flex-grow-1 mt-3 border">
       <% if @rooms.empty? %>
         <%= render 'no_rooms' %>
       <% end %>
@@ -18,6 +18,10 @@
           <span class="visually-hidden">Loading...</span>
         </div>
       </div>
+    </div>
+  </div>
+  <div class="full-column col-md-6 d-flex flex-column">
+    <div class="items-list border flex-grow-1">
     </div>
   </div>
 </div>
