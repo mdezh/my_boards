@@ -11,21 +11,21 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.0].define(version: 2022_12_14_203229) do
-  create_table "posts", force: :cascade do |t|
-    t.integer "room_id", null: false
-    t.text "content"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["room_id"], name: "index_posts_on_room_id"
-  end
-
-  create_table "rooms", force: :cascade do |t|
+  create_table "boards", force: :cascade do |t|
     t.string "name", null: false
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["name"], name: "index_rooms_on_name", unique: true
+    t.index ["name"], name: "index_boards_on_name", unique: true
   end
 
-  add_foreign_key "posts", "rooms"
+  create_table "notes", force: :cascade do |t|
+    t.integer "board_id", null: false
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["board_id"], name: "index_notes_on_board_id"
+  end
+
+  add_foreign_key "notes", "boards"
 end

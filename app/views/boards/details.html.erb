@@ -1,0 +1,10 @@
+<%= turbo_frame_tag dom_id(@board, :details) do %>
+  <h6 class="card-title fw-bold"><%= @board.name %></h6>
+  <p class="card-text">
+    <% if @board.description.blank? %>
+      <span class="text-secondary">No description</span>
+    <% else %>
+      <span style="white-space: pre-wrap;"><%= @board.description %></span>
+    <% end %>
+  </p>
+<% end %>

@@ -1,22 +1,22 @@
-<%= turbo_frame_tag dom_id(room) do %>
+<%= turbo_frame_tag dom_id(board) do %>
   <div class="hover-wrapper">
     <div class="d-flex w-100 justify-content-between align-items-center"
         data-controller="clicker" data-clicker-selector-value=".cancel-btn">
       <a href="/" class="h6 my-2 text-truncate stretched-link" style="text-decoration-line: none">
-        <%= room.name %>
+        <%= board.name %>
       </a>
       <div class="hover-content-block shadow">
         <div class="btn-group" role="group">
-          <%= link_to "", edit_room_path(room), class: "btn btn-secondary btn-sm bi bi-pen",
+          <%= link_to "", edit_board_path(board), class: "btn btn-secondary btn-sm bi bi-pen",
             role: "button", data: { action: "click->clicker#click"} %>
-          <%= link_to "", room, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
+          <%= link_to "", board, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
             class: "btn btn-danger btn-sm bi bi-trash", role: "button" %>
         </div>
       </div>
     </div>
     <div class="card text-bg-light hover-content-block w-75 shadow">
       <div class="card-body">
-        <%= turbo_frame_tag dom_id(room, :details), loading: :lazy, src: details_room_path(room) do %>
+        <%= turbo_frame_tag dom_id(board, :details), loading: :lazy, src: details_board_path(board) do %>
           <div class="text-center text-secondary">
             <div class="spinner-grow" role="status">
               <span class="visually-hidden">Loading...</span>

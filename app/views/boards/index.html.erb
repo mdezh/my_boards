@@ -3,16 +3,16 @@
     <div class="d-flex w-100 justify-content-between">
       <h1>Boards:</h1>
       <div data-controller="clicker class-changer" data-clicker-selector-value=".cancel-btn"
-          data-class-changer-selector-value="#add_room_btn" data-class-changer-class-value="disabled">
-        <%= render 'add_room_btn' %>
+          data-class-changer-selector-value="#add_board_btn" data-class-changer-class-value="disabled">
+        <%= render 'add_board_btn' %>
       </div>
     </div>
 
-    <div id="room_list" class="items-list list-group list-group-flush flex-grow-1 mt-3 border">
-      <% if @rooms.empty? %>
-        <%= render 'no_rooms' %>
+    <div id="board_list" class="items-list list-group list-group-flush flex-grow-1 mt-3 border">
+      <% if @boards.empty? %>
+        <%= render 'no_boards' %>
       <% end %>
-      <%= render @rooms %>
+      <%= render @boards %>
       <div id="loading" class="my-5 text-secondary text-center invisible">
         <div class="spinner-grow" style="width: 5rem; height: 5rem" role="status">
           <span class="visually-hidden">Loading...</span>

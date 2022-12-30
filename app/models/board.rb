@@ -1,5 +1,5 @@
-class Room < ApplicationRecord
-  has_many :posts, dependent: :destroy
+class Board < ApplicationRecord
+  has_many :notes, dependent: :destroy
   validates :name, presence: true, uniqueness: true, length: { maximum: 100 }
   validates :description, length: { maximum: 1000 }
 
