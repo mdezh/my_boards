@@ -1,8 +1,8 @@
 <div class="row mt-3">
-  <div class="col-md-6">
+  <div class="col-md-5">
     <%= turbo_frame_tag 'boards', src: boards_path(board: @active_board_id) %>
   </div>
-  <div class="col-md-6">
+  <div class="col-md-7">
     <%= turbo_frame_tag 'notes', src: notes_path(board: @active_board_id) %>
   </div>
 </div>
