@@ -6,6 +6,7 @@ class BoardsController < ApplicationController
   TRIGGER_FROM_BOTTOM = 5
 
   def index
+    @active_board_id = params[:board]
     @cursor = params[:cursor]&.to_i || (Board.last&.id || 0) + 1
     amount = params[:cursor] ? BOARDS_PER_NEXT_PAGE : BOARDS_PER_FIRST_PAGE
     @boards = Board.order(id: :desc).where('id < ?', @cursor).take(amount)

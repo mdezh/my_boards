@@ -21,6 +21,6 @@
     </div>
   </div>
   <div class="col-md-6">
-      <%= turbo_frame_tag 'notes', loading: :lazy, src: notes_path %>
+      <%= turbo_frame_tag 'notes', src: notes_path(board: @active_board_id) %>
   </div>
 </div>
