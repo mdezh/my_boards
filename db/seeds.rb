@@ -12,9 +12,11 @@
   Board.create(name:, description:)
 end
 
-board = Board.last
+boards = Board.order(id: :desc).take(3)
 
-10.times do
-  content = Faker::Lorem.sentence(word_count: 10, supplemental: true, random_words_to_add: 50)
-  board.notes.create(content:)
+boards.each do |board|
+  10.times do
+    content = Faker::Lorem.sentence(word_count: 10, supplemental: true, random_words_to_add: 50)
+    board.notes.create(content:)
+  end
 end
