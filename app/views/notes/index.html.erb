@@ -1,6 +1,7 @@
 <%= turbo_frame_tag 'notes' do %>
   <div class="full-column d-flex flex-column">
-    <div id="note_list" class="items-list list-group list-group-flush flex-grow-1 border">
+    <div id="note_list" class="items-list list-group list-group-flush flex-grow-1 border"
+      data-controller="scroll-bottom">
       <% if @notes.nil? %>
         <%= render 'not_selected' %>
       <% elsif @notes.empty? %>
