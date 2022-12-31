@@ -25,7 +25,7 @@ class BoardsController < ApplicationController
   end
 
   def show
-    if request.headers.to_h['HTTP_TURBO_FRAME']
+    if request.headers.to_h['HTTP_TURBO_FRAME'].present?
       render @board
     else
       redirect_to root_path
@@ -38,7 +38,6 @@ class BoardsController < ApplicationController
       format.turbo_stream do
         render turbo_stream: turbo_stream.before('board_list', partial: 'form')
       end
-      format.html
     end
   end
 
@@ -54,7 +53,6 @@ class BoardsController < ApplicationController
             turbo_stream.prepend('board_list', partial: 'board', locals: { board: @board })
           ]
         end
-        format.html { redirect_to root_path }
       else
         format.turbo_stream do
           render turbo_stream: turbo_stream.replace(
@@ -63,7 +61,6 @@ class BoardsController < ApplicationController
             status: :unprocessable_entity
           )
         end
-        format.html { render 'new', status: :unprocessable_entity }
       end
     end
   end
@@ -91,7 +88,6 @@ class BoardsController < ApplicationController
 
   def set_board
     @board = Board.find_by(id: params[:id])
-    redirect_to root_path unless @board
   end
 
   def board_params

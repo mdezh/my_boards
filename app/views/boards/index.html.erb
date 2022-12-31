@@ -1,5 +1,5 @@
-<div class="row mt-3">
-  <div class="full-column col-md-6 d-flex flex-column">
+<%= turbo_frame_tag 'boards' do %>
+  <div class="full-column d-flex flex-column">
     <div class="d-flex w-100 justify-content-between">
       <h1>Boards:</h1>
       <div data-controller="clicker class-changer" data-clicker-selector-value=".cancel-btn"
@@ -20,7 +20,4 @@
       </div>
     </div>
   </div>
-  <div class="col-md-6">
-      <%= turbo_frame_tag 'notes', src: notes_path(board: @active_board_id) %>
-  </div>
-</div>
+<% end %>

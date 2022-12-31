@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'boards#index'
+  root 'main#show'
   resources :boards, only: %i[index show edit update new create destroy] do
     member do
       get :details
