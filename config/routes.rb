@@ -5,4 +5,5 @@ Rails.application.routes.draw do
       get :details
     end
   end
+  resources :notes, only: %i[index]
 end

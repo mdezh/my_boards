@@ -2,7 +2,7 @@
   <% if @more_pages && board.id == @loading_trigger %>
     data-controller="lazy-loader"
     data-lazy-loader-src-value="<%= boards_path(cursor: @next_cursor) %>"
-    data-lazy-loader-indicator-value="#loading"
+    data-lazy-loader-indicator-value="#boards_spinner"
   <% end %>
 >
   <%= render "board_inner", board: %>

@@ -13,18 +13,14 @@
         <%= render 'no_boards' %>
       <% end %>
       <%= render @boards %>
-      <div id="loading" class="my-5 text-secondary text-center invisible">
+      <div id="boards_spinner" class="my-5 text-secondary text-center invisible">
         <div class="spinner-grow" style="width: 5rem; height: 5rem" role="status">
           <span class="visually-hidden">Loading...</span>
         </div>
       </div>
     </div>
   </div>
-  <div id="note_list" class="full-column col-md-6 d-flex flex-column">
-    <div class="items-list border flex-grow-1 d-flex align-items-center">
-      <div class="w-100 text-center text-secondary">
-        No notes in the board
-      </div>
-    </div>
+  <div class="col-md-6">
+      <%= turbo_frame_tag 'notes', loading: :lazy, src: notes_path %>
   </div>
 </div>

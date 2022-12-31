@@ -2,9 +2,8 @@
   <div class="hover-wrapper">
     <div class="d-flex w-100 justify-content-between align-items-center"
         data-controller="clicker" data-clicker-selector-value=".cancel-btn">
-      <a href="/" class="h6 my-2 text-truncate stretched-link" style="text-decoration-line: none">
-        <%= board.name %>
-      </a>
+      <%= link_to board.name, notes_path(board: board.id), class: "h6 my-2 text-truncate stretched-link",
+        style: "text-decoration-line: none", data: {turbo_frame: "notes"} %>
       <div class="hover-content-block shadow">
         <div class="btn-group" role="group">
           <%= link_to "", edit_board_path(board), class: "btn btn-secondary btn-sm bi bi-pen",
