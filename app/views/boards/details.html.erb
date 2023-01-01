@@ -4,7 +4,7 @@
     <% if @board.description.blank? %>
       <span class="text-secondary">No description</span>
     <% else %>
-      <span style="white-space: pre-wrap;"><%= @board.description %></span>
+      <span class="preserve-lines"><%= @board.description %></span>
     <% end %>
   </p>
 <% end %>

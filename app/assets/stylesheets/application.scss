@@ -37,6 +37,10 @@
   }
 }
 
+.preserve-lines {
+  white-space: pre-wrap;
+}
+
 .full-column {
   height: calc(100vh - 6rem);
 }
