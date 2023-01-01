@@ -37,11 +37,16 @@ class NotesController < ApplicationController
   def create
     board = Board.find(@board_id)
     @note = board.notes.build(note_params)
-    @note.save!
     respond_to do |f|
       f.turbo_stream do
-        render turbo_stream: turbo_stream.append('note_list', partial: 'note',
-                                                              locals: { note: @note, auto_scroll: true })
+        if @note.save
+          render turbo_stream: [
+            turbo_stream.append('note_list', partial: 'note', locals: { note: @note, auto_scroll: true }),
+            turbo_stream.replace('add_note', partial: 'add_form')
+          ]
+        else
+          render turbo_stream: turbo_stream.replace('add_note', partial: 'add_form')
+        end
       end
     end
   end

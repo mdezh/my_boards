@@ -16,11 +16,7 @@
       <% end %>
     </div>
     <% if @board_id.positive? %>
-      <%= form_with id: 'add_note', model: Board.find(@board_id).notes.build,
-          url: board_notes_path(board_id: @board_id), class: "mt-2 d-flex" do |f| %>
-        <%= f.text_area :content, class: "form-control", rows: 1, placeholder: 'New note' %>
-        <%= f.submit "+", class: "btn btn-sm btn-primary ms-2", data: {turbo_stream: ""} %>
-      <% end %>
+      <%= render 'add_form' %>
     <% end %>
   </div>
 <% end %>
