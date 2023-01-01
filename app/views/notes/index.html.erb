@@ -4,8 +4,6 @@
       data-controller="scroll-bottom">
       <% if @notes.nil? %>
         <%= render 'not_selected' %>
-      <% elsif @notes.empty? %>
-        <%= render 'no_notes' %>
       <% else %>
         <%# <div id="notes_spinner" class="my-5 text-secondary text-center invisible"> %>
         <%#   <div class="spinner-grow" style="width: 5rem; height: 5rem" role="status"> %>
