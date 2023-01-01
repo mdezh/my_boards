@@ -3,6 +3,6 @@
     <%= turbo_frame_tag 'boards', src: boards_path(board: @active_board_id) %>
   </div>
   <div class="col-md-7">
-    <%= turbo_frame_tag 'notes', src: notes_path(board: @active_board_id) %>
+    <%= turbo_frame_tag 'notes', src: board_notes_path(board_id: @active_board_id) %>
   </div>
 </div>

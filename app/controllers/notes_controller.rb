@@ -4,7 +4,7 @@ class NotesController < ApplicationController
   TRIGGER_FROM_EDGE = 5
 
   def index
-    board_id = params[:board]
+    board_id = (params[:board_id] || params[:board] || '0').to_i
 
     if request.headers.to_h['HTTP_TURBO_FRAME'].blank? &&
        request.headers.to_h['HTTP_ACCEPT'] != 'text/vnd.turbo-stream.html'
@@ -12,7 +12,7 @@ class NotesController < ApplicationController
       return
     end
 
-    if board_id.nil?
+    if board_id.zero?
       @notes = nil
       return
     end

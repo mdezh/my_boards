@@ -4,6 +4,6 @@ Rails.application.routes.draw do
     member do
       get :details
     end
+    resources :notes, only: %i[index]
   end
-  resources :notes, only: %i[index]
 end
