@@ -13,7 +13,7 @@
         <%= render @notes %>
       <% end %>
     </div>
-    <% if @board_id.positive? %>
+    <% if @board.present? %>
       <%= render 'add_form' %>
     <% end %>
   </div>

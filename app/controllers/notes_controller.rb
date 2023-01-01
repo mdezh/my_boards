@@ -1,5 +1,5 @@
 class NotesController < ApplicationController
-  before_action :set_board_id, only: %i[index create]
+  before_action :set_board, only: %i[index create]
 
   NOTES_PER_FIRST_PAGE = 30
   NOTES_PER_NEXT_PAGE = 10
@@ -8,18 +8,18 @@ class NotesController < ApplicationController
   def index
     if request.headers.to_h['HTTP_TURBO_FRAME'].blank? &&
        request.headers.to_h['HTTP_ACCEPT'] != 'text/vnd.turbo-stream.html'
-      redirect_to root_path(board: @board_id)
+      redirect_to root_path(board: @board&.id || 0)
       return
     end
 
-    if @board_id.zero?
+    if @board.nil?
       @notes = nil
       return
     end
 
     @cursor = params[:cursor]&.to_i || (Note.last&.id || 0) + 1
     amount = params[:cursor] ? NOTES_PER_NEXT_PAGE : NOTES_PER_FIRST_PAGE
-    @notes = Note.order(id: :desc).where('board_id = ? and id < ?', @board_id, @cursor).take(amount).reverse
+    @notes = @board.notes.order(id: :desc).where('id < ?', @cursor).take(amount).reverse
     @next_cursor = @notes.first&.id
     @loading_trigger = if @notes.empty?
                          nil
@@ -35,8 +35,7 @@ class NotesController < ApplicationController
   end
 
   def create
-    board = Board.find(@board_id)
-    @note = board.notes.build(note_params)
+    @note = @board.notes.build(note_params)
     respond_to do |f|
       f.turbo_stream do
         if @note.save
@@ -53,8 +52,9 @@ class NotesController < ApplicationController
 
   private
 
-  def set_board_id
-    @board_id = (params[:board_id] || params[:board] || '0').to_i
+  def set_board
+    board_id = (params[:board_id] || params[:board] || '0').to_i
+    @board = board_id.zero? ? nil : Board.find(board_id)
   end
 
   def note_params
