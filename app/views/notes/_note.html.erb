@@ -1,4 +1,4 @@
-<div id="<%= dom_id(note, :note_list_item) %>" class="list-group-item list-group-item-action"
+<div id="<%= dom_id(note, :note_list_item) %>" class="list-group-item"
   <% if @more_pages && note.id == @loading_trigger %>
     data-controller="lazy-loader"
     data-lazy-loader-src-value="<%= board_notes_path(board_id: note.board.id, cursor: @next_cursor) %>"
