@@ -25,7 +25,7 @@ class NotesController < ApplicationController
     @loading_trigger = if @notes.empty?
                          nil
                        else
-                         @notes.count < TRIGGER_FROM_EDGE ? @notes.first.id : @notes[TRIGGER_FROM_EDGE].id
+                         @notes.count < TRIGGER_FROM_EDGE ? @notes.first.id : @notes[TRIGGER_FROM_EDGE - 1].id
                        end
     @more_pages = @next_cursor.present? && @notes.count == amount
     return unless params[:cursor]
