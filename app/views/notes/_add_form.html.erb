@@ -2,5 +2,5 @@
   url: board_notes_path(board_id: @board.id), class: "mt-2 d-flex" do |f| %>
   <%= f.text_area :content, class: "form-control growing-text", placeholder: 'New note', rows: 1,
     data: { controller: "auto-grow", action: "input->auto-grow#grow", auto_grow_prev_value: "#note_list" } %>
-  <%= f.button "", type: :submit, class: "btn btn-sm btn-primary ms-2 bi bi-plus", data: {turbo_stream: ""} %>
+  <%= f.button "", type: :submit, class: "btn btn-sm btn-primary ms-2 bi bi-plus-lg", data: {turbo_stream: ""} %>
 <% end %>
