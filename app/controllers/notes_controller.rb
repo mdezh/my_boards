@@ -2,9 +2,9 @@ class NotesController < ApplicationController
   before_action :set_board, only: %i[index create]
   before_action :set_note, only: %i[destroy edit update show]
 
-  NOTES_PER_FIRST_PAGE = 30
+  NOTES_PER_FIRST_PAGE = 40
   NOTES_PER_NEXT_PAGE = 10
-  TRIGGER_FROM_EDGE = 5
+  TRIGGER_FROM_EDGE = 10
 
   def index
     if request.headers.to_h['HTTP_TURBO_FRAME'].blank? &&
