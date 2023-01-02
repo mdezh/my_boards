@@ -1,5 +1,6 @@
 class NotesController < ApplicationController
   before_action :set_board, only: %i[index create]
+  before_action :set_note, only: %i[destroy]
 
   NOTES_PER_FIRST_PAGE = 30
   NOTES_PER_NEXT_PAGE = 10
@@ -50,11 +51,27 @@ class NotesController < ApplicationController
     end
   end
 
+  def destroy
+    respond_to do |f|
+      f.turbo_stream do
+        if @note.destroy
+          render turbo_stream: turbo_stream.remove(helpers.dom_id(@note, :note_list_item))
+        else
+          render turbo_stream: []
+        end
+      end
+    end
+  end
+
   private
 
   def set_board
     board_id = (params[:board_id] || params[:board] || '0').to_i
     @board = board_id.zero? ? nil : Board.find(board_id)
+  end
+
+  def set_note
+    @note = Note.find(params[:id])
   end
 
   def note_params

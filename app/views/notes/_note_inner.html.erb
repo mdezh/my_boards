@@ -1,1 +1,9 @@
-<span class="preserve-lines"><%= note.content %></span>
+<div class="hover-wrapper">
+  <div class="d-flex align-items-center">
+    <span class="preserve-lines"><%= note.content %></span>
+    <div class="hover-content-block shadow">
+      <%= link_to "", note, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
+        class: "btn btn-danger btn-sm bi bi-trash", role: "button" %>
+    </div>
+  </div>
+</div>
