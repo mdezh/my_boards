@@ -1,9 +1,16 @@
-<div class="hover-wrapper">
-  <div class="d-flex align-items-center">
-    <span class="preserve-lines"><%= note.content %></span>
-    <div class="hover-content-block shadow">
-      <%= link_to "", note, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
-        class: "btn btn-danger btn-sm bi bi-trash", role: "button" %>
+<%= turbo_frame_tag dom_id(note) do %>
+  <div class="hover-wrapper">
+    <div class="d-flex align-items-center"
+        data-controller="clicker" data-clicker-selector-value=".cancel-btn">
+      <span class="preserve-lines"><%= note.content %></span>
+      <div class="hover-content-block shadow">
+        <div class="btn-group" role="group">
+          <%= link_to "", edit_note_path(note), class: "btn btn-secondary btn-sm bi bi-pen",
+            role: "button", data: { action: "click->clicker#click"} %>
+          <%= link_to "", note, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
+            class: "btn btn-danger btn-sm bi bi-trash", role: "button" %>
+        </div>
+      </div>
     </div>
   </div>
-</div>
+<% end %>

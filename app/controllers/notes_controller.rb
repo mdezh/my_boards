@@ -1,6 +1,6 @@
 class NotesController < ApplicationController
   before_action :set_board, only: %i[index create]
-  before_action :set_note, only: %i[destroy]
+  before_action :set_note, only: %i[destroy edit update show]
 
   NOTES_PER_FIRST_PAGE = 30
   NOTES_PER_NEXT_PAGE = 10
@@ -60,6 +60,14 @@ class NotesController < ApplicationController
           render turbo_stream: []
         end
       end
+    end
+  end
+
+  def update
+    if @note.update(note_params)
+      render @note
+    else
+      render 'edit', status: :unprocessable_entity
     end
   end
 

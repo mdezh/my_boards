@@ -1,0 +1,15 @@
+<%= turbo_frame_tag dom_id(@note) do %>
+  <%= form_with model: @note do |f| %>
+    <% invalid = @note.errors.include?(:content) %>
+    <%= f.text_area :content, class: "form-control #{'is-invalid' if invalid}" %>
+    <% if invalid %>
+      <% @note.errors.full_messages_for(:content).each do |m| %>
+        <p class="my-0"><small class="text-danger"><%= m %></small></p>
+      <% end %>
+    <% end %>
+    <div class="mt-3">
+      <%= f.submit "Submit", class: "btn btn-primary" %>
+      <%= link_to "Cancel", @note, class: "btn btn-secondary cancel-btn" %>
+    </div>
+  <% end %>
+<% end %>
