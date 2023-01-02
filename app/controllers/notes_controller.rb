@@ -45,7 +45,7 @@ class NotesController < ApplicationController
             turbo_stream.replace('add_note', partial: 'add_form')
           ]
         else
-          render turbo_stream: turbo_stream.replace('add_note', partial: 'add_form')
+          render turbo_stream: []
         end
       end
     end
