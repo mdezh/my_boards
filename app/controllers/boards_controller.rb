@@ -74,12 +74,15 @@ class BoardsController < ApplicationController
   end
 
   def destroy
-    @board.destroy
     respond_to do |format|
       format.turbo_stream do
-        render turbo_stream: [
-          turbo_stream.remove(helpers.dom_id(@board, :list_item))
-        ] + (Board.count.zero? ? [turbo_stream.prepend('board_list', partial: 'no_boards')] : [])
+        if @board.destroy
+          render turbo_stream: [
+            turbo_stream.remove(helpers.dom_id(@board, :list_item))
+          ] + (Board.count.zero? ? [turbo_stream.prepend('board_list', partial: 'no_boards')] : [])
+        else
+          render turbo_stream: []
+        end
       end
     end
   end
