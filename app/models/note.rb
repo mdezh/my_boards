@@ -7,6 +7,7 @@ class Note < ApplicationRecord
   private
 
   def strip_content
-    content.strip!
+    # with content.strip! form field after invalid submit will stay unstripped
+    self.content = content.strip
   end
 end
