@@ -49,6 +49,11 @@
   overflow-y: auto;
 }
 
+.growing-text {
+  resize: none;
+  max-height: 30vh;
+}
+
 #note_list {
   display: none !important;
 }
