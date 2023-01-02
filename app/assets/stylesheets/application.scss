@@ -48,6 +48,9 @@
 .items-list {
   overflow-y: auto;
 }
+.items-list > :first-child {
+  margin-top: auto !important;
+}
 
 .growing-text {
   resize: none;
