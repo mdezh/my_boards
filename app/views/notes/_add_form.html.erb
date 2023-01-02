@@ -1,5 +1,6 @@
 <%= form_with id: 'add_note', model: @board.notes.build,
-    url: board_notes_path(board_id: @board.id), class: "mt-2 d-flex" do |f| %>
-  <%= f.text_area :content, class: "form-control", rows: 1, placeholder: 'New note' %>
+  url: board_notes_path(board_id: @board.id), class: "mt-2 d-flex" do |f| %>
+  <%= f.text_area :content, class: "form-control growing-text", placeholder: 'New note',
+    data: { controller: "auto-grow", action: "input->auto-grow#grow" }, rows: 1 %>
   <%= f.submit "+", class: "btn btn-sm btn-primary ms-2", data: {turbo_stream: ""} %>
 <% end %>

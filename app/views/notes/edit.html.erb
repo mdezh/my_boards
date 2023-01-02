@@ -1,9 +1,8 @@
 <%= turbo_frame_tag dom_id(@note) do %>
   <%= form_with model: @note do |f| %>
     <% invalid = @note.errors.include?(:content) %>
-    <%= f.text_area :content, class: "form-control growing-text #{'is-invalid' if invalid}",
-      style: "resize: none; max-height: 30vh;",
-      data: { controller: "auto-grow", action: "input->auto-grow#grow"}%>
+    <%= f.text_area :content, class: "form-control growing-text #{ 'is-invalid' if invalid }",
+      data: { controller: "auto-grow", action: "input->auto-grow#grow" } %>
     <% if invalid %>
       <% @note.errors.full_messages_for(:content).each do |m| %>
         <p class="my-0"><small class="text-danger"><%= m %></small></p>
