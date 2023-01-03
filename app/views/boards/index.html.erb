@@ -12,13 +12,14 @@
     <div id="board_list" class="items-list list-group list-group-flush flex-grow-1 mt-3 border text-bg-light">
       <% if @boards.empty? %>
         <%= render 'no_boards' %>
-      <% end %>
-      <%= render @boards %>
-      <div id="boards_spinner" class="my-5 text-secondary text-center invisible">
-        <div class="spinner-grow" style="width: 5rem; height: 5rem" role="status">
-          <span class="visually-hidden">Loading...</span>
+      <% else %>
+        <%= render @boards %>
+        <div id="boards_spinner" class="my-5 text-secondary text-center invisible">
+          <div class="spinner-grow" style="width: 5rem; height: 5rem" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
         </div>
-      </div>
+      <% end %>
     </div>
   </div>
 <% end %>

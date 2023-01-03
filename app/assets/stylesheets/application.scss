@@ -45,10 +45,11 @@
   height: calc(100vh - 6rem);
 }
 
-.items-list {
+.items-list,
+.item-list-bottom {
   overflow-y: auto;
 }
-.items-list > :first-child {
+.items-list-bottom > :first-child {
   margin-top: auto !important;
 }
 
