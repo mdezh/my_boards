@@ -58,8 +58,12 @@
   max-height: 30vh;
 }
 
-#note_list {
+.hidden {
   display: none !important;
+}
+
+#note_list {
+  @extend .hidden;
 }
 
 @include media-breakpoint-up(md) {

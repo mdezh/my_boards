@@ -47,9 +47,8 @@ class BoardsController < ApplicationController
       if @board.save
         format.turbo_stream do
           render turbo_stream: [
-            turbo_stream.remove('no_boards'),
             turbo_stream.remove('new_board'),
-            turbo_stream.replace('add_board_btn', partial: 'add_board_btn'),    # reenable button
+            turbo_stream.replace('add_board_btn', partial: 'add_board_btn'), # reenable button
             turbo_stream.prepend('board_list', partial: 'board', locals: { board: @board })
           ]
         end
@@ -77,9 +76,7 @@ class BoardsController < ApplicationController
     respond_to do |format|
       format.turbo_stream do
         if @board.destroy
-          render turbo_stream: [
-            turbo_stream.remove(helpers.dom_id(@board, :list_item))
-          ] + (Board.count.zero? ? [turbo_stream.prepend('board_list', partial: 'no_boards')] : [])
+          render turbo_stream: turbo_stream.remove(helpers.dom_id(@board, :list_item))
         else
           render turbo_stream: []
         end
