@@ -1,8 +1,8 @@
 <% cancel_path = @board.id ? board_path(@board) : root_path %>
 <% prevent_cancel_request = @board.id ? false: true %>
 
-<%= turbo_frame_tag dom_id(@board), data: {
-      controller: "eraser class-changer", eraser_selector_value: "#new_board",
+<%= turbo_frame_tag dom_id(@board, :inner), data: {
+      controller: "eraser class-changer", eraser_selector_value: "#inner_board",
       eraser_prevent_value: prevent_cancel_request,
       class_changer_selector_value: "#add_board_btn",
       class_changer_class_value: "disabled" } do %>

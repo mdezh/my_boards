@@ -7,9 +7,7 @@ class Board < ApplicationRecord
 
   before_validation :strip_fields
 
-  after_create_commit -> { broadcast_prepend_later_to 'boards', target: 'board_list' }
-  after_update_commit -> { broadcast_replace_later_to 'boards', target: dom_id(self, :list_item) }
-  after_destroy_commit -> { broadcast_remove_to 'boards', target: dom_id(self, :list_item) }
+  broadcasts_to ->(_board) { 'boards' }, inserts_by: :prepend
 
   private
 

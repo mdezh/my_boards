@@ -36,7 +36,7 @@ class BoardsController < ApplicationController
     @board = Board.new
     respond_to do |format|
       format.turbo_stream do
-        render turbo_stream: turbo_stream.before('board_list', partial: 'form')
+        render turbo_stream: turbo_stream.before('boards', partial: 'form')
       end
     end
   end
@@ -47,15 +47,15 @@ class BoardsController < ApplicationController
       if @board.save
         format.turbo_stream do
           render turbo_stream: [
-            turbo_stream.remove('new_board'),
+            turbo_stream.remove('inner_board'),
             turbo_stream.replace('add_board_btn', partial: 'add_board_btn'), # reenable button
-            turbo_stream.prepend('board_list', partial: 'board', locals: { board: @board })
+            turbo_stream.prepend('boards', partial: 'board', locals: { board: @board })
           ]
         end
       else
         format.turbo_stream do
           render turbo_stream: turbo_stream.replace(
-            'new_board',
+            'inner_board',
             partial: 'form',
             status: :unprocessable_entity
           )

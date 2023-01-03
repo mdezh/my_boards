@@ -1,5 +1,7 @@
-<%= turbo_frame_tag 'boards' do %>
+<%= turbo_frame_tag 'boards_frame' do %>
+
   <%= turbo_stream_from "boards" %>
+
   <div class="full-column d-flex flex-column">
     <div class="d-flex w-100 justify-content-between">
       <h1>Boards:</h1>
@@ -8,8 +10,7 @@
         <%= render 'add_board_btn' %>
       </div>
     </div>
-
-    <div id="board_list" class="items-list list-group list-group-flush flex-grow-1 mt-3 border text-bg-light"
+    <div id="boards" class="items-list list-group list-group-flush flex-grow-1 mt-3 border text-bg-light"
       data-controller="empty" data-empty-hidden-class="hidden">
       <%= render 'no_boards' %>
       <%= render @boards %>
