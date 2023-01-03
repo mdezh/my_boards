@@ -5,6 +5,8 @@ class Board < ApplicationRecord
 
   before_validation :strip_fields
 
+  after_create_commit -> { broadcast_prepend_to 'boards', target: 'board_list' }
+
   private
 
   def strip_fields
