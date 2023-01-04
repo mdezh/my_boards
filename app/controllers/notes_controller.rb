@@ -31,7 +31,7 @@ class NotesController < ApplicationController
     return unless params[:cursor]
 
     render turbo_stream: turbo_stream.before(
-      helpers.dom_id(Note.new(id: @cursor), :note_list_item), partial: 'note', collection: @notes
+      helpers.dom_id(Note.new(id: @cursor)), partial: 'note', collection: @notes
     )
   end
 
@@ -41,7 +41,7 @@ class NotesController < ApplicationController
       f.turbo_stream do
         if @note.save
           render turbo_stream: [
-            turbo_stream.append('note_list', partial: 'note', locals: { note: @note, auto_scroll: true }),
+            turbo_stream.append('notes', partial: 'note', locals: { note: @note, auto_scroll: true }),
             turbo_stream.replace('add_note', partial: 'add_form'),
             turbo_stream.remove('no_notes')
           ]
@@ -58,8 +58,8 @@ class NotesController < ApplicationController
       f.turbo_stream do
         if @note.destroy
           render turbo_stream: [
-            turbo_stream.remove(helpers.dom_id(@note, :note_list_item))
-          ] + (board.notes.count.zero? ? [turbo_stream.append('note_list', partial: 'no_notes')] : [])
+            turbo_stream.remove(helpers.dom_id(@note))
+          ] + (board.notes.count.zero? ? [turbo_stream.append('notes', partial: 'no_notes')] : [])
         else
           render turbo_stream: []
         end

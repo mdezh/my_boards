@@ -62,7 +62,7 @@
   display: none !important;
 }
 
-#note_list {
+#notes {
   @extend .hidden;
 }
 
@@ -71,7 +71,7 @@
     height: calc(100vh - 3rem);
   }
 
-  #note_list {
+  #notes {
     display: flex !important;
   }
 }
