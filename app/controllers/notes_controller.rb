@@ -42,8 +42,7 @@ class NotesController < ApplicationController
         if @note.save
           render turbo_stream: [
             turbo_stream.append('notes', partial: 'note', locals: { note: @note, auto_scroll: true }),
-            turbo_stream.replace('add_note', partial: 'add_form'),
-            turbo_stream.remove('no_notes')
+            turbo_stream.replace('add_note', partial: 'add_form')
           ]
         else
           render turbo_stream: []
@@ -53,13 +52,10 @@ class NotesController < ApplicationController
   end
 
   def destroy
-    board = @note.board
     respond_to do |f|
       f.turbo_stream do
         if @note.destroy
-          render turbo_stream: [
-            turbo_stream.remove(helpers.dom_id(@note))
-          ] + (board.notes.count.zero? ? [turbo_stream.append('notes', partial: 'no_notes')] : [])
+          render turbo_stream: turbo_stream.remove(helpers.dom_id(@note))
         else
           render turbo_stream: []
         end

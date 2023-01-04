@@ -49,7 +49,9 @@
 .items-list-bottom {
   overflow-y: auto;
 }
-.items-list-bottom > :first-child {
+
+// list pinned to the bottom, n=2 since the first child is a 'no notes' message
+.items-list-bottom > :nth-child(2) {
   margin-top: auto !important;
 }
 

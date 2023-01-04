@@ -6,8 +6,8 @@
 
   <div class="full-column d-flex flex-column">
     <div id="notes" class="items-list-bottom list-group list-group-flush flex-grow-1 border text-bg-light"
-      data-controller="scroll-bottom">
-      <% if @notes.nil? %>
+      data-controller="scroll-bottom empty" data-empty-hidden-class="hidden">
+      <% if @board.nil? %>
         <%= render 'not_selected' %>
       <% else %>
         <%# <div id="notes_spinner" class="my-5 text-secondary text-center invisible"> %>
