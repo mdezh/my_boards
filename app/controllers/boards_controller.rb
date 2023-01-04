@@ -49,7 +49,7 @@ class BoardsController < ApplicationController
           render turbo_stream: [
             turbo_stream.remove('inner_board'),
             turbo_stream.replace('add_board_btn', partial: 'add_board_btn') # reenable button
-            # next line is unnecessary as we use broadcasting
+            # next line is unnecessary since we use broadcasting
             # turbo_stream.prepend('boards', partial: 'board', locals: { board: @board })
           ]
         end
@@ -67,7 +67,7 @@ class BoardsController < ApplicationController
 
   def update
     if @board.update(board_params)
-      # next line is unnecessary as we use broadcasting
+      # next line is unnecessary since we use broadcasting
       # render @board
       render html: ''
     else
@@ -79,7 +79,7 @@ class BoardsController < ApplicationController
     respond_to do |format|
       format.turbo_stream do
         if @board.destroy
-          # next line is unnecessary as we use broadcasting
+          # next line is unnecessary since we use broadcasting
           # render turbo_stream: turbo_stream.remove(@board)
           render turbo_stream: []
         else

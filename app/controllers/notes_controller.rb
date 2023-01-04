@@ -41,7 +41,8 @@ class NotesController < ApplicationController
       f.turbo_stream do
         if @note.save
           render turbo_stream: [
-            turbo_stream.append('notes', partial: 'note', locals: { note: @note, auto_scroll: true }),
+            # next line is unnecessary since we use broadcasting
+            # turbo_stream.append('notes', partial: 'note', locals: { note: @note, auto_scroll: true }),
             turbo_stream.replace('add_note', partial: 'add_form')
           ]
         else
@@ -55,7 +56,9 @@ class NotesController < ApplicationController
     respond_to do |f|
       f.turbo_stream do
         if @note.destroy
-          render turbo_stream: turbo_stream.remove(@note)
+          # next line is unnecessary since we use broadcasting
+          # render turbo_stream: turbo_stream.remove(@note)
+          render turbo_stream: []
         else
           render turbo_stream: []
         end
@@ -65,7 +68,9 @@ class NotesController < ApplicationController
 
   def update
     if @note.update(note_params)
-      render @note
+      # next line is unnecessary since we use broadcasting
+      # render @note
+      render html: ''
     else
       render 'edit', status: :unprocessable_entity
     end
