@@ -20,7 +20,7 @@ class BoardsController < ApplicationController
     return unless params[:cursor]
 
     render turbo_stream: turbo_stream.after(
-      helpers.dom_id(Board.new(id: @cursor), :list_item), partial: 'board', collection: @boards
+      helpers.dom_id(Board.new(id: @cursor)), partial: 'board', collection: @boards
     )
   end
 
