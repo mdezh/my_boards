@@ -20,7 +20,7 @@ class BoardsController < ApplicationController
     return unless params[:cursor]
 
     render turbo_stream: turbo_stream.after(
-      helpers.dom_id(Board.new(id: @cursor)), partial: 'board', collection: @boards
+      Board.new(id: @cursor), partial: 'board', collection: @boards
     )
   end
 
@@ -80,7 +80,7 @@ class BoardsController < ApplicationController
       format.turbo_stream do
         if @board.destroy
           # next line is unnecessary as we use broadcasting
-          # render turbo_stream: turbo_stream.remove(helpers.dom_id(@board, :list_item))
+          # render turbo_stream: turbo_stream.remove(@board)
           render turbo_stream: []
         else
           render turbo_stream: []

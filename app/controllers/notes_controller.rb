@@ -31,7 +31,7 @@ class NotesController < ApplicationController
     return unless params[:cursor]
 
     render turbo_stream: turbo_stream.before(
-      helpers.dom_id(Note.new(id: @cursor)), partial: 'note', collection: @notes
+      Note.new(id: @cursor), partial: 'note', collection: @notes
     )
   end
 
@@ -55,7 +55,7 @@ class NotesController < ApplicationController
     respond_to do |f|
       f.turbo_stream do
         if @note.destroy
-          render turbo_stream: turbo_stream.remove(helpers.dom_id(@note))
+          render turbo_stream: turbo_stream.remove(@note)
         else
           render turbo_stream: []
         end
