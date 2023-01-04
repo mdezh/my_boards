@@ -48,8 +48,9 @@ class BoardsController < ApplicationController
         format.turbo_stream do
           render turbo_stream: [
             turbo_stream.remove('inner_board'),
-            turbo_stream.replace('add_board_btn', partial: 'add_board_btn'), # reenable button
-            turbo_stream.prepend('boards', partial: 'board', locals: { board: @board })
+            turbo_stream.replace('add_board_btn', partial: 'add_board_btn') # reenable button
+            # next line is unnecessary as we use broadcasting
+            # turbo_stream.prepend('boards', partial: 'board', locals: { board: @board })
           ]
         end
       else
@@ -66,7 +67,9 @@ class BoardsController < ApplicationController
 
   def update
     if @board.update(board_params)
-      render @board
+      # next line is unnecessary as we use broadcasting
+      # render @board
+      render html: ''
     else
       render 'edit', status: :unprocessable_entity
     end
@@ -76,7 +79,9 @@ class BoardsController < ApplicationController
     respond_to do |format|
       format.turbo_stream do
         if @board.destroy
-          render turbo_stream: turbo_stream.remove(helpers.dom_id(@board, :list_item))
+          # next line is unnecessary as we use broadcasting
+          # render turbo_stream: turbo_stream.remove(helpers.dom_id(@board, :list_item))
+          render turbo_stream: []
         else
           render turbo_stream: []
         end
