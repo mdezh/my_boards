@@ -7,7 +7,7 @@ export default class extends Controller {
     frame: String,
     path: String,
   };
-  static targets = ["item"];
+  static targets = ["item", "inner"];
   static classes = ["selected"];
 
   itemTargetDisconnected(e) {
@@ -16,6 +16,14 @@ export default class extends Controller {
       if (turboFrame) {
         turboFrame.src = this.pathValue;
       }
+    }
+  }
+
+  innerTargetConnected(e) {
+    const id = e.dataset.id;
+    if (id == this.activeValue) {
+      const item = document.querySelector(`#${id}`);
+      item?.classList.add(this.selectedClass);
     }
   }
 
