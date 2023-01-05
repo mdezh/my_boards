@@ -60,11 +60,12 @@
   max-height: 30vh;
 }
 
+.board-name {
+  text-decoration-line: none;
+}
+
 .selected-board {
-  background-color: #f0f0f0 !important;
-  .board-name {
-    font-weight: bold;
-  }
+  @extend .list-group-item-primary;
 }
 
 .hidden {
