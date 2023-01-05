@@ -4,7 +4,6 @@ import { Controller } from "@hotwired/stimulus";
 export default class extends Controller {
   static values = {
     active: { type: String, default: "" },
-    suffix: { type: String, default: "" },
     frame: String,
     path: String,
   };
@@ -22,11 +21,11 @@ export default class extends Controller {
 
   activeValueChanged(next, prev) {
     if (prev) {
-      const prevItem = document.querySelector(`#${prev}${this.suffixValue}`);
+      const prevItem = document.querySelector(`#${prev}`);
       prevItem?.classList.remove(this.selectedClass);
     }
     if (next) {
-      const nextItem = document.querySelector(`#${next}${this.suffixValue}`);
+      const nextItem = document.querySelector(`#${next}`);
       nextItem?.classList.add(this.selectedClass);
     }
   }
