@@ -60,8 +60,11 @@
   max-height: 30vh;
 }
 
-.selected-board a {
-  font-weight: bold;
+.selected-board {
+  background-color: #f0f0f0 !important;
+  a {
+    font-weight: bold;
+  }
 }
 
 .hidden {
