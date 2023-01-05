@@ -1,5 +1,6 @@
 <div id="<%= dom_id(board) %>" class="list-group-item list-group-item-action"
-  data-empty-target='item'
+  data-empty-target="item"
+  data-active-target="item"
   <% if @more_pages && board.id == @loading_trigger %>
     data-controller="lazy-loader"
     data-lazy-loader-src-value="<%= boards_path(cursor: @next_cursor) %>"

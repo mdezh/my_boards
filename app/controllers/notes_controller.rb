@@ -14,7 +14,7 @@ class NotesController < ApplicationController
     end
 
     if @board.nil?
-      @notes = nil
+      @notes = []
       return
     end
 
