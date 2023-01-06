@@ -41,8 +41,8 @@ class NotesController < ApplicationController
       f.turbo_stream do
         if @note.save
           render turbo_stream: [
-            # next line is unnecessary since we use broadcasting
-            # turbo_stream.prepend('notes', partial: 'note', locals: { note: @note, auto_scroll: true }),
+            # despite we use broadcasting we need next line since we want autoscroll new note into the viewport
+            turbo_stream.prepend('notes', partial: 'note', locals: { note: @note, auto_scroll: true }),
             turbo_stream.replace('add_note', partial: 'add_form')
           ]
         else
