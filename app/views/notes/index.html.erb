@@ -8,8 +8,9 @@
     <% if @board.present? %>
       <%= render 'board_header' %>
     <% end %>
-    <div id="notes" class="items-list-bottom list-group list-group-flush flex-grow-1 border text-bg-light d-flex flex-column-reverse"
-      data-controller="scroll-bottom empty"
+    <div id="notes"
+      class="items-list-bottom list-group list-group-flush flex-grow-1 border text-bg-light d-flex flex-column-reverse"
+      data-controller="empty"
       data-empty-hidden-class="hidden"
     >
       <% if @board.nil? %>
