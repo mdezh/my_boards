@@ -50,11 +50,6 @@
   overflow-y: auto;
 }
 
-// list pinned to the bottom, n=3 since the first child is a loading indicator, etc.
-.items-list-bottom > :nth-child(3) {
-  margin-top: auto !important;
-}
-
 .growing-text {
   resize: none;
   max-height: 30vh;

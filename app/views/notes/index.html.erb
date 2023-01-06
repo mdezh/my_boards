@@ -8,20 +8,20 @@
     <% if @board.present? %>
       <%= render 'board_header' %>
     <% end %>
-    <div id="notes" class="items-list-bottom list-group list-group-flush flex-grow-1 border text-bg-light"
+    <div id="notes" class="items-list-bottom list-group list-group-flush flex-grow-1 border text-bg-light d-flex flex-column-reverse"
       data-controller="scroll-bottom empty"
       data-empty-hidden-class="hidden"
     >
       <% if @board.nil? %>
         <%= render 'not_selected' %>
       <% else %>
+        <%= render 'no_notes' %>
+        <%= render @notes %>
         <div id="notes_spinner" class="my-5 text-secondary text-center invisible hidden">
           <div class="spinner-grow" style="width: 5rem; height: 5rem" role="status">
             <span class="visually-hidden">Loading...</span>
           </div>
         </div>
-        <%= render 'no_notes' %>
-        <%= render @notes %>
       <% end %>
     </div>
     <% if @board.present? %>

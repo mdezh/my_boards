@@ -20,17 +20,17 @@ class NotesController < ApplicationController
 
     @cursor = params[:cursor]&.to_i || (Note.last&.id || 0) + 1
     amount = params[:cursor] ? NOTES_PER_NEXT_PAGE : NOTES_PER_FIRST_PAGE
-    @notes = @board.notes.order(id: :desc).where('id < ?', @cursor).take(amount).reverse
-    @next_cursor = @notes.first&.id
+    @notes = @board.notes.order(id: :desc).where('id < ?', @cursor).take(amount)
+    @next_cursor = @notes.last&.id
     @loading_trigger = if @notes.empty?
                          nil
                        else
-                         @notes.count < TRIGGER_FROM_EDGE ? @notes.first.id : @notes[TRIGGER_FROM_EDGE - 1].id
+                         @notes.count < TRIGGER_FROM_EDGE ? @notes.last.id : @notes[-TRIGGER_FROM_EDGE].id
                        end
     @more_pages = @next_cursor.present? && @notes.count == amount
     return unless params[:cursor]
 
-    render turbo_stream: turbo_stream.before(
+    render turbo_stream: turbo_stream.after(
       Note.new(id: @cursor), partial: 'note', collection: @notes
     )
   end
@@ -42,7 +42,7 @@ class NotesController < ApplicationController
         if @note.save
           render turbo_stream: [
             # next line is unnecessary since we use broadcasting
-            # turbo_stream.append('notes', partial: 'note', locals: { note: @note, auto_scroll: true }),
+            # turbo_stream.prepend('notes', partial: 'note', locals: { note: @note, auto_scroll: true }),
             turbo_stream.replace('add_note', partial: 'add_form')
           ]
         else
