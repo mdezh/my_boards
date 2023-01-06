@@ -5,6 +5,9 @@
   <% end %>
 
   <div class="full-column d-flex flex-column">
+    <% if @board.present? %>
+      <%= render 'board_header' %>
+    <% end %>
     <div id="notes" class="items-list-bottom list-group list-group-flush flex-grow-1 border text-bg-light"
       data-controller="scroll-bottom empty" data-empty-hidden-class="hidden">
       <% if @board.nil? %>

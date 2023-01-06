@@ -85,3 +85,10 @@
     display: flex !important;
   }
 }
+
+#board-header {
+  @extend .border;
+  @extend .mb-2;
+
+  background-color: white;
+}
