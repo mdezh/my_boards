@@ -6,6 +6,7 @@ export default class extends Controller {
     src: String,
     status: String,
     indicator: String,
+    hidden: { type: String, default: "invisible" },
   };
 
   connect() {
@@ -29,7 +30,7 @@ export default class extends Controller {
         },
       })
         .then((r) => r.text())
-        .then((html) => (this.hideIndicator(), Turbo.renderStreamMessage(html)))
+        .then((html) => (Turbo.renderStreamMessage(html), this.hideIndicator()))
         .then(() => (this.statusValue = "complete"))
         .then(() => this.observer.unobserve(this.element))
         .catch((e) => {
@@ -41,11 +42,11 @@ export default class extends Controller {
   }
 
   showIndicator() {
-    this.indicator?.classList.remove("invisible");
+    this.indicator?.classList.remove(...this.hiddenValue.split(" "));
   }
 
   hideIndicator() {
-    this.indicator?.classList.add("invisible");
+    this.indicator?.classList.add(...this.hiddenValue.split(" "));
   }
 
   disconnect() {

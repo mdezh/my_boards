@@ -1,9 +1,9 @@
 class BoardsController < ApplicationController
   before_action :set_board, only: %i[show edit update destroy details]
 
-  BOARDS_PER_FIRST_PAGE = 40
+  BOARDS_PER_FIRST_PAGE = 30
   BOARDS_PER_NEXT_PAGE = 10
-  TRIGGER_FROM_BOTTOM = 10
+  TRIGGER_FROM_BOTTOM = 3
 
   def index
     @active_board_id = params[:board]

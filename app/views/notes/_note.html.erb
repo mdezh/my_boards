@@ -4,6 +4,7 @@
     data-controller="lazy-loader"
     data-lazy-loader-src-value="<%= board_notes_path(board_id: note.board.id, cursor: @next_cursor) %>"
     data-lazy-loader-indicator-value="#notes_spinner"
+    data-lazy-loader-hidden-value="invisible hidden"
   <% end %>
   <% if defined?(auto_scroll) %>
     data-controller="scroll-into-view"
