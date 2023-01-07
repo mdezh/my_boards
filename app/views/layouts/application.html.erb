@@ -16,12 +16,8 @@
       <%= yield %>
     </div>
   </body>
-
   <script type="text/javascript">
     document.querySelector('html').style.display = 'block';
     document.oncontextmenu = () => false;
-    document.addEventListener("turbo:before-fetch-request", (e) => {
-      e.detail.fetchOptions.headers["X-UTC-Offset"] = String((new Date()).getTimezoneOffset());
-    });
   </script>
 </html>
