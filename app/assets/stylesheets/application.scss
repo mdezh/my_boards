@@ -47,8 +47,8 @@
   height: calc(100vh - 6rem);
 }
 
-.items-list,
-.items-list-bottom {
+.items-list {
+  @extend .rounded;
   overflow-y: auto;
 }
 
@@ -85,7 +85,9 @@
 
 #board-header {
   @extend .border;
+  @extend .shadow;
   @extend .mb-2;
+  @extend .rounded;
 
   background-color: white;
   cursor: default;
