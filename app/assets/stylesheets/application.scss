@@ -27,13 +27,15 @@
     position: absolute;
     z-index: $zindex-popover;
   }
-}
-
-.hover-wrapper:hover {
-  .hover-content-block {
+  .hover-trigger:hover ~ .hover-content-block,
+  .hover-trigger:hover .hover-content-block {
     left: calc(100% - 1rem);
     transform: translate(-100%, 0);
     display: block;
+  }
+  .hover-trigger:hover ~ .hover-content-flex,
+  .hover-trigger:hover .hover-content-flex {
+    display: flex;
   }
 }
 

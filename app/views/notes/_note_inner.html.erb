@@ -1,6 +1,6 @@
 <%= turbo_frame_tag dom_id(note, :inner) do %>
   <div class="hover-wrapper">
-    <div class="d-flex align-items-center"
+    <div class="d-flex align-items-center hover-trigger"
         data-controller="clicker" data-clicker-selector-value=".cancel-btn">
       <span class="preserve-lines"><%= note.content %></span>
       <div class="hover-content-block shadow">
