@@ -2,7 +2,20 @@
   <div class="hover-wrapper">
     <div class="d-flex align-items-center hover-trigger"
         data-controller="clicker" data-clicker-selector-value=".cancel-btn">
-      <span class="preserve-lines"><%= note.content %></span>
+      <div class="d-flex flex-column w-100">
+        <div>
+          <span class="preserve-lines"><%= note.content %></span>
+        </div>
+        <div class="text-secondary d-flex flex-row-reverse">
+          <small>
+            <% if note.created_at == note.updated_at %>
+              Created at: <%= note.created_at.localtime.to_fs(:long) %>
+            <% else %>
+              Updated at: <%= note.updated_at.localtime.to_fs(:long) %>
+            <% end %>
+          </small>
+        </div>
+      </div>
       <div class="hover-content-block shadow">
         <div class="btn-group" role="group">
           <%= link_to "", edit_note_path(note), class: "btn btn-secondary btn-sm bi bi-pen",
