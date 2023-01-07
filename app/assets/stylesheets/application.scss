@@ -69,7 +69,7 @@
   display: none !important;
 }
 
-#notes {
+#notes_frame {
   @extend .hidden;
 }
 
@@ -78,7 +78,7 @@
     height: calc(100vh - 3rem);
   }
 
-  #notes {
+  #notes_frame {
     display: flex !important;
   }
 }
