@@ -16,7 +16,7 @@
       data-active-active-value="<%= @active_board_id.nil? ? '' : dom_id(Board.new(id: @active_board_id)) %>">
       <%= render 'no_boards' %>
       <%= render @boards %>
-      <div id="boards_spinner" class="my-5 text-secondary text-center invisible">
+      <div id="boards_spinner" class="mt-5 text-secondary text-center invisible" style="margin-bottom: 70%">
         <div class="spinner-grow" style="width: 5rem; height: 5rem" role="status">
           <span class="visually-hidden">Loading...</span>
         </div>
