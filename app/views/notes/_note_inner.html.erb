@@ -9,10 +9,11 @@
         <div class="text-secondary d-flex flex-row-reverse">
           <small>
             <% if note.created_at == note.updated_at %>
-              Created at: <%= note.created_at.localtime.to_fs(:long) %>
+              Created at: 
             <% else %>
-              Updated at: <%= note.updated_at.localtime.to_fs(:long) %>
+              Updated at:
             <% end %>
+            <%= @utc_offset.minutes.ago(note.updated_at).to_fs(:long) %>
           </small>
         </div>
       </div>
