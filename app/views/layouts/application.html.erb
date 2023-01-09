@@ -19,5 +19,9 @@
   <script type="text/javascript">
     document.querySelector('html').style.display = 'block';
     document.oncontextmenu = () => false;
+    document.addEventListener('turbo:before-fetch-request', (event) => {
+      const timeZone = Intl?.DateTimeFormat()?.resolvedOptions()?.timeZone;
+      if (timeZone) event.detail.fetchOptions.headers['X-Time-Zone'] = timeZone;
+    })
   </script>
 </html>
