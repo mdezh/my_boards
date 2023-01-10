@@ -77,6 +77,14 @@
   display: block;
 }
 
+#notes_frame {
+  display: none;
+}
+
+#notes_frame[complete] {
+  display: block;
+}
+
 @include media-breakpoint-up(md) {
   .full-column {
     height: calc(100vh - 3rem);
@@ -88,6 +96,10 @@
 
   .hidden-md {
     display: none;
+  }
+
+  #notes_frame {
+    display: block;
   }
 }
 
@@ -103,12 +115,4 @@
 
 .normal-height {
   line-height: normal;
-}
-
-#notes_frame {
-  display: none;
-}
-
-#notes_frame[complete] {
-  display: block;
 }
