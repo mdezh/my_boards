@@ -1,3 +1,7 @@
-<div id="board-header">
+<div id="board_header" class="d-flex">
+  <button id="back_to_boards" type="button" class="btn btn-light bi bi-arrow-left ms-3 my-2 hidden-md"
+    data-controller="toggle" data-toggle-manipulate-class="hidden-below-md"
+    data-toggle-selector-value=".toggle-mobile" data-action="toggle#toggle"
+  ></button>
   <h4 class="normal-height text-truncate my-2 mx-3"><%= @board.name %></h4>
 </div>

@@ -69,8 +69,12 @@
   display: none !important;
 }
 
-#notes_frame {
+.hidden-below-md {
   @extend .hidden;
+}
+
+.hidden-md {
+  display: block;
 }
 
 @include media-breakpoint-up(md) {
@@ -78,12 +82,16 @@
     height: calc(100vh - 3rem);
   }
 
-  #notes_frame {
+  .hidden-below-md {
     display: block !important;
+  }
+
+  .hidden-md {
+    display: none;
   }
 }
 
-#board-header {
+#board_header {
   @extend .border;
   @extend .shadow;
   @extend .mb-2;
@@ -95,4 +103,12 @@
 
 .normal-height {
   line-height: normal;
+}
+
+#notes_frame {
+  display: none;
+}
+
+#notes_frame[complete] {
+  display: block;
 }
