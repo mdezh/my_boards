@@ -108,6 +108,8 @@
   @extend .shadow;
   @extend .mb-2;
   @extend .rounded;
+  @extend .d-flex;
+  @extend .align-items-center;
 
   background-color: white;
   cursor: default;
