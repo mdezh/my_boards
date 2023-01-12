@@ -23,11 +23,17 @@
       <p class="alert"><%= alert %></p>
     </div>
 
-    <%= render 'layouts/navbar' %>
-    <div class="main container-md">
-      <%= yield %>
-    </div>
+    <header>
+      <%= render 'layouts/navbar' %>
+    </header>
+
+    <main>
+      <div class="container-md">
+        <%= yield %>
+      </div>
+    </main>
   </body>
+
   <script type="text/javascript">
     document.querySelector('html').style.display = 'block';
     document.oncontextmenu = () => false;
