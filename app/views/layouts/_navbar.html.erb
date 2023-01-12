@@ -1,0 +1,31 @@
+<nav class="navbar navbar-expand-sm fixed-top bg-light shadow">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">
+      <img src="favicon-32x32.png" alt="Logo" width="32" height="32" class="d-inline-block align-bottom">
+      My Boards
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse align-items-end" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <% if current_user %>
+          <li class="nav-item text-center">
+            <%= link_to "Edit Account", edit_user_registration_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item text-center">
+            <%= link_to "Sign Out", destroy_user_session_path, method: "delete", class: "nav-link" %>
+          </li>
+        <% else %>
+          <li class="nav-item text-center">
+            <%= link_to "Sign Up",new_user_registration_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item text-center">
+            <%= link_to "Sign In", new_user_session_path, class: "nav-link" %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</nav>

@@ -18,6 +18,10 @@
 
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css");
 
+.main {
+  margin-top: 5rem;
+}
+
 .hover-wrapper {
   .hover-content-flex,
   .hover-content-block {
@@ -44,7 +48,7 @@
 }
 
 .full-column {
-  height: calc(100vh - 6rem);
+  height: calc(100vh - 10rem);
 }
 
 .items-list {
@@ -87,7 +91,7 @@
 
 @include media-breakpoint-up(md) {
   .full-column {
-    height: calc(100vh - 3rem);
+    height: calc(100vh - 6rem);
   }
 
   .hidden-below-md {
