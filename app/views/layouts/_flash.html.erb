@@ -1,0 +1,18 @@
+<div class="fixed-bottom">
+  <% if flash[:notice].present? %>
+    <div class="d-flex justify-content-end mb-3 me-3">
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <%= flash[:notice] %>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    </div>
+  <% end %>
+  <% if flash[:alert].present? %>
+    <div class="d-flex justify-content-end mb-3 me-3">
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <%= flash[:alert] %>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    </div>
+  <% end %>
+</div>

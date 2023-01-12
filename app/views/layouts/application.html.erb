@@ -17,17 +17,12 @@
   </head>
 
   <body class="text-bg-light">
-    <!-- temporary -->
-    <div style="position: fixed;">
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
-    </div>
-
     <header>
       <%= render 'layouts/navbar' %>
     </header>
 
     <main>
+      <%= render 'layouts/flash' %>
       <div class="container-md">
         <%= yield %>
       </div>
