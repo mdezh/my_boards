@@ -1,0 +1,5 @@
+<div class="fixed-bottom">
+  <% flash.each do |type, message| %>
+    <%= render 'shared/alert', type:, message: %>
+  <% end %>
+</div>
