@@ -9,10 +9,10 @@
                     'alert-warning'
                   end
   %>
-  <div class="d-flex justify-content-end mb-2 me-5">
+<div class="d-flex justify-content-end mb-2 me-5" data-controller="timeout-clicker" data-timeout-clicker-timeout-value="5000">
     <div class="alert <%= alert_class %> alert-dismissible fade show shadow" role="alert">
       <%= message %>
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" data-timeout-clicker-target="btn"></button>
     </div>
   </div>
 <% end %>
