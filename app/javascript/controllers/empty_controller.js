@@ -18,9 +18,9 @@ export default class extends Controller {
 
   counterValueChanged(next, prev) {
     if (next > 0 && prev < 1) {
-      this.indicatorTarget.classList.add(this.hiddenClass);
+      this.indicatorTarget.classList.add(...this.hiddenClasses);
     } else if (next < 1 && prev > 0) {
-      this.indicatorTarget.classList.remove(this.hiddenClass);
+      this.indicatorTarget.classList.remove(...this.hiddenClasses);
     }
   }
 }

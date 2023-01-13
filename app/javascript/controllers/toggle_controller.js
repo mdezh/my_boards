@@ -10,7 +10,7 @@ export default class extends Controller {
   toggle() {
     const elements = document.querySelectorAll(this.selectorValue);
     elements.forEach((element) =>
-      element.classList.toggle(this.manipulateClasses)
+      element.classList.toggle(...this.manipulateClasses)
     );
   }
 }

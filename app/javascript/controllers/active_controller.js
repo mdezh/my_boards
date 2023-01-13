@@ -23,18 +23,18 @@ export default class extends Controller {
     const id = e.dataset.id;
     if (id == this.activeValue) {
       const item = document.querySelector(`#${id}`);
-      item?.classList.add(this.selectedClass);
+      item?.classList.add(...this.selectedClasses);
     }
   }
 
   activeValueChanged(next, prev) {
     if (prev) {
       const prevItem = document.querySelector(`#${prev}`);
-      prevItem?.classList.remove(this.selectedClass);
+      prevItem?.classList.remove(...this.selectedClasses);
     }
     if (next) {
       const nextItem = document.querySelector(`#${next}`);
-      nextItem?.classList.add(this.selectedClass);
+      nextItem?.classList.add(...this.selectedClasses);
     }
   }
 }
