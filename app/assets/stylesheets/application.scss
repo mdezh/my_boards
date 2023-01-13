@@ -22,6 +22,13 @@ main {
   margin-top: 5rem;
 }
 
+.note-content {
+  display: -webkit-box;
+  -webkit-line-clamp: 10;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
 .hover-wrapper {
   .hover-content-flex,
   .hover-content-block {
