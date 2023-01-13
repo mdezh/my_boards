@@ -1,5 +1,5 @@
 <div class="fixed-bottom">
   <% flash.each do |type, message| %>
-    <%= render 'shared/alert', type:, message: %>
+    <%= render 'shared/alert', type:, message:, timeout: 5000 %>
   <% end %>
 </div>

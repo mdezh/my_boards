@@ -9,6 +9,7 @@ export default class extends Controller {
 
   connect() {
     if (!this.hasBtnTarget) return;
+    if (this.timeoutValue < 1) return;
 
     this.timeout = setTimeout(() => {
       this.timeout = null;
