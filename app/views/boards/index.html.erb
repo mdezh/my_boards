@@ -3,12 +3,8 @@
   <%= turbo_stream_from "boards" %>
 
   <div class="full-column d-flex flex-column">
-    <div class="d-flex w-100 justify-content-between">
-      <h2>Boards:</h2>
-      <div data-controller="clicker class-changer" data-clicker-selector-value=".cancel-btn"
-          data-class-changer-selector-value="#add_board_btn" data-class-changer-class-value="disabled">
-        <%= render 'add_board_btn' %>
-      </div>
+    <div id="new_board_area">
+      <%= render 'add_board_btn' %>
     </div>
     <div id="boards" class="items-list shadow list-group list-group-flush flex-grow-1 mt-3 border text-bg-light"
       data-controller="empty active" data-empty-hidden-class="hidden" data-active-frame-value="notes_frame"

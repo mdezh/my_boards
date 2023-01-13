@@ -7,4 +7,5 @@ Rails.application.routes.draw do
       get :details
     end
   end
+  get 'cancel_new_board', to: 'boards#cancel', as: :cancel_new_board
 end

@@ -36,7 +36,7 @@ class BoardsController < ApplicationController
     @board = Board.new
     respond_to do |format|
       format.turbo_stream do
-        render turbo_stream: turbo_stream.before('boards', partial: 'form')
+        render turbo_stream: turbo_stream.update('new_board_area', partial: 'form')
       end
     end
   end
@@ -47,8 +47,7 @@ class BoardsController < ApplicationController
       if @board.save
         format.turbo_stream do
           render turbo_stream: [
-            turbo_stream.remove('inner_board'),
-            turbo_stream.replace('add_board_btn', partial: 'add_board_btn') # reenable button
+            turbo_stream.update('new_board_area', partial: 'add_board_btn')
             # next line is unnecessary since we use broadcasting
             # turbo_stream.prepend('boards', partial: 'board', locals: { board: @board })
           ]
@@ -62,6 +61,12 @@ class BoardsController < ApplicationController
           )
         end
       end
+    end
+  end
+
+  def cancel
+    respond_to do |format|
+      format.turbo_stream { render turbo_stream: turbo_stream.update('new_board_area', partial: 'add_board_btn') }
     end
   end
 
