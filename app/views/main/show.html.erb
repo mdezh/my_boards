@@ -1,8 +1,8 @@
 <div class="row">
-  <div class="col-md-5">
+  <div class="col-md-5 col-xl-4">
     <%= turbo_frame_tag 'boards_frame', class: "toggle-mobile", src: boards_path(board: @active_board_id) %>
   </div>
-  <div class="col-md-7">
+  <div class="col-md-7 col-xl-8">
     <%= turbo_frame_tag 'notes_frame', class: "toggle-mobile hidden-below-md", src: board_notes_path(board_id: @active_board_id) %>
   </div>
 </div>
