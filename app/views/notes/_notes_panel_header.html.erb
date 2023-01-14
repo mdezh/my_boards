@@ -1,7 +1,7 @@
 <div id="notes_panel_header">
-  <button id="back_to_boards" type="button" class="btn btn-sm btn-light bi bi-arrow-left ms-3 hidden-md"
+  <i id="back_to_boards" class="bi bi-arrow-left ms-3 hidden-md"
     data-controller="class-changer" data-class-changer-manipulate-class="hidden-below-md"
-    data-class-changer-selector-value=".toggle-mobile" data-action="class-changer#toggle"
-  ></button>
-  <span class="normal-height text-truncate mx-3 fw-semibold my-2"><%= @board.name %></span>
+    data-class-changer-selector-value=".toggle-mobile" data-action="click->class-changer#toggle"
+  ></i>
+  <span class="normal-height text-truncate mx-3 fw-semibold my-1"><%= @board.name %></span>
 </div>
