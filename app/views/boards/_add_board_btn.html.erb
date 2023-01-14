@@ -1,5 +1,5 @@
 <%= button_to new_board_path, id: "add_board_btn", class: "btn btn-primary shadow w-100", method: "get",
   data: { turbo_stream: "", controller: "clicker", clicker_selector_value: ".cancel-btn",
           action: "click->clicker#click" } do %>
-  Add new board <i class="bi bi-plus-circle-fill ms-3"></i>
+  Add new board
 <% end %>
