@@ -125,8 +125,8 @@ main {
   @extend .rounded-top;
   @extend .d-flex;
   @extend .align-items-center;
-  @extend .text-bg-light;
   cursor: default;
+  background-color: #fff;
 }
 
 .normal-height {
