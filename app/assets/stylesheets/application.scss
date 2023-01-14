@@ -18,6 +18,10 @@
 
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css");
 
+body {
+  background-color: #f0f0f0;
+}
+
 main {
   margin-top: 5rem;
 }
@@ -59,7 +63,6 @@ main {
 }
 
 .items-list {
-  @extend .rounded;
   overflow-y: auto;
 }
 
@@ -116,13 +119,13 @@ main {
 
 #board_header {
   @extend .border;
+  @extend .border-bottom-0;
+  @extend .py-1;
   @extend .shadow;
-  @extend .mb-2;
-  @extend .rounded;
+  @extend .rounded-top;
   @extend .d-flex;
   @extend .align-items-center;
-
-  background-color: white;
+  @extend .text-bg-light;
   cursor: default;
 }
 

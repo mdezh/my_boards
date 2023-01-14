@@ -6,7 +6,7 @@
     <div id="new_board_area">
       <%= render 'add_board_btn' %>
     </div>
-    <div id="boards" class="items-list shadow list-group list-group-flush flex-grow-1 mt-3 border text-bg-light"
+    <div id="boards" class="items-list shadow list-group list-group-flush flex-grow-1 mt-3 border rounded text-bg-light"
       data-controller="empty active" data-empty-hidden-class="hidden" data-active-frame-value="notes_frame"
       data-active-path-value="<%= root_path %>" data-active-selected-class="selected-board"
       data-active-active-value="<%= @active_board_id.nil? ? '' : dom_id(Board.new(id: @active_board_id)) %>">
