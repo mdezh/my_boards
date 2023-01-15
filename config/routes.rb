@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
-  devise_for :users
   root 'main#show'
+  devise_for :users
+  get 'about', to: 'pages#about'
   resources :boards do
     resources :notes, shallow: true, only: %i[index create destroy edit update show]
     member do

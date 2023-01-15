@@ -10,6 +10,9 @@
     </button>
     <div class="collapse navbar-collapse align-items-end" id="navbarNav">
       <ul class="navbar-nav ms-auto">
+        <li class="nav-item text-center">
+          <%= link_to "About", about_path, class: "nav-link" %>
+        </li>
         <% if current_user %>
           <li class="nav-item text-center">
             <%= link_to "Edit Account", edit_user_registration_path, class: "nav-link" %>
