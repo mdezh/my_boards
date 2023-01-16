@@ -3,15 +3,15 @@ class Board < ApplicationRecord
   validates :name, presence: true, uniqueness: true, length: { maximum: 100 }
   validates :description, length: { maximum: 1000 }
 
-  before_validation :strip_fields
+  before_validation :prepare_fields
 
   broadcasts_to ->(_board) { 'boards' }, inserts_by: :prepend
 
   private
 
-  def strip_fields
-    # with name.strip! form field after invalid submit will stay unstripped
-    self.name = name.strip
+  def prepare_fields
+    # with name.squish! form field after invalid submit will stay unsquished
+    self.name = name.squish
     self.description = description.strip
   end
 end
