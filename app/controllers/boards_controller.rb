@@ -64,7 +64,7 @@ class BoardsController < ApplicationController
     end
   end
 
-  def cancel
+  def cancel_new
     respond_to do |format|
       format.turbo_stream { render turbo_stream: turbo_stream.update('new_board_area', partial: 'add_board_btn') }
     end
