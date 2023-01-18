@@ -2,9 +2,10 @@
   url: board_notes_path(board_id: @board.id), class: "mt-2 d-flex" do |f| %>
   <div class="input-group">
     <%= f.text_area :content, class: "form-control growing-text shadow", placeholder: 'New note', rows: 1,
-      data: { controller: "clear-value auto-grow", auto_grow_prev_value: "#notes",
-              action: "keydown.esc->clear-value#clear input->auto-grow#grow keydown.esc->auto-grow#grow" } %>
-    <%= f.button "", type: :submit, class: "btn btn-sm btn-primary bi bi-plus-lg shadow",
+      data: { controller: "clear-value auto-grow clicker", auto_grow_prev_value: "#notes",
+              clicker_selector_value: "#add_note_btn", clicker_prevent_value: true,
+              action: "keydown.esc->clear-value#clear input->auto-grow#grow keydown.esc->auto-grow#grow keydown.enter->clicker#click" } %>
+    <%= f.button "", type: :submit, id: "add_note_btn", class: "btn btn-sm btn-primary bi bi-plus-lg shadow",
       data: {turbo_stream: "", controller: "clicker", clicker_selector_value: ".cancel-btn", action: "clicker#click"} %>
   </div>
 <% end %>

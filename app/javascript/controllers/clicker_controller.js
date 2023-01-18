@@ -4,9 +4,11 @@ import { Controller } from "@hotwired/stimulus";
 export default class extends Controller {
   static values = {
     selector: String,
+    prevent: { type: Boolean, default: false },
   };
 
-  click() {
+  click(e) {
+    this.preventValue && e.preventDefault();
     const elements = document.querySelectorAll(this.selectorValue);
     elements && elements.forEach((element) => element.click());
   }
