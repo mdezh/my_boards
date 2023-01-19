@@ -51,26 +51,15 @@ class BoardsController < ApplicationController
 
   def update
     if @board.update(board_params)
-      # next line is unnecessary since we use broadcasting
-      # render @board
-      render html: ''
+      head :ok
     else
-      render 'edit', status: :unprocessable_entity
+      render partial: 'form', status: :unprocessable_entity
     end
   end
 
   def destroy
-    respond_to do |format|
-      format.turbo_stream do
-        if @board.destroy
-          # next line is unnecessary since we use broadcasting
-          # render turbo_stream: turbo_stream.remove(@board)
-          render turbo_stream: []
-        else
-          render turbo_stream: []
-        end
-      end
-    end
+    @board.destroy
+    head :ok
   end
 
   private
