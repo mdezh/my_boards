@@ -2,7 +2,7 @@
   <%= form_with model: @note do |f| %>
     <% invalid = @note.errors.include?(:content) %>
     <%= f.text_area :content, class: "form-control shadow growing-text #{ 'is-invalid' if invalid }",
-      data: { controller: "auto-grow", action: "input->auto-grow#grow" } %>
+      autofocus:true, data: { controller: "auto-grow", action: "input->auto-grow#grow" } %>
     <% if invalid %>
       <% @note.errors.full_messages_for(:content).each do |m| %>
         <p class="my-0"><small class="text-danger"><%= m %></small></p>
