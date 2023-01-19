@@ -37,8 +37,7 @@ class BoardsController < ApplicationController
   end
 
   def create
-    @board = Board.new(board_params)
-    if @board.save
+    if current_user.boards.create(board_params)
       render partial: 'add_board_btn'
     else
       render partial: 'form', status: :unprocessable_entity
