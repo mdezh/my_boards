@@ -7,5 +7,6 @@
     data-lazy-loader-indicator-value="#boards_spinner"
   <% end %>
 >
+  <%= turbo_stream_from board %>
   <%= render "boards/board_inner", board: %>
 </div>

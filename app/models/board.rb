@@ -8,8 +8,9 @@ class Board < ApplicationRecord
 
   before_validation :prepare_fields
 
-  # broadcasts_to ->(_board) { 'boards' }, inserts_by: :prepend
   after_create_commit ->(board) { add_board board }
+  after_update_commit ->(board) { update_board board }
+  after_destroy_commit ->(board) { destroy_board board }
 
   def belong_to_user?(user)
     users.include?(user)
@@ -20,6 +21,14 @@ class Board < ApplicationRecord
   def add_board(board)
     user = board.relations.find_by(role: :owner).user
     broadcast_prepend_later_to(user) unless user.nil?
+  end
+
+  def update_board(board)
+    broadcast_replace_later_to(board)
+  end
+
+  def destroy_board(board)
+    broadcast_remove_to(board)
   end
 
   def prepare_fields
