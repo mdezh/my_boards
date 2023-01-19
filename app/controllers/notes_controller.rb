@@ -46,31 +46,20 @@ class NotesController < ApplicationController
             turbo_stream.replace('add_note', partial: 'add_form')
           ]
         else
-          render turbo_stream: []
+          head :ok
         end
       end
     end
   end
 
   def destroy
-    respond_to do |f|
-      f.turbo_stream do
-        if @note.destroy
-          # next line is unnecessary since we use broadcasting
-          # render turbo_stream: turbo_stream.remove(@note)
-          render turbo_stream: []
-        else
-          render turbo_stream: []
-        end
-      end
-    end
+    @note.destroy
+    head :ok
   end
 
   def update
     if @note.update(note_params)
-      # next line is unnecessary since we use broadcasting
-      # render @note
-      render html: ''
+      head :ok
     else
       render 'edit', status: :unprocessable_entity
     end
