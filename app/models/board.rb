@@ -10,6 +10,10 @@ class Board < ApplicationRecord
 
   broadcasts_to ->(_board) { 'boards' }, inserts_by: :prepend
 
+  def belong_to_user?(user)
+    users.include?(user)
+  end
+
   private
 
   def prepare_fields

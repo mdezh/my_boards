@@ -9,7 +9,7 @@ class BoardsController < ApplicationController
     @active_board_id = params[:board]
     @cursor = params[:cursor]&.to_i || (Board.last&.id || 0) + 1
     amount = params[:cursor] ? BOARDS_PER_NEXT_PAGE : BOARDS_PER_FIRST_PAGE
-    @boards = Board.order(id: :desc).where('id < ?', @cursor).take(amount)
+    @boards = current_user.boards.order(id: :desc).where('board_id < ?', @cursor).take(amount)
     @next_cursor = @boards.last&.id
     @loading_trigger = if @boards.empty?
                          nil
