@@ -1,7 +1,7 @@
 <%= turbo_frame_tag 'notes_frame' do %>
 
   <% if @board.present? %>
-    <%= turbo_stream_from dom_id(@board) %>
+    <%= turbo_stream_from [@board, :notes] %>
   <% end %>
 
   <div class="full-column d-flex flex-column">

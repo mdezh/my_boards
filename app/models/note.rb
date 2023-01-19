@@ -4,7 +4,7 @@ class Note < ApplicationRecord
 
   before_validation :strip_content
 
-  broadcasts_to ->(note) { ActionView::RecordIdentifier.dom_id(note.board) }, inserts_by: :prepend
+  broadcasts_to ->(note) { [note.board, :notes] }, inserts_by: :prepend
 
   private
 
