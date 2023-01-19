@@ -1,6 +1,6 @@
 <%= turbo_frame_tag 'boards_frame' do %>
 
-  <%= turbo_stream_from "boards" %>
+  <%= turbo_stream_from current_user %>
 
   <div class="full-column d-flex flex-column">
     <%= render 'add_board_btn' %>

@@ -8,13 +8,19 @@ class Board < ApplicationRecord
 
   before_validation :prepare_fields
 
-  broadcasts_to ->(_board) { 'boards' }, inserts_by: :prepend
+  # broadcasts_to ->(_board) { 'boards' }, inserts_by: :prepend
+  after_create_commit ->(board) { add_board board }
 
   def belong_to_user?(user)
     users.include?(user)
   end
 
   private
+
+  def add_board(board)
+    user = board.relations.find_by(role: :owner).user
+    broadcast_prepend_later_to(user) unless user.nil?
+  end
 
   def prepare_fields
     # with name.squish! form field after invalid submit will stay unsquished
