@@ -34,40 +34,19 @@ class BoardsController < ApplicationController
 
   def new
     @board = Board.new
-    respond_to do |format|
-      format.turbo_stream do
-        render turbo_stream: turbo_stream.update('new_board_area', partial: 'form')
-      end
-    end
   end
 
   def create
     @board = Board.new(board_params)
-    respond_to do |format|
-      if @board.save
-        format.turbo_stream do
-          render turbo_stream: [
-            turbo_stream.update('new_board_area', partial: 'add_board_btn')
-            # next line is unnecessary since we use broadcasting
-            # turbo_stream.prepend('boards', partial: 'board', locals: { board: @board })
-          ]
-        end
-      else
-        format.turbo_stream do
-          render turbo_stream: turbo_stream.replace(
-            'inner_board',
-            partial: 'form',
-            status: :unprocessable_entity
-          )
-        end
-      end
+    if @board.save
+      render partial: 'add_board_btn'
+    else
+      render partial: 'form', status: :unprocessable_entity
     end
   end
 
   def cancel_new
-    respond_to do |format|
-      format.turbo_stream { render turbo_stream: turbo_stream.update('new_board_area', partial: 'add_board_btn') }
-    end
+    render partial: 'add_board_btn'
   end
 
   def update

@@ -3,9 +3,7 @@
   <%= turbo_stream_from "boards" %>
 
   <div class="full-column d-flex flex-column">
-    <div id="new_board_area">
-      <%= render 'add_board_btn' %>
-    </div>
+    <%= render 'add_board_btn' %>
     <div id="boards" class="items-list shadow list-group list-group-flush flex-grow-1 mt-3 border rounded text-bg-light"
       data-controller="empty active" data-empty-hidden-class="hidden" data-active-frame-value="notes_frame"
       data-active-path-value="<%= root_path %>" data-active-selected-class="selected-board"
