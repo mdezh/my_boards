@@ -1,6 +1,6 @@
-<% cancel_path = @board.id ? board_path(@board) : cancel_new_board_path %>
+<% cancel_path = @board.new_record? ? cancel_new_board_path : board_path(@board) %>
 
-<%= turbo_frame_tag(@board.id ? dom_id(@board, :inner) : 'add_board_frame') do %>
+<%= turbo_frame_tag(@board.new_record? ? 'add_board_frame' : dom_id(@board, :inner)) do %>
   <%= form_with(model: @board) do |f| %>
     <% invalid = @board.errors.include?(:name) %>
     <%= f.text_field :name, autofocus: true, class: "shadow form-control #{'is-invalid' if invalid}", placeholder: "Board name",
