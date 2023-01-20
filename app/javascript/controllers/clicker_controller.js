@@ -17,11 +17,11 @@ export default class extends Controller {
 
   submit(e) {
     e.preventDefault();
-    document.querySelector("#" + this.submitValue)?.click();
+    document.getElementById(this.submitValue)?.click();
   }
 
   cancel(e) {
     e.preventDefault();
-    document.querySelector("#" + this.cancelValue)?.click();
+    document.getElementById(this.cancelValue)?.click();
   }
 }
