@@ -21,6 +21,9 @@ export default class extends Controller {
   }
 
   cancel(e) {
+    // sometimes we get here unsuspected events
+    if (!e.cancelable) return;
+
     e.preventDefault();
     document.getElementById(this.cancelValue)?.click();
   }
