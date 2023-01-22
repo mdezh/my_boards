@@ -5,6 +5,7 @@ class Board < ApplicationRecord
 
   validates :name, presence: true, length: { maximum: 100 }
   validates :description, length: { maximum: 1000 }
+  validate :name_should_be_unique_per_user, on: :update
 
   before_validation :prepare_fields
 
@@ -17,6 +18,12 @@ class Board < ApplicationRecord
   end
 
   private
+
+  def name_should_be_unique_per_user
+    return unless relations.owner.first.user.boards.where('name = ?', name).count.positive?
+
+    errors.add(:name, 'should be unique per user')
+  end
 
   def add_board(board)
     user = board.relations.find_by(role: :owner).user

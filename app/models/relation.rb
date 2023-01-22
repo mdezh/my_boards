@@ -4,7 +4,7 @@ class Relation < ApplicationRecord
 
   validates :role, presence: true
   validates :board_id, uniqueness: { scope: :user_id }
-  validate :board_name_should_be_unique_per_user
+  validate :board_name_should_be_unique_per_user, on: :create
 
   enum role: %i[owner subscriber]
 
