@@ -3,7 +3,7 @@ class Board < ApplicationRecord
   has_many :relations, dependent: :destroy
   has_many :users, through: :relations
 
-  validates :name, presence: true, uniqueness: true, length: { maximum: 100 }
+  validates :name, presence: true, length: { maximum: 100 }
   validates :description, length: { maximum: 1000 }
 
   before_validation :prepare_fields

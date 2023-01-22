@@ -37,7 +37,16 @@ class BoardsController < ApplicationController
   end
 
   def create
-    @board = current_user.boards.create(board_params)
+    # use rescue since the association calls create! (or save!) internally
+    begin
+      @board = current_user.boards.create(board_params)
+    rescue ActiveRecord::RecordInvalid => e
+      @board = Board.new(board_params)
+      @board.valid?  # call before_validation callback
+      e.record.errors.each do |error|
+        @board.errors.add(error.attribute, error.type)
+      end
+    end
     if @board.errors.empty?
       render partial: 'add_board_btn'
     else
