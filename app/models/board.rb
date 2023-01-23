@@ -20,7 +20,9 @@ class Board < ApplicationRecord
   private
 
   def name_should_be_unique_per_user
-    return unless relations.owner.first.user.boards.where('name = ?', name).count.positive?
+    board_with_same_name = relations.owner.first.user.boards.find_by_name(name)
+    return if board_with_same_name.nil?
+    return if board_with_same_name.id == id
 
     errors.add(:name, 'should be unique per user')
   end
