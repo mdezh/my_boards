@@ -1,5 +1,4 @@
-<%= form_with id: 'add_note', model: @board.notes.build,
-  url: board_notes_path(board_id: @board.id), class: "mt-2 d-flex" do |f| %>
+<%= form_with id: 'add_note', model: [@board, @board.notes.build], class: "mt-2 d-flex" do |f| %>
   <div class="input-group">
     <%= f.text_area :content, class: "form-control growing-text shadow", placeholder: 'New note', rows: 1,
       data: { controller: "clear-value auto-grow clicker", auto_grow_prev_value: "#notes",
