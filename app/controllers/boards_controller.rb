@@ -1,5 +1,5 @@
 class BoardsController < ApplicationController
-  before_action :set_board, only: %i[show edit update destroy details]
+  before_action :set_board!, only: %i[show edit update destroy details]
 
   BOARDS_PER_FIRST_PAGE = 30
   BOARDS_PER_NEXT_PAGE = 10
@@ -73,8 +73,8 @@ class BoardsController < ApplicationController
 
   private
 
-  def set_board
-    @board = Board.find_by(id: params[:id])
+  def set_board!
+    @board = Board.find(params[:id])
   end
 
   def board_params

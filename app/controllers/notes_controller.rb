@@ -1,6 +1,6 @@
 class NotesController < ApplicationController
-  before_action :set_board, only: %i[index create]
-  before_action :set_note, only: %i[destroy edit update show]
+  before_action :set_board!, only: %i[index create]
+  before_action :set_note!, only: %i[destroy edit update show]
 
   NOTES_PER_FIRST_PAGE = 30
   NOTES_PER_NEXT_PAGE = 10
@@ -67,12 +67,12 @@ class NotesController < ApplicationController
 
   private
 
-  def set_board
+  def set_board!
     board_id = (params[:board_id] || params[:board] || '0').to_i
     @board = board_id.zero? ? nil : Board.find(board_id)
   end
 
-  def set_note
+  def set_note!
     @note = Note.find(params[:id])
   end
 
