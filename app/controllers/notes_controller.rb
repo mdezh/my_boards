@@ -1,6 +1,9 @@
 class NotesController < ApplicationController
   before_action :set_board!, only: %i[index create]
   before_action :set_note!, only: %i[destroy edit update show]
+  before_action :authorize_note!, only: %i[destroy edit update show]
+  before_action :authorize_board!, only: %i[index create]
+  after_action :verify_authorized
 
   NOTES_PER_FIRST_PAGE = 30
   NOTES_PER_NEXT_PAGE = 10
@@ -20,7 +23,7 @@ class NotesController < ApplicationController
 
     @cursor = params[:cursor]&.to_i || (Note.last&.id || 0) + 1
     amount = params[:cursor] ? NOTES_PER_NEXT_PAGE : NOTES_PER_FIRST_PAGE
-    @notes = @board.notes.order(id: :desc).where('id < ?', @cursor).take(amount)
+    @notes = @board.notes.where('id < ?', @cursor).order(id: :desc).take(amount)
     @next_cursor = @notes.last&.id
     @loading_trigger = if @notes.empty?
                          nil
@@ -41,7 +44,7 @@ class NotesController < ApplicationController
       f.turbo_stream do
         if @note.save
           render turbo_stream: [
-            # despite we use broadcasting we need next line since we want autoscroll new note into the viewport
+            # despite we use broadcasting we still need next line since we want autoscroll new note into the viewport
             turbo_stream.prepend('notes', partial: 'note', locals: { note: @note, auto_scroll: true }),
             turbo_stream.replace('add_note', partial: 'add_form')
           ]
@@ -69,11 +72,19 @@ class NotesController < ApplicationController
 
   def set_board!
     board_id = (params[:board_id] || params[:board] || '0').to_i
-    @board = board_id.zero? ? nil : Board.find(board_id)
+    @board = board_id.zero? ? nil : policy_scope(Board).find(board_id)
   end
 
   def set_note!
-    @note = Note.find(params[:id])
+    @note = policy_scope(Note).find(params[:id])
+  end
+
+  def authorize_note!
+    authorize @note || Note
+  end
+
+  def authorize_board!
+    authorize @board, policy_class: NotePolicy
   end
 
   def note_params

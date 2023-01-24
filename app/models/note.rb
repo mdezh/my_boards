@@ -6,6 +6,10 @@ class Note < ApplicationRecord
 
   broadcasts_to ->(note) { [note.board, :notes] }, inserts_by: :prepend
 
+  def visible_to_user?(user)
+    Relation.where(board_id:).where(user_id: user.id).present?
+  end
+
   private
 
   def strip_content
