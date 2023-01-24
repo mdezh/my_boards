@@ -1,5 +1,7 @@
 class BoardsController < ApplicationController
   before_action :set_board!, only: %i[show edit update destroy details]
+  before_action :authorize_board!
+  after_action :verify_authorized
 
   BOARDS_PER_FIRST_PAGE = 30
   BOARDS_PER_NEXT_PAGE = 10
@@ -9,7 +11,7 @@ class BoardsController < ApplicationController
     @active_board_id = params[:board]
     @cursor = params[:cursor]&.to_i || (Board.last&.id || 0) + 1
     amount = params[:cursor] ? BOARDS_PER_NEXT_PAGE : BOARDS_PER_FIRST_PAGE
-    @boards = current_user.boards.order(id: :desc).where('board_id < ?', @cursor).take(amount)
+    @boards = policy_scope(Board).where('board_id < ?', @cursor).order(id: :desc).take(amount)
     @next_cursor = @boards.last&.id
     @loading_trigger = if @boards.empty?
                          nil
@@ -74,7 +76,11 @@ class BoardsController < ApplicationController
   private
 
   def set_board!
-    @board = Board.find(params[:id])
+    @board = policy_scope(Board).find(params[:id])
+  end
+
+  def authorize_board!
+    authorize(@board || Board)
   end
 
   def board_params

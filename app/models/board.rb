@@ -17,6 +17,10 @@ class Board < ApplicationRecord
     users.include?(user)
   end
 
+  def owned_by_user?(user)
+    relations.owner&.first&.user == user
+  end
+
   private
 
   def name_should_be_unique_per_user
