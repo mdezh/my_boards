@@ -76,3 +76,5 @@ gem "faker", "~> 3.0"
 gem "bootstrap", "~> 5.2"
 
 gem "devise", "~> 4.8"
+
+gem "pundit", "~> 2.3"

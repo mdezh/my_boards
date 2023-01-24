@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  include Authorization
+
   # looks like it works without next line
   # protect_from_forgery with: :exception
   before_action :authenticate_user!
