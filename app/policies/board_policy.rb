@@ -4,7 +4,7 @@ class BoardPolicy < ApplicationPolicy
   end
 
   def show?
-    index?
+    record.belong_to_user?(user)
   end
 
   def create?
@@ -20,7 +20,7 @@ class BoardPolicy < ApplicationPolicy
   end
 
   def details?
-    index?
+    show?
   end
 
   def cancel_new?
