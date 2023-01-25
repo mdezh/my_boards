@@ -9,6 +9,8 @@
 test_user = User.create!(nickname: 'test', password: '111111')
 test2_user = User.create!(nickname: 'test2', password: '111111')
 
+Current.skip_user_check = true
+
 100.times do
   name = Faker::Hobby.unique.activity
   description = Faker::Books::Lovecraft.sentence(word_count: 1, random_words_to_add: 30)
