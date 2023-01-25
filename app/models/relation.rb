@@ -4,19 +4,12 @@ class Relation < ApplicationRecord
 
   validates :role, presence: true
   validates :board_id, uniqueness: { scope: :user_id }
-  validate :board_name_should_be_unique_per_user, on: :create
 
   after_destroy ->(record) { destroy_board_if_owner record }
 
   enum role: %i[owner subscriber]
 
   private
-
-  def board_name_should_be_unique_per_user
-    return unless user.boards.where('name = ?', board.name).count.positive?
-
-    errors.add(:name, 'should be unique per user')
-  end
 
   def destroy_board_if_owner(record)
     return unless record.owner?

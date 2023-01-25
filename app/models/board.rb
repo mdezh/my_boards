@@ -5,7 +5,7 @@ class Board < ApplicationRecord
 
   validates :name, presence: true, length: { maximum: 100 }
   validates :description, length: { maximum: 1000 }
-  validate :name_should_be_unique_per_user, on: :update
+  validate :name_should_be_unique_per_user, on: %i[create update], if: -> { !Current.skip_user_check }
 
   before_validation :prepare_fields
 
@@ -24,7 +24,19 @@ class Board < ApplicationRecord
   private
 
   def name_should_be_unique_per_user
-    board_with_same_name = relations.owner.first.user.boards.find_by_name(name)
+    use_current_user = true
+
+    if Current.user.nil?
+      raise 'Current.user is necessary for board validation on create, but is is nil' unless relations.present?
+
+      use_current_user = false
+    end
+
+    board_with_same_name = if use_current_user
+                             Board.where(relations: Current.user.relations.owner).find_by_name(name)
+                           else
+                             relations.owner.first.user.boards.find_by_name(name)
+                           end
     return if board_with_same_name.nil?
     return if board_with_same_name.id == id
 
