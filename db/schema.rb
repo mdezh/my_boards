@@ -21,7 +21,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_19_173008) do
 
   create_table "notes", force: :cascade do |t|
     t.integer "board_id", null: false
-    t.text "content"
+    t.text "content", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["board_id"], name: "index_notes_on_board_id"
