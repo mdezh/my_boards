@@ -10,16 +10,15 @@ class NotePolicy < ApplicationPolicy
   end
 
   def show?
-    record.board.belong_to_user?(user)
-  end
-
-  def update?
-    # record.board.owned_by_user?(user)
     record.visible_to_user?(user)
   end
 
+  def update?
+    show?
+  end
+
   def destroy?
-    record.board.owned_by_user?(user)
+    show?
   end
 
   class Scope < Scope
