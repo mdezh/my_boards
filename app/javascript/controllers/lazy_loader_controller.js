@@ -24,9 +24,11 @@ export default class extends Controller {
     if (!this.statusValue) {
       this.statusValue = "pending";
       this.showIndicator();
+      const timeZone = Intl?.DateTimeFormat()?.resolvedOptions()?.timeZone;
       fetch(this.srcValue, {
         headers: {
           Accept: "text/vnd.turbo-stream.html",
+          "X-Time-Zone": timeZone ? timeZone : "UTC",
         },
       })
         .then((r) => r.text())
