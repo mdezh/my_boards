@@ -1,4 +1,6 @@
 class Note < ApplicationRecord
+  include Presentable
+
   belongs_to :board
   validates :content, presence: true
 

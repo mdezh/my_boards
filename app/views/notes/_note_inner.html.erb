@@ -7,22 +7,7 @@
           <span class="preserve-lines"><%= note.content %></span>
         </div>
         <div class="text-secondary d-flex flex-row-reverse">
-          <small>
-            <% if note.created_at != note.updated_at %>
-              Updated at 
-            <% end %>
-            <%
-              delta = Time.current - note.updated_at
-              format = if delta < 1.day and Time.current.day == note.updated_at.day
-                  :time
-                elsif Time.current.year == note.updated_at.year
-                  :short
-                else
-                  :long
-                end
-            %>
-            <%= note.updated_at.to_fs(format) %>
-          </small>
+          <small><%= note.presenter.time_mark %></small>
         </div>
       </div>
       <div class="hover-content-block shadow">
