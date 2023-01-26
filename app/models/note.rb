@@ -1,5 +1,5 @@
 class Note < ApplicationRecord
-  include Presentable
+  include Presenter
 
   belongs_to :board
   validates :content, presence: true
