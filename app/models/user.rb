@@ -5,6 +5,7 @@ class User < ApplicationRecord
 
   has_many :relations, dependent: :destroy
   has_many :boards, through: :relations
+  has_many :notes, dependent: :destroy
 
   validates_presence_of :nickname
   validates_length_of :nickname, within: 1..30

@@ -2,6 +2,7 @@ class Note < ApplicationRecord
   include Presenter
 
   belongs_to :board
+  belongs_to :user, default: -> { Current.user }
   validates :content, presence: true
 
   before_validation :strip_content
