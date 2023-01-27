@@ -7,7 +7,6 @@ module CurrentUser
     private
 
     def set_current_user
-      Current.skip_user_check = false
       Current.user = current_user
     end
   end
