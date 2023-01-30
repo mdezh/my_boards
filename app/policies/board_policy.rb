@@ -4,7 +4,7 @@ class BoardPolicy < ApplicationPolicy
   end
 
   def show?
-    record.belong_to_user?(user)
+    record.belong_to_user?(user) || record.published?
   end
 
   def create?

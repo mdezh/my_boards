@@ -5,6 +5,8 @@ class Board < ApplicationRecord
 
   enum sharing_status: %i[forbidden public_ro public_rw invite_ro invite_rw]
 
+  scope :published, -> { Board.public_ro.or(Board.public_rw) }
+
   validates :name, presence: true, length: { maximum: 100 }
   validates :description, length: { maximum: 1000 }
   validate :name_should_be_unique_per_user, on: %i[create update]
@@ -21,6 +23,10 @@ class Board < ApplicationRecord
 
   def owned_by_user?(user)
     relations.where(user_id: user.id).owner.present?
+  end
+
+  def published?
+    sharing_status.in? %w[public_ro public_rw]
   end
 
   private

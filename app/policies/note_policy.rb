@@ -1,12 +1,12 @@
 class NotePolicy < ApplicationPolicy
   # use board as record
   def index?
-    record.nil? || record.belong_to_user?(user)
+    record.nil? || record.belong_to_user?(user) || record.published?
   end
 
   # use board as record
   def create?
-    record.owned_by_user?(user)
+    record.owned_by_user?(user) || record.public_rw?
   end
 
   def show?
@@ -14,16 +14,16 @@ class NotePolicy < ApplicationPolicy
   end
 
   def update?
-    show?
+    record.changeable_by_user?(user)
   end
 
   def destroy?
-    show?
+    update?
   end
 
   class Scope < Scope
     def resolve
-      scope.where(board: user.boards)
+      scope.where(board: user.boards).or(scope.where(board: Board.public_ro)).or(scope.where(board: Board.public_rw))
     end
   end
 end
