@@ -10,11 +10,11 @@ class Note < ApplicationRecord
   broadcasts_to ->(note) { [note.board, :notes] }, inserts_by: :prepend
 
   def visible_to_user?(user)
-    Relation.where(board_id:).where(user_id: user.id).present? || board.published?
+    @visible_to_user ||= Relation.where(board_id:).where(user_id: user.id).present? || board.published?
   end
 
   def changeable_by_user?(user)
-    user_id == user.id || Relation.owner.where(board_id:).where(user_id: user.id).present?
+    @changeable_by_user ||= user_id == user.id || Relation.owner.where(board_id:).where(user_id: user.id).present?
   end
 
   private
