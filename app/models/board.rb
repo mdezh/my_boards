@@ -18,11 +18,11 @@ class Board < ApplicationRecord
   after_destroy_commit ->(board) { destroy_board board }
 
   def belong_to_user?(user)
-    @belong_to_user ||= relations.where(user_id: user.id).present?
+    relations.where(user_id: user.id).present?
   end
 
   def owned_by_user?(user)
-    @owned_by_user ||= relations.where(user_id: user.id).owner.present?
+    relations.where(user_id: user.id).owner.present?
   end
 
   def published?
