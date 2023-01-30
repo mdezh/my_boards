@@ -29,6 +29,10 @@ class Board < ApplicationRecord
     sharing_status.in? %w[public_ro public_rw]
   end
 
+  def writable_for_user?(user)
+    owned_by_user?(user) || public_rw?
+  end
+
   private
 
   def name_should_be_unique_per_user

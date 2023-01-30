@@ -27,7 +27,7 @@
         </div>
       <% end %>
     </div>
-    <% if @board.present? %>
+    <% if @board&.writable_for_user?(current_user) %>
       <%= render 'add_form' %>
     <% end %>
   </div>
