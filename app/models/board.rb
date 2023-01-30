@@ -3,6 +3,8 @@ class Board < ApplicationRecord
   has_many :relations, dependent: :destroy
   has_many :users, through: :relations
 
+  enum sharing_status: %i[forbidden public_ro public_rw invite_ro invite_rw]
+
   validates :name, presence: true, length: { maximum: 100 }
   validates :description, length: { maximum: 1000 }
   validate :name_should_be_unique_per_user, on: %i[create update]

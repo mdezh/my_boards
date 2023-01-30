@@ -11,7 +11,7 @@ Current.user = User.create!(nickname: 'test', password: '111111')
 100.times do
   name = Faker::Hobby.unique.activity
   description = Faker::Books::Lovecraft.sentence(word_count: 1, random_words_to_add: 30)
-  Current.user.boards.create!(name:, description:)
+  Current.user.boards.create!(name:, description:, sharing_status: Board.sharing_statuses[:public_ro])
 end
 
 Current.user.boards.order(id: :desc).take(2).each do |board|
@@ -26,7 +26,7 @@ Current.user = User.create!(nickname: 'test2', password: '111111')
 5.times do
   name = Faker::Hobby.unique.activity
   description = Faker::Books::Lovecraft.sentence(word_count: 1, random_words_to_add: 30)
-  Current.user.boards.create!(name:, description:)
+  Current.user.boards.create!(name:, description:, sharing_status: Board.sharing_statuses[:public_rw])
 end
 
 Current.user.boards.order(id: :desc).each do |board|
