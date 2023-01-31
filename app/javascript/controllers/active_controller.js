@@ -11,7 +11,10 @@ export default class extends Controller {
   static classes = ["selected"];
 
   itemTargetDisconnected(e) {
-    if (e?.id == this.activeValue) {
+    if (
+      e?.id == this.activeValue &&
+      document.querySelectorAll(`#${e.id}`).length == 0 // to prevent issues when element is duplicated by broadcasting
+    ) {
       const turboFrame = document.querySelector(`#${this.frameValue}`);
       if (turboFrame) {
         turboFrame.src = this.pathValue;
