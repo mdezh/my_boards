@@ -13,8 +13,12 @@ class Note < ApplicationRecord
     Relation.where(board_id:).where(user_id: user.id).present? || board.published?
   end
 
-  def changeable_by_user?(user)
-    user_id == user.id || Relation.owner.where(board_id:).where(user_id: user.id).present?
+  def updatable_for_user?(user)
+    user_id == user.id
+  end
+
+  def destroyable_for_user?(user)
+    updatable_for_user?(user) || Relation.owner.where(board_id:).where(user_id: user.id).present?
   end
 
   private

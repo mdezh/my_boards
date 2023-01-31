@@ -31,4 +31,13 @@
       <%= render 'add_form' %>
     <% end %>
   </div>
+
+  <% if @board.present? %>
+    <%= tag.div id: 'notes_state', class: 'hidden', data: {
+      controller: 'notes',
+      notes_user_value: current_user.id,
+      notes_board_state_value: {owner: @board.owner_id, sharing_status: @board.sharing_status},
+      notes_note_outlet: '.js-note'
+    } %>
+  <% end %>
 <% end %>

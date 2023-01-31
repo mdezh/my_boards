@@ -1,20 +1,23 @@
 <%= turbo_frame_tag dom_id(note, :inner) do %>
   <div class="hover-wrapper">
-    <div class="d-flex align-items-center hover-trigger"
-        data-controller="clicker" data-clicker-selector-value=".cancel-btn">
+    <div class="d-flex align-items-center hover-trigger js-note"
+      data-controller="note clicker" data-clicker-selector-value=".cancel-btn"
+      data-note-user-value="<%= note.user_id %>"
+    >
       <div class="d-flex flex-column w-100">
         <div class="note-content">
           <span class="preserve-lines"><%= note.content %></span>
         </div>
         <div class="text-secondary d-flex flex-row-reverse">
+          <small data-note-target="nick">&nbspby <%= note.user.nickname %></small>
           <small><%= note.time_mark %></small>
         </div>
       </div>
       <div class="hover-content-block shadow">
         <div class="btn-group" role="group">
           <%= link_to "", edit_note_path(note), class: "btn btn-secondary btn-sm bi bi-pen",
-            role: "button", data: { action: "click->clicker#click"} %>
-          <%= link_to "", note, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
+            role: "button", data: { note_target: "edit", action: "click->clicker#click" } %>
+          <%= link_to "", note, data: { note_target: "delete", turbo_method: :delete, turbo_confirm: "Are you sure?" },
             class: "btn btn-danger btn-sm bi bi-trash", role: "button" %>
         </div>
       </div>

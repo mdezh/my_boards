@@ -14,11 +14,11 @@ class NotePolicy < ApplicationPolicy
   end
 
   def update?
-    record.changeable_by_user?(user)
+    record.updatable_for_user?(user)
   end
 
   def destroy?
-    update?
+    record.destroyable_for_user?(user)
   end
 
   class Scope < Scope

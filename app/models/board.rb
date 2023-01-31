@@ -33,6 +33,10 @@ class Board < ApplicationRecord
     owned_by_user?(user) || public_rw?
   end
 
+  def owner_id
+    relations.owner.first.user_id
+  end
+
   private
 
   def name_should_be_unique_per_user
