@@ -27,9 +27,7 @@
         </div>
       <% end %>
     </div>
-    <% if @board&.writable_for_user?(current_user) %>
-      <%= render 'add_form' %>
-    <% end %>
+    <%= render 'add_form' if @board.present? %>
   </div>
 
   <% if @board.present? %>
@@ -37,7 +35,8 @@
       controller: 'notes',
       notes_user_value: current_user.id,
       notes_board_state_value: {owner: @board.owner_id, sharing_status: @board.sharing_status},
-      notes_note_outlet: '.js-note'
+      notes_note_outlet: '.js-notes-show',
+      notes_add_note_outlet: '.js-notes-new'
     } %>
   <% end %>
 <% end %>
