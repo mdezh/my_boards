@@ -23,7 +23,7 @@ class NotesController < ApplicationController
 
     @cursor = params[:cursor]&.to_i || (Note.last&.id || 0) + 1
     amount = params[:cursor] ? NOTES_PER_NEXT_PAGE : NOTES_PER_FIRST_PAGE
-    @notes = @board.notes.where('id < ?', @cursor).order(id: :desc).take(amount)
+    @notes = @board.notes.where('id < ?', @cursor).order(id: :desc).includes(:user).take(amount)
     @next_cursor = @notes.last&.id
     @loading_trigger = if @notes.empty?
                          nil
