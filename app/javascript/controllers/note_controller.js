@@ -9,32 +9,32 @@ export default class extends Controller {
 
   refresh({ currentUser, boardOwner }) {
     if (currentUser == this.userValue) {
-      this.showEditBtn();
+      this.enableEditBtn();
       this.hideNickname();
     } else {
-      this.hideEditBtn();
+      this.disableEditBtn();
       this.showNickname();
     }
     if (currentUser == boardOwner || currentUser == this.userValue) {
-      this.showDeleteBtn();
+      this.enableDeleteBtn();
     } else {
-      this.hideDeleteBtn();
+      this.disableDeleteBtn();
     }
   }
 
-  showEditBtn() {
+  enableEditBtn() {
     this.editTarget.classList.remove("disabled");
   }
 
-  hideEditBtn() {
+  disableEditBtn() {
     this.editTarget.classList.add("disabled");
   }
 
-  showDeleteBtn() {
+  enableDeleteBtn() {
     this.deleteTarget.classList.remove("disabled");
   }
 
-  hideDeleteBtn() {
+  disableDeleteBtn() {
     this.deleteTarget.classList.add("disabled");
   }
 
