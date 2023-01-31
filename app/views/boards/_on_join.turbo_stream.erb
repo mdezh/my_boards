@@ -1,0 +1,6 @@
+<%= turbo_stream.prepend 'boards', partial: 'boards/board', locals: { board: } %>
+<%= turbo_stream.remove 'join_board' %>
+
+<% if board.public_rw? %>
+  <%= turbo_stream.replace 'add_note', partial: 'notes/add_form', locals: { board: } %>
+<% end %>

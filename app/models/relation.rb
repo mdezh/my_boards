@@ -25,13 +25,7 @@ class Relation < ApplicationRecord
   def join_board(relation)
     return unless relation.subscriber?
 
-    # use sync broadcasting since it is unlikely that there are many clients with the same user
-    broadcast_prepend_to relation.user, target: 'boards', partial: 'boards/board',
-                                        locals: { board: relation.board }
-    broadcast_remove_to relation.user, target: 'join_board'
-    return unless relation.board.public_rw?
-
-    broadcast_replace_to relation.user, target: 'add_note', partial: 'notes/add_form',
-                                        locals: { board: relation.board }
+    broadcast_render_later_to relation.user, partial: 'boards/on_join',
+                                             locals: { board: relation.board }
   end
 end
