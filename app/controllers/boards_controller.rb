@@ -60,6 +60,7 @@ class BoardsController < ApplicationController
   end
 
   def destroy
+    @board.destroy
     head :ok
   end
 
