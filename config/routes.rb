@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     resources :notes, shallow: true, only: %i[index create destroy edit update show]
     member do
       get :details
+      put :join
     end
   end
 end

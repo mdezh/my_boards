@@ -1,5 +1,5 @@
 class BoardsController < ApplicationController
-  before_action :set_board!, only: %i[show edit update destroy details]
+  before_action :set_board!, only: %i[show edit update destroy details join]
   before_action :authorize_board!
   after_action :verify_authorized
 
@@ -60,14 +60,22 @@ class BoardsController < ApplicationController
   end
 
   def destroy
-    @board.destroy
     head :ok
+  end
+
+  def join
+    relation = current_user.relations.build(board: @board, role: Relation.roles[:subscriber])
+    if relation.save
+      head :ok
+    else
+      head :unprocessable_entity
+    end
   end
 
   private
 
   def set_board!
-    @board = policy_scope(Board).find(params[:id])
+    @board = Board.find(params[:id])
   end
 
   def authorize_board!

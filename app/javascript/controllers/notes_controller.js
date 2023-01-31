@@ -30,6 +30,8 @@ export default class extends Controller {
   }
 
   refreshAddNoteForm() {
+    if (!this.hasAddNoteOutlet) return;
+
     this.addNoteOutlet.refresh({
       currentUser: this.userValue,
       boardOwner: this.boardStateValue.owner,

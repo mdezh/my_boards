@@ -1,4 +1,4 @@
-<%= form_with id: 'add_note', model: [@board, @board.notes.build], class: "mt-2 d-flex js-notes-new",
+<%= form_with id: 'add_note', model: [board, board.notes.build], class: "mt-2 d-flex js-notes-new",
   data: {controller: 'add-note'} do |f| %>
   <div class="input-group">
     <%= f.text_area :content, class: "form-control growing-text shadow", placeholder: 'New note', rows: 1,
