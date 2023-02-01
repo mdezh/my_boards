@@ -7,7 +7,6 @@
   <div class="ms-auto me-3 dropdown"
     data-controller="state-driven"
     data-state-driven-key-value="belongs"
-    data-action="user_board_state@window->state-driven#refresh"
     data-state-driven-state-outlet="#user_board_state"
   >
     <i class="bi bi-three-dots-vertical" type="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
@@ -15,7 +14,6 @@
       <li
         data-controller="state-driven"
         data-state-driven-key-value="joined"
-        data-action="user_board_state@window->state-driven#refresh"
         data-state-driven-state-outlet="#user_board_state"
       >
         <%= link_to 'Leave', leave_board_path(@board), class: 'dropdown-item',
@@ -24,7 +22,6 @@
       <li
         data-controller="state-driven"
         data-state-driven-key-value="owned"
-        data-action="user_board_state@window->state-driven#refresh"
         data-state-driven-state-outlet="#user_board_state"
       >
         <%= link_to 'Delete', board_path(@board), class: 'dropdown-item',

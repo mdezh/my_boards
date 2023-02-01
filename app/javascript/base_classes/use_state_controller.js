@@ -7,6 +7,11 @@ export default class UseStateController extends Controller {
   };
 
   connect() {
+    const stateOutletId = this.stateOutlet.element.id;
+    this.element.dataset.action = [
+      ...(this.element.dataset.action ?? "").split(" ").filter(Boolean),
+      `${stateOutletId}@window->state-driven#refresh`,
+    ].join(" ");
     const state = this.stateOutlet.objectValue;
     this.updateWithState(state);
   }
