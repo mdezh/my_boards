@@ -17,6 +17,7 @@ export default class UseStateController extends Controller {
 
     const states = this.stateOutlets.map((outlet) => outlet.objectValue);
     this.state = states.reduce((acc, state) => Object.assign(acc, state), {});
+
     this.updateWithState();
   }
 
@@ -25,8 +26,16 @@ export default class UseStateController extends Controller {
     this.updateWithState();
   }
 
+  checkFunction() {
+    throw Error("Not implemented!");
+  }
+
   updateWithState() {
-    console.error("Not implemented!");
+    if (this.checkFunction()) {
+      this.element.classList.remove(this.hiddenClassValue);
+    } else {
+      this.element.classList.add(this.hiddenClassValue);
+    }
   }
 }
 

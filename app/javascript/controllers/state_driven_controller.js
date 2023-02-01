@@ -7,11 +7,7 @@ export default class extends UseStateController {
     key: String,
   };
 
-  updateWithState() {
-    if (this.state[this.keyValue]) {
-      this.element.classList.remove(this.hiddenClassValue);
-    } else {
-      this.element.classList.add(this.hiddenClassValue);
-    }
+  checkFunction() {
+    return this.state[this.keyValue];
   }
 }
