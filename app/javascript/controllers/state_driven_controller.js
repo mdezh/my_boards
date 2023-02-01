@@ -5,9 +5,11 @@ export default class extends UseStateController {
   static values = {
     ...super.values,
     key: String,
+    not: { type: Boolean, default: false },
   };
 
   checkFunction() {
-    return this.state[this.keyValue];
+    const result = this.state[this.keyValue];
+    return this.notValue ? !result : result;
   }
 }
