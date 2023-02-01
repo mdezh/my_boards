@@ -4,7 +4,11 @@
     data-class-changer-selector-value=".toggle-mobile" data-action="click->class-changer#toggle"
   ></i>
   <span class="normal-height text-truncate mx-3 fw-semibold my-1"><%= @board.name %></span>
-  <div class="ms-auto me-3 dropdown">
+  <div class="ms-auto me-3 dropdown"
+    data-controller="notes-header-dropdown"
+    data-action="user_board_state@window->notes-header-dropdown#refresh"
+    data-notes-header-dropdown-state-outlet="#user_board_state"
+  >
     <i class="bi bi-three-dots-vertical" type="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
     <ul class="dropdown-menu">
       <li>
