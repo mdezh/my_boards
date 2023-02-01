@@ -10,7 +10,7 @@ export default class UseStateController extends Controller {
     const stateOutletId = this.stateOutlet.element.id;
     this.element.dataset.action = [
       ...(this.element.dataset.action ?? "").split(" ").filter(Boolean),
-      `${stateOutletId}@window->state-driven#refresh`,
+      `${stateOutletId}@window->${this.identifier}#refresh`,
     ].join(" ");
     const state = this.stateOutlet.objectValue;
     this.updateWithState(state);
