@@ -7,21 +7,25 @@ export default class UseStateController extends Controller {
   };
 
   connect() {
-    const stateOutletId = this.stateOutlet.element.id;
+    const actions = this.stateOutlets.map(
+      (outlet) => `${outlet.element.id}@window->${this.identifier}#refresh`
+    );
     this.element.dataset.action = [
       ...(this.element.dataset.action ?? "").split(" ").filter(Boolean),
-      `${stateOutletId}@window->${this.identifier}#refresh`,
+      ...actions,
     ].join(" ");
-    const state = this.stateOutlet.objectValue;
-    this.updateWithState(state);
+
+    const states = this.stateOutlets.map((outlet) => outlet.objectValue);
+    this.state = states.reduce((acc, state) => Object.assign(acc, state), {});
+    this.updateWithState();
   }
 
   refresh(e) {
-    const state = e.detail;
-    this.updateWithState(state);
+    this.state = Object.assign(this.state, e.detail);
+    this.updateWithState();
   }
 
-  updateWithState(_state) {
+  updateWithState() {
     console.error("Not implemented!");
   }
 }

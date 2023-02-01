@@ -7,8 +7,8 @@ export default class extends UseStateController {
     key: String,
   };
 
-  updateWithState(state) {
-    if (state[this.keyValue]) {
+  updateWithState() {
+    if (this.state[this.keyValue]) {
       this.element.classList.remove(this.hiddenClassValue);
     } else {
       this.element.classList.add(this.hiddenClassValue);
