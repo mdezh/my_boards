@@ -5,24 +5,27 @@
   ></i>
   <span class="normal-height text-truncate mx-3 fw-semibold my-1"><%= @board.name %></span>
   <div class="ms-auto me-3 dropdown"
-    data-controller="notes-header-dropdown"
-    data-action="user_board_state@window->notes-header-dropdown#refresh"
-    data-notes-header-dropdown-state-outlet="#user_board_state"
+    data-controller="state-driven"
+    data-state-driven-key-value="belongs"
+    data-action="user_board_state@window->state-driven#refresh"
+    data-state-driven-state-outlet="#user_board_state"
   >
     <i class="bi bi-three-dots-vertical" type="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
     <ul class="dropdown-menu">
       <li
-        data-controller="leave-board"
-        data-action="user_board_state@window->leave-board#refresh"
-        data-leave-board-state-outlet="#user_board_state"
+        data-controller="state-driven"
+        data-state-driven-key-value="joined"
+        data-action="user_board_state@window->state-driven#refresh"
+        data-state-driven-state-outlet="#user_board_state"
       >
         <%= link_to 'Leave', leave_board_path(@board), class: 'dropdown-item',
           data: { turbo_method: 'put', turbo_confirm: "Are you sure?" } %>
       </li>
       <li
-        data-controller="delete-board"
-        data-action="user_board_state@window->delete-board#refresh"
-        data-delete-board-state-outlet="#user_board_state"
+        data-controller="state-driven"
+        data-state-driven-key-value="owned"
+        data-action="user_board_state@window->state-driven#refresh"
+        data-state-driven-state-outlet="#user_board_state"
       >
         <%= link_to 'Delete', board_path(@board), class: 'dropdown-item',
           data: { turbo_method: 'delete', turbo_confirm: "Are you sure?" } %>

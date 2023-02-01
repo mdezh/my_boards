@@ -1,5 +1,6 @@
 <%= turbo_stream.replace 'user_board_state' do %>
   <%= render 'shared/state', id: 'user_board_state', value: {
+    belongs: true,
     owned: false,
     joined: true
   } %>

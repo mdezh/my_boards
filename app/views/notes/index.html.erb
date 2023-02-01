@@ -5,6 +5,7 @@
     <%= turbo_stream_from [current_user, @board] %>
 
     <%= render 'shared/state', id: 'user_board_state', value: {
+      belongs: @board.belong_to_user?(current_user),
       owned: @board.owned_by_user?(current_user),
       joined: @board.joined_by_user?(current_user)
     } %>
