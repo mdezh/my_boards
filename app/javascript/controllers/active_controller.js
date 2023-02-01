@@ -17,7 +17,7 @@ export default class extends Controller {
     ) {
       const turboFrame = document.querySelector(`#${this.frameValue}`);
       if (turboFrame) {
-        turboFrame.src = this.pathValue;
+        this.promoteToFrameVisit(turboFrame, this.pathValue, "replace");
       }
     }
   }
@@ -39,5 +39,22 @@ export default class extends Controller {
       const nextItem = document.querySelector(`#${next}`);
       nextItem?.classList.add(...this.selectedClasses);
     }
+  }
+
+  // use this to guarantee right navigation action (advance or replace)
+  promoteToFrameVisit(
+    element /*: FrameElement */,
+    src /*: string */,
+    action = null
+  ) {
+    const link = document.createElement("a");
+    link.setAttribute("href", src);
+    if (action) {
+      link.setAttribute("data-turbo-action", action); // you can skip this is the <turbo-frame> already declares [data-turbo-action]
+    }
+    link.setAttribute("hidden", "");
+    element.appendChild(link);
+    link.click();
+    element.removeChild(link);
   }
 }
