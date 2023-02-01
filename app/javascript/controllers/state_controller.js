@@ -6,6 +6,13 @@ export default class extends Controller {
     object: { type: Object, default: {} },
   };
 
+  connect() {
+    this.element.dataset.action = [
+      ...(this.element.dataset.action ?? "").split(" ").filter(Boolean),
+      `fire_${this.element.id}@window->state#fireState`,
+    ].join(" ");
+  }
+
   objectValueChanged() {
     this.fireState();
   }
