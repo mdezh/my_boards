@@ -1,48 +1,40 @@
-import { Controller } from "@hotwired/stimulus";
+import { UseStateController } from "../base_classes/use_state_controller";
 
 // Connects to data-controller="note"
-export default class extends Controller {
+export default class extends UseStateController {
   static values = {
+    ...super.values,
     user: Number,
   };
   static targets = ["edit", "delete", "nick"];
 
-  refresh({ currentUser, boardOwner }) {
-    if (currentUser == this.userValue) {
-      this.enableEditBtn();
-      this.hideNickname();
+  updateWithState() {
+    const { current_user, owned, joined, public_rw } = this.state;
+
+    if (current_user == this.userValue) {
+      this.addClass(this.nickTarget, "hidden");
     } else {
-      this.disableEditBtn();
-      this.showNickname();
+      this.removeClass(this.nickTarget, "hidden");
     }
-    if (currentUser == boardOwner || currentUser == this.userValue) {
-      this.enableDeleteBtn();
+
+    if (current_user == this.userValue && (owned || (joined && public_rw))) {
+      this.removeClass(this.editTarget, "disabled");
     } else {
-      this.disableDeleteBtn();
+      this.addClass(this.editTarget, "disabled");
+    }
+
+    if (owned || (current_user == this.userValue && joined && public_rw)) {
+      this.removeClass(this.deleteTarget, "disabled");
+    } else {
+      this.addClass(this.deleteTarget, "disabled");
     }
   }
 
-  enableEditBtn() {
-    this.editTarget.classList.remove("disabled");
+  addClass(target, value) {
+    target.classList.add(value);
   }
 
-  disableEditBtn() {
-    this.editTarget.classList.add("disabled");
-  }
-
-  enableDeleteBtn() {
-    this.deleteTarget.classList.remove("disabled");
-  }
-
-  disableDeleteBtn() {
-    this.deleteTarget.classList.add("disabled");
-  }
-
-  showNickname() {
-    this.nickTarget.classList.remove("hidden");
-  }
-
-  hideNickname() {
-    this.nickTarget.classList.add("hidden");
+  removeClass(target, value) {
+    target.classList.remove(value);
   }
 }

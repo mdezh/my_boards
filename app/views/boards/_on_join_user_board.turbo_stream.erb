@@ -5,9 +5,3 @@
     joined: true
   } %>
 <% end %>
-
-<%= turbo_stream.update 'join_board', html: '' %>
-
-<% if board.public_rw? %>
-  <%= turbo_stream.replace 'add_note', partial: 'notes/add_form', locals: { board: } %>
-<% end %>

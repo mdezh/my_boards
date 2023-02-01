@@ -1,5 +1,9 @@
-<%= form_with id: 'add_note', model: [board, board.notes.build], class: "mt-2 d-flex js-notes-new",
-  data: {controller: 'add-note'} do |f| %>
+<%= form_with id: 'add_note', model: [board, board.notes.build],
+  class: "mt-2 d-flex #{(board.owned_by_user?(current_user) || (board.public_rw? && board.joined_by_user?(current_user))) ? '' : 'hidden'}",
+  data: {
+    controller: 'add-note',
+    add_note_state_outlet: '#board_state, #user_board_state'
+  } do |f| %>
   <div class="input-group">
     <%= f.text_area :content, class: "form-control growing-text shadow", placeholder: 'New note', rows: 1,
       data: { controller: "clear-value auto-grow clicker", auto_grow_prev_value: "#notes",

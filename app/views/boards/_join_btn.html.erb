@@ -1,4 +1,12 @@
-<%= button_to join_board_path(board), class: 'btn btn-light mt-2 w-100 shadow',
-  method: 'put', form: { data: { type: 'turbo_stream' }} do %>
+<%= button_to join_board_path(board), id: 'join_board',
+  class: "btn btn-light mt-2 w-100 shadow #{board.belong_to_user?(current_user) ? 'hidden' : ''}",
+  method: 'put', form: { data: {
+    type: 'turbo_stream',
+  }}, data: {
+    controller: 'state-driven',
+    state_driven_key_value: 'belongs',
+    state_driven_not_value: true,
+    state_driven_state_outlet: '#user_board_state'
+  } do %>
   <strong>Join</strong>
 <% end %>

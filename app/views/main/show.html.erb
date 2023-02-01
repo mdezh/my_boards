@@ -1,4 +1,7 @@
 <div class="row">
+  <%= render 'shared/state', id: 'user_state', value: {
+    current_user: current_user.id
+  } %>
   <div class="col-md-5 col-xl-4">
     <%= turbo_frame_tag 'boards_frame', class: "toggle-mobile", src: boards_path(board: @active_board_id) %>
   </div>
