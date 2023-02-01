@@ -2,6 +2,7 @@
 
   <% if @board.present? %>
     <%= turbo_stream_from [@board, :notes] %>
+    <%= turbo_stream_from [current_user, @board] %>
   <% end %>
 
   <div class="full-column d-flex flex-column">

@@ -67,7 +67,9 @@ class BoardsController < ApplicationController
   def join
     relation = current_user.relations.build(board: @board, role: Relation.roles[:subscriber])
     if relation.save
-      relation.broadcast_render_later_to current_user, partial: 'boards/on_join',
+      relation.broadcast_render_later_to [current_user, @board], partial: 'boards/on_join_user_board',
+                                                                 locals: { board: @board }
+      relation.broadcast_render_later_to current_user, partial: 'boards/on_join_user',
                                                        locals: { board: @board }
     else
       head :unprocessable_entity

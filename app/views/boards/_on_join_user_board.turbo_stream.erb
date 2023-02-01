@@ -1,4 +1,3 @@
-<%= turbo_stream.prepend 'boards', partial: 'boards/board', locals: { board: } %>
 <%= turbo_stream.update 'join_board', html: '' %>
 
 <% if board.public_rw? %>
