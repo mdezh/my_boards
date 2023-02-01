@@ -1,22 +1,7 @@
-import { Controller } from "@hotwired/stimulus";
+import { UseStateController } from "../base_classes/use_state_controller";
 
 // Connects to data-controller="notes-header-dropdown"
-export default class extends Controller {
-  static outlets = ["state"];
-  static values = {
-    hiddenClass: { type: String, default: "hidden" },
-  };
-
-  connect() {
-    const state = this.stateOutlet.objectValue;
-    this.updateWithState(state);
-  }
-
-  refresh(e) {
-    const state = e.detail;
-    this.updateWithState(state);
-  }
-
+export default class extends UseStateController {
   updateWithState(state) {
     if (state.owned || state.joined) {
       this.element.classList.remove(this.hiddenClassValue);
