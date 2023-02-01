@@ -11,9 +11,21 @@
   >
     <i class="bi bi-three-dots-vertical" type="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
     <ul class="dropdown-menu">
-      <li>
+      <li
+        data-controller="leave-board"
+        data-action="user_board_state@window->leave-board#refresh"
+        data-leave-board-state-outlet="#user_board_state"
+      >
         <%= link_to 'Leave', leave_board_path(@board), class: 'dropdown-item',
-          data: { turbo_method: 'put' } %>
+          data: { turbo_method: 'put', turbo_confirm: "Are you sure?" } %>
+      </li>
+      <li
+        data-controller="delete-board"
+        data-action="user_board_state@window->delete-board#refresh"
+        data-delete-board-state-outlet="#user_board_state"
+      >
+        <%= link_to 'Delete', board_path(@board), class: 'dropdown-item',
+          data: { turbo_method: 'delete', turbo_confirm: "Are you sure?" } %>
       </li>
     </ul>
   </div>
