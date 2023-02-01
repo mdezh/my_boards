@@ -31,6 +31,10 @@ class BoardPolicy < ApplicationPolicy
     !record.belong_to_user?(user) && record.published?
   end
 
+  def leave?
+    record.joined_by_user?(user)
+  end
+
   class Scope < Scope
     def resolve
       user.boards

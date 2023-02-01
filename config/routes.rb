@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     member do
       get :details
       put :join
+      put :leave
     end
   end
 end

@@ -34,12 +34,11 @@
         <div id="add_note"></div>
       <% end %>
     <% end %>
-    <% if @board && !@board.belong_to_user?(current_user) %>
-      <%= button_to join_board_path(@board), id: 'join_board', class: 'btn btn-light mt-2 w-100 shadow',
-        method: 'put', form: { data: { type: 'turbo_stream' }} do %>
-        <strong>Join</strong>
+    <div id="join_board">
+      <% if @board && !@board.belong_to_user?(current_user) %>
+        <%= render 'boards/join_btn', board: @board %>
       <% end %>
-    <% end %>
+    </div>
   </div>
 
   <% if @board.present? %>

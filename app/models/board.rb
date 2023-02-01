@@ -25,12 +25,12 @@ class Board < ApplicationRecord
     relations.where(user_id: user.id).owner.present?
   end
 
-  def published?
-    sharing_status.in? %w[public_ro public_rw]
+  def joined_by_user?(user)
+    relations.where(user_id: user.id).subscriber.present?
   end
 
-  def writable_for_user?(user)
-    owned_by_user?(user) || public_rw?
+  def published?
+    sharing_status.in? %w[public_ro public_rw]
   end
 
   def owner_id

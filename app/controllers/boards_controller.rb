@@ -1,5 +1,5 @@
 class BoardsController < ApplicationController
-  before_action :set_board!, only: %i[show edit update destroy details join]
+  before_action :set_board!, only: %i[show edit update destroy details join leave]
   before_action :authorize_board!
   after_action :verify_authorized
 
@@ -67,11 +67,17 @@ class BoardsController < ApplicationController
   def join
     relation = current_user.relations.build(board: @board, role: Relation.roles[:subscriber])
     if relation.save
-      relation.broadcast_render_later_to relation.user, partial: 'boards/on_join',
-                                                        locals: { board: relation.board }
+      relation.broadcast_render_later_to current_user, partial: 'boards/on_join',
+                                                       locals: { board: @board }
     else
       head :unprocessable_entity
     end
+  end
+
+  def leave
+    Relation.where(user_id: current_user.id, board_id: @board.id).subscriber.destroy_all
+    @board.broadcast_render_later_to current_user, partial: 'boards/on_leave',
+                                                   locals: { board: @board }
   end
 
   private

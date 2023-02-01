@@ -1,0 +1,4 @@
+<%= button_to join_board_path(board), class: 'btn btn-light mt-2 w-100 shadow',
+  method: 'put', form: { data: { type: 'turbo_stream' }} do %>
+  <strong>Join</strong>
+<% end %>
