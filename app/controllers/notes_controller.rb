@@ -72,11 +72,11 @@ class NotesController < ApplicationController
 
   def set_board!
     board_id = (params[:board_id] || params[:board] || '0').to_i
-    @board = board_id.zero? ? nil : policy_scope(Board).or(Board.published).find(board_id)
+    @board = board_id.zero? ? nil : Board.find(board_id)
   end
 
   def set_note!
-    @note = policy_scope(Note).find(params[:id])
+    @note = Note.find(params[:id])
   end
 
   def authorize_note!

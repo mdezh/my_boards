@@ -6,24 +6,18 @@ class NotePolicy < ApplicationPolicy
 
   # use board as record
   def create?
-    record.owned_by_user?(user) || record.public_rw?
+    record.owned_by_user?(user) || (record.public_rw? && record.joined_by_user?(user))
   end
 
   def show?
-    record.visible_to_user?(user)
+    user.id == record.board.owner_id || record.board.published?
   end
 
   def update?
-    record.updatable_for_user?(user)
+    record.user_id == user.id
   end
 
   def destroy?
-    record.destroyable_for_user?(user)
-  end
-
-  class Scope < Scope
-    def resolve
-      scope.where(board: user.boards).or(scope.where(board: Board.public_ro)).or(scope.where(board: Board.public_rw))
-    end
+    update? || user.id == record.board.owner_id
   end
 end
