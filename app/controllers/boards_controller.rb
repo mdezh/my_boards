@@ -11,7 +11,8 @@ class BoardsController < ApplicationController
     @active_board_id = params[:board]
     @cursor = params[:cursor]&.to_i || (Board.last&.id || 0) + 1
     amount = params[:cursor] ? BOARDS_PER_NEXT_PAGE : BOARDS_PER_FIRST_PAGE
-    @boards = policy_scope(Board).where('board_id < ?', @cursor).order(id: :desc).includes(:owner).take(amount)
+    @boards = policy_scope(Board).where('board_id < ?',
+                                        @cursor).select('boards.*, relations.id as position').order(position: :desc).includes(:owner).take(amount)
     @next_cursor = @boards.last&.id
     @loading_trigger = if @boards.empty?
                          nil
