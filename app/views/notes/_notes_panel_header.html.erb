@@ -3,7 +3,7 @@
     data-controller="class-changer" data-class-changer-manipulate-class="hidden-below-md"
     data-class-changer-selector-value=".toggle-mobile" data-action="click->class-changer#toggle"
   ></i>
-  <span class="normal-height text-truncate mx-3 fw-semibold my-1"><%= @board.name %></span>
+  <span id="notes_header_board_name" class="normal-height text-truncate mx-3 fw-semibold my-1"><%= @board.name %></span>
   <span class="ms-auto"></span>
   <%= tag.span class: 'me-3 fw-semibold text-secondary', data: {
     controller: 'state-driven',

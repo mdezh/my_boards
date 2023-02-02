@@ -70,6 +70,7 @@ class Board < ApplicationRecord
 
   def update_board(board)
     broadcast_replace_later_to(board)
+    broadcast_update_later_to board, target: 'notes_header_board_name', html: board.name
   end
 
   def destroy_board(board)
