@@ -9,7 +9,7 @@ export default class extends UseStateController {
   static targets = ["edit", "delete", "nick"];
 
   updateWithState() {
-    const { current_user, owned, joined, public_rw } = this.state;
+    const { current_user, owned, joined, belongs, public_rw } = this.state;
 
     if (current_user == this.userValue) {
       this.addClass(this.nickTarget, "hidden");
@@ -27,6 +27,14 @@ export default class extends UseStateController {
       this.removeClass(this.deleteTarget, "disabled");
     } else {
       this.addClass(this.deleteTarget, "disabled");
+    }
+
+    if (belongs) {
+      this.removeClass(this.editTarget, "hidden");
+      this.removeClass(this.deleteTarget, "hidden");
+    } else {
+      this.addClass(this.editTarget, "hidden");
+      this.addClass(this.deleteTarget, "hidden");
     }
   }
 
