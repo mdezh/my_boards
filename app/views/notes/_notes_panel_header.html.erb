@@ -4,7 +4,16 @@
     data-class-changer-selector-value=".toggle-mobile" data-action="click->class-changer#toggle"
   ></i>
   <span class="normal-height text-truncate mx-3 fw-semibold my-1"><%= @board.name %></span>
-  <div class="ms-auto me-3 dropdown"
+  <span class="ms-auto"></span>
+  <%= tag.span class: 'me-3 fw-semibold text-secondary', data: {
+    controller: 'state-driven',
+    state_driven_state_outlet: '#user_board_state',
+    state_driven_key_value: 'owned',
+    state_driven_not_value: true
+  } do %>
+    @<%= @board.owner.nickname %>
+  <% end %>
+  <div class="me-3 dropdown"
     data-controller="state-driven"
     data-state-driven-key-value="belongs"
     data-state-driven-state-outlet="#user_board_state"
