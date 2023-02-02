@@ -2,6 +2,7 @@ class Board < ApplicationRecord
   has_many :notes, dependent: :destroy
   has_many :relations, dependent: :destroy
   has_many :users, through: :relations
+  belongs_to :owner, class_name: 'User', foreign_key: 'owner_id', default: -> { Current.user }
 
   enum sharing_status: %i[forbidden public_ro public_rw invite_ro invite_rw]
 
@@ -22,7 +23,7 @@ class Board < ApplicationRecord
   end
 
   def owned_by_user?(user)
-    relations.where(user_id: user.id).owner.present?
+    owner_id == user.id
   end
 
   def joined_by_user?(user)
@@ -31,14 +32,6 @@ class Board < ApplicationRecord
 
   def published?
     sharing_status.in? %w[public_ro public_rw]
-  end
-
-  def owner_id
-    relations.owner.first.user_id
-  end
-
-  def owner
-    relations.owner.first.user
   end
 
   private
