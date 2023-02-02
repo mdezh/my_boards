@@ -6,10 +6,12 @@ export default class extends UseStateController {
     ...super.values,
     key: String,
     not: { type: Boolean, default: false },
+    eql: { type: String, default: "" },
   };
 
   checkFunction() {
-    const result = this.state[this.keyValue];
+    const result =
+      this.state[this.keyValue] == (this.eqlValue ? this.eqlValue : true);
     return this.notValue ? !result : result;
   }
 }
