@@ -7,6 +7,15 @@
       <%= link_to board.name, root_path(board: board.id), class: "h6 my-2 normal-height text-truncate stretched-link board-name",
         data: {turbo_frame: "notes_frame", turbo_action: "replace",
                select_id_param: dom_id(board), action: "select#select class-changer#toggle "} %>
+      <%= tag.small class: 'text-secondary', data: {
+        controller: 'state-driven',
+        state_driven_key_value: 'current_user',
+        state_driven_eql_value: board.owner_id,
+        state_driven_not_value: true,
+        state_driven_state_outlet: '#user_state'
+      } do %>
+        @<%= board.owner.nickname %>
+      <% end %>
       <div class="hover-content-block shadow">
         <div class="btn-group" role="group">
           <%= link_to "", edit_board_path(board), class: "btn btn-secondary btn-sm bi bi-pen",
