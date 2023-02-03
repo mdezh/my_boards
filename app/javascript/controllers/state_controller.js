@@ -14,13 +14,14 @@ export default class extends Controller {
     ].join(" ");
   }
 
-  objectValueChanged() {
+  objectValueChanged(_next, prev) {
+    this.prevObject = { ...prev };
     this.fireState();
   }
 
   fireState() {
     const event = new CustomEvent(this.element.id, {
-      detail: { ...this.objectValue },
+      detail: { ...this.objectValue, _previous: { ...this.prevObject } },
     });
     window.dispatchEvent(event);
   }
