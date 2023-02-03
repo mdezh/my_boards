@@ -1,0 +1,9 @@
+<% if defined?(value) && defined?(state_id) %>
+  <%= tag.div id: 'set_state', class: 'hidden', data: {
+    controller: 'set-state',
+    set_state_object_value: value,
+    set_state_id_value: state_id
+  } %>
+<% else %>
+  <div id="set_state" class="hidden"></div>
+<% end %>
