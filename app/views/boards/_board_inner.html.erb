@@ -7,7 +7,7 @@
       <%= link_to board.name, root_path(board: board.id), class: "h6 my-2 normal-height text-truncate stretched-link board-name",
         data: {turbo_frame: "notes_frame", turbo_action: "replace",
                select_id_param: dom_id(board), action: "select#select class-changer#toggle "} %>
-      <%= tag.small class: 'text-secondary', data: {
+      <%= tag.small class: 'text-secondary hidden', data: {
         controller: 'state-driven',
         state_driven_key_value: 'current_user',
         state_driven_eql_value: board.owner_id,
