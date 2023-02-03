@@ -31,7 +31,11 @@ export default class UseStateController extends Controller {
   }
 
   updateWithState() {
-    if (this.checkFunction()) {
+    const checkResult = this.checkFunction();
+    if (checkResult === this.prevCheckResult) return;
+
+    this.prevCheckResult = checkResult;
+    if (checkResult) {
       this.element.classList.remove(this.hiddenClassValue);
     } else {
       this.element.classList.add(this.hiddenClassValue);
