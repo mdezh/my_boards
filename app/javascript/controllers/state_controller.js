@@ -10,6 +10,7 @@ export default class extends Controller {
     this.element.dataset.action = [
       ...(this.element.dataset.action ?? "").split(" ").filter(Boolean),
       `fire_${this.element.id}@window->state#fireState`,
+      `set_${this.element.id}@window->state#setState`,
     ].join(" ");
   }
 
@@ -22,5 +23,9 @@ export default class extends Controller {
       detail: { ...this.objectValue },
     });
     window.dispatchEvent(event);
+  }
+
+  setState(e) {
+    this.objectValue = { ...this.objectValue, ...e.detail };
   }
 }
