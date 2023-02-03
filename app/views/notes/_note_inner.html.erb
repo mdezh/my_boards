@@ -1,6 +1,6 @@
 <%= turbo_frame_tag dom_id(note, :inner) do %>
   <div class="hover-wrapper">
-    <div class="d-flex align-items-center hover-trigger js-notes-show"
+    <div class="d-flex align-items-center hover-trigger"
       data-controller="clicker note" data-clicker-selector-value=".cancel-btn"
       data-note-state-outlet="#user_state, #board_state, #user_board_state"
       data-note-user-value="<%= note.user_id %>"
