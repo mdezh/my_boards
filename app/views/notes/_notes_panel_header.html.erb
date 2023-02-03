@@ -1,8 +1,10 @@
 <div id="notes_panel_header">
-  <i id="back_to_boards" class="bi bi-arrow-left ms-3 hidden-md"
-    data-controller="class-changer" data-class-changer-manipulate-class="hidden-below-md"
-    data-class-changer-selector-value=".toggle-mobile" data-action="click->class-changer#toggle"
-  ></i>
+  <%= tag.i id: 'back_to_boards', class: 'bi bi-arrow-left ms-3 hidden-md', data: {
+    controller: 'set-state',
+    set_state_object_value: { active_panel: 'boards' },
+    set_state_id_value: 'panel_state',
+    action: 'click->set-state#fire'
+  } %>
   <span id="notes_header_board_name" class="normal-height text-truncate mx-3 fw-semibold my-1"><%= @board.name %></span>
   <span class="ms-auto"></span>
   <%= tag.span class: 'me-3 fw-semibold text-secondary', data: {

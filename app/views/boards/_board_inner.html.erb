@@ -1,12 +1,18 @@
 <%= turbo_frame_tag dom_id(board, :inner), data: { active_target: 'inner', id: dom_id(board)} do %>
   <div class="hover-wrapper">
-    <div class="d-flex w-100 justify-content-between align-items-center hover-trigger"
-      data-controller="clicker select class-changer" data-clicker-selector-value=".cancel-btn" data-select-active-outlet="#boards"
-      data-class-changer-manipulate-class="hidden-below-md" data-class-changer-selector-value=".toggle-mobile"
-    >
-      <%= link_to board.name, root_path(board: board.id), class: "h6 my-2 normal-height text-truncate stretched-link board-name",
-        data: {turbo_frame: "notes_frame", turbo_action: "replace",
-               select_id_param: dom_id(board), action: "select#select class-changer#toggle "} %>
+    <%= tag.div class: 'd-flex w-100 justify-content-between align-items-center hover-trigger', data: {
+      controller: 'clicker select set-state',
+      clicker_selector_value: '.cancel-btn',
+      select_active_outlet:'#boards',
+      set_state_object_value: { active_panel: 'notes' },
+      set_state_id_value: 'panel_state'
+    } do %>
+      <%= link_to board.name, root_path(board: board.id), data: {
+        turbo_frame: "notes_frame",
+        turbo_action: "replace",
+        select_id_param: dom_id(board),
+        action: "select#select set-state#fire"
+      }, class: "h6 my-2 normal-height text-truncate stretched-link board-name" %>
       <%= tag.small class: 'text-secondary hidden', data: {
         controller: 'state-driven',
         state_driven_key_value: 'current_user',
@@ -24,7 +30,7 @@
             class: "btn btn-danger btn-sm bi bi-trash", role: "button" %>
         </div>
       </div>
-    </div>
+    <% end %>
     <div class="card text-bg-light mt-3 hover-content-block w-75 shadow">
       <div class="card-body">
         <%= turbo_frame_tag dom_id(board, :details), loading: :lazy, src: details_board_path(board) do %>
