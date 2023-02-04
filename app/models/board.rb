@@ -67,6 +67,13 @@ class Board < ApplicationRecord
   end
 
   def destroy_board(board)
+    broadcast_replace_to board, target: 'set_state', partial: 'shared/set_state', locals: {
+      state_id: 'panel_state',
+      value: {
+        active_panel: 'boards',
+        show_details: false
+      }
+    }
     broadcast_remove_to(board)
   end
 
