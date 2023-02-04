@@ -1,9 +1,20 @@
-<div id="notes_panel_header">
-  <%= tag.i id: 'back_to_boards', class: 'bi bi-arrow-left ms-3 hidden-md', data: {
-    controller: 'set-state',
+<div id="notes_panel_header" class="notes-panel-header">
+  <%= tag.i id: 'back_to_boards', class: 'tapable bi bi-arrow-left ms-3 hidden-md', data: {
+    controller: 'set-state state-driven',
     set_state_object_value: { active_panel: 'boards' },
     set_state_id_value: 'panel_state',
-    action: 'click->set-state#fire'
+    action: 'click->set-state#fire',
+    state_driven_state_selector_value: '#panel_state',
+    state_driven_key_value: 'show_details',
+    state_driven_not_value: true,
+  } %>
+  <%= tag.i id: 'back_to_notes', class: 'tapable bi bi-arrow-left ms-3 hidden', data: {
+    controller: 'set-state state-driven',
+    set_state_object_value: { show_details: false },
+    set_state_id_value: 'panel_state',
+    action: 'click->set-state#fire',
+    state_driven_state_selector_value: '#panel_state',
+    state_driven_key_value: 'show_details',
   } %>
   <span id="notes_header_board_name" class="normal-height text-truncate mx-3 fw-semibold my-1"><%= @board.name %></span>
   <span class="ms-auto"></span>
@@ -23,8 +34,24 @@
     <i class="bi bi-three-dots-vertical" type="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
     <ul class="dropdown-menu">
       <li>
-        <%= link_to 'Details', details_board_path(@board), class: 'dropdown-item', data: {
-          turbo_action: false
+        <%= tag.button 'Details', class: 'dropdown-item', data: {
+          controller: 'set-state state-driven',
+          set_state_id_value: 'panel_state',
+          set_state_object_value: { show_details: true },
+          action: 'click->set-state#fire',
+          state_driven_state_selector_value: '#panel_state',
+          state_driven_key_value: 'show_details',
+          state_driven_not_value: true
+        } %>
+      </li>
+      <li>
+        <%= tag.button 'Notes', class: 'dropdown-item', data: {
+          controller: 'set-state state-driven',
+          set_state_id_value: 'panel_state',
+          set_state_object_value: { show_details: false },
+          action: 'click->set-state#fire',
+          state_driven_state_selector_value: '#panel_state',
+          state_driven_key_value: 'show_details',
         } %>
       </li>
       <li

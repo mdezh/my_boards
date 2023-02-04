@@ -18,30 +18,38 @@
   <% end %>
 
   <div class="full-column d-flex flex-column">
-    <% rounded = 'rounded' %>
-    <% if @board %>
-      <%= render 'notes_panel_header' %>
-      <% rounded = 'rounded-bottom' %>
-    <% end %>
-    <div class="d-flex flex-column-reverse flex-grow-1 overflow-auto shadow <%= rounded %> border text-bg-light">
+      <% rounded = 'rounded' %>
       <% if @board %>
-        <%= render 'no_notes' %>
-        <div id="notes" class="overflow-auto list-group list-group-flush d-flex flex-column-reverse" >
-          <%= render @notes %>
-          <div id="notes_spinner" class="my-5 text-secondary text-center invisible hidden">
-            <div class="spinner-grow" role="status">
-              <span class="visually-hidden">Loading...</span>
-            </div>
-          </div>
-        </div>
-      <% else %>
-        <%= render 'not_selected' %>
+        <%= render 'notes_panel_header' %>
+        <% rounded = 'rounded-bottom' %>
       <% end %>
-    </div>
-    <% if @board %>
-      <%= render 'add_form', board: @board %>
-      <%= render 'boards/join_btn', board: @board %>
-    <% end %>
+      <div class="d-flex flex-column-reverse flex-grow-1 overflow-auto shadow <%= rounded %> border text-bg-light">
+        <% if @board %>
+          <%= tag.div class: 'd-flex flex-column-reverse flex-grow-1 overflow-auto', data: {
+            controller: 'state-driven',
+            state_driven_state_selector_value: '#panel_state',
+            state_driven_key_value: 'show_details',
+            state_driven_not_value: true
+          } do %>
+            <%= render 'no_notes' %>
+            <div id="notes" class="overflow-auto list-group list-group-flush d-flex flex-column-reverse" >
+              <%= render @notes %>
+              <div id="notes_spinner" class="my-5 text-secondary text-center invisible hidden">
+                <div class="spinner-grow" role="status">
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+              </div>
+            </div>
+          <% end %>
+          <%= render 'board_details' %>
+        <% else %>
+          <%= render 'not_selected' %>
+        <% end %>
+      </div>
+      <% if @board %>
+        <%= render 'add_form', board: @board %>
+        <%= render 'boards/join_btn', board: @board %>
+      <% end %>
   </div>
 
 <% end %>

@@ -113,7 +113,7 @@ main {
   }
 }
 
-#notes_panel_header {
+.notes-panel-header {
   @extend .border;
   @extend .border-bottom-0;
   @extend .py-1;
@@ -125,7 +125,7 @@ main {
   background-color: #fff;
 }
 
-#back_to_boards {
+.tapable {
   cursor: pointer;
 }
 
