@@ -1,15 +1,11 @@
-<div id="<%= dom_id(note) %>" class="list-group-item"
-  data-controller="count-me"
-  data-count-me-counter-value="notes_counter"
-  <% if @more_pages && note.id == @loading_trigger %>
-    data-controller="lazy-loader"
-    data-lazy-loader-src-value="<%= board_notes_path(board_id: note.board.id, cursor: @next_cursor) %>"
-    data-lazy-loader-indicator-value="#notes_spinner"
-    data-lazy-loader-hidden-value="invisible hidden"
-  <% end %>
-  <% if defined?(auto_scroll) %>
-    data-controller="scroll-into-view"
-  <% end %>
->
+<%= tag.div id: dom_id(note), class: 'list-group-item', data: {
+  controller: 'count-me' + (defined?(auto_scroll) ? ' scroll-into-view' : '') +
+              (@more_pages && note.id == @loading_trigger ? ' lazy-loader' : ''),
+  count_me_counter_value: 'notes_counter'
+}.merge(@more_pages && note.id == @loading_trigger ? {
+  lazy_loader_src_value: board_notes_path(board_id: note.board.id, cursor: @next_cursor),
+  lazy_loader_indicator_value: '#notes_spinner',
+  lazy_loader_hidden_value: 'invisible hidden'
+} : {}) do %>
   <%= render "notes/note_inner", note: %>
-</div>
+<% end %>
