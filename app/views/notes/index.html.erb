@@ -51,7 +51,14 @@
         <% end %>
       </div>
       <% if @board %>
-        <%= render 'add_form', board: @board %>
+        <%= tag.div data: {
+          controller: 'state-driven',
+          state_driven_state_selector_value: '#details_state',
+          state_driven_key_value: 'show_details',
+          state_driven_not_value: true,
+        } do %>
+          <%= render 'add_form', board: @board %>
+        <% end %>
         <%= render 'boards/join_btn', board: @board %>
       <% end %>
   </div>
