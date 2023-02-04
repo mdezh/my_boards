@@ -59,7 +59,7 @@
         data-state-driven-key-value="joined"
         data-state-driven-state-outlet="#user_board_state"
       >
-        <%= link_to 'Leave', leave_board_path(@board), class: 'dropdown-item',
+        <%= link_to 'Leave', leave_board_path(@board), class: 'dropdown-item link-danger',
           data: { turbo_method: 'put', turbo_confirm: "Are you sure?" } %>
       </li>
       <li
@@ -67,7 +67,7 @@
         data-state-driven-key-value="owned"
         data-state-driven-state-outlet="#user_board_state"
       >
-        <%= link_to 'Delete', board_path(@board), class: 'dropdown-item',
+        <%= link_to 'Delete', board_path(@board), class: 'dropdown-item link-danger',
           data: { turbo_method: 'delete', turbo_confirm: "Are you sure?" } %>
       </li>
     </ul>
