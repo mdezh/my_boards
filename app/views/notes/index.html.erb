@@ -13,6 +13,8 @@
       owned: @board.owned_by_user?(current_user),
       joined: @board.joined_by_user?(current_user)
     } %>
+
+    <%= render 'shared/state_counter', id: 'notes_counter', value: @notes.size %>
   <% end %>
 
   <div class="full-column d-flex flex-column">
@@ -21,17 +23,15 @@
       <%= render 'notes_panel_header' %>
       <% rounded = 'rounded-bottom' %>
     <% end %>
-    <div id="notes"
-      class="items-list list-group list-group-flush shadow flex-grow-1 <%= rounded %> border text-bg-light d-flex flex-column-reverse"
-      data-controller="empty"
-      data-empty-hidden-class="hidden"
-    >
+    <div class="d-flex flex-column-reverse flex-grow-1 overflow-auto shadow <%= rounded %> border text-bg-light">
       <% if @board %>
         <%= render 'no_notes' %>
-        <%= render @notes %>
-        <div id="notes_spinner" class="my-5 text-secondary text-center invisible hidden">
-          <div class="spinner-grow" role="status">
-            <span class="visually-hidden">Loading...</span>
+        <div id="notes" class="overflow-auto list-group list-group-flush d-flex flex-column-reverse" >
+          <%= render @notes %>
+          <div id="notes_spinner" class="my-5 text-secondary text-center invisible hidden">
+            <div class="spinner-grow" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
           </div>
         </div>
       <% else %>

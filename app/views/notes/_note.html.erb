@@ -1,5 +1,6 @@
 <div id="<%= dom_id(note) %>" class="list-group-item"
-  data-empty-target='item'
+  data-controller="count-me"
+  data-count-me-counter-value="notes_counter"
   <% if @more_pages && note.id == @loading_trigger %>
     data-controller="lazy-loader"
     data-lazy-loader-src-value="<%= board_notes_path(board_id: note.board.id, cursor: @next_cursor) %>"

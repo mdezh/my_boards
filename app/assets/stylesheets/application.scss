@@ -62,10 +62,6 @@ main {
   height: calc(100vh - 10rem);
 }
 
-.items-list {
-  overflow-y: auto;
-}
-
 .growing-text {
   resize: none;
   max-height: 30vh;
