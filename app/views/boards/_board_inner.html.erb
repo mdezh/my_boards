@@ -4,7 +4,7 @@
       controller: 'clicker select set-state',
       clicker_selector_value: '.cancel-btn',
       select_active_outlet:'#boards',
-      set_state_object_value: { active_panel: 'notes', show_details: false },
+      set_state_object_value: { active_panel: 'notes' },
       set_state_id_value: 'panel_state'
     } do %>
       <%= link_to board.name, root_path(board: board.id), data: {

@@ -70,8 +70,7 @@ class Board < ApplicationRecord
     broadcast_replace_to board, target: 'set_state', partial: 'shared/set_state', locals: {
       state_id: 'panel_state',
       value: {
-        active_panel: 'boards',
-        show_details: false
+        active_panel: 'boards'
       }
     }
     broadcast_remove_to(board)
