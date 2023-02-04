@@ -1,4 +1,3 @@
-<%= turbo_stream.remove board %>
 <%= turbo_stream.replace 'set_state' do %>
   <%= render 'shared/set_state', state_id: 'panel_state', value: {
     active_panel: 'boards',
