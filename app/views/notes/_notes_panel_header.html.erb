@@ -26,11 +26,7 @@
   } do %>
     @<%= @board.owner.nickname %>
   <% end %>
-  <div class="me-3 dropdown"
-    data-controller="state-driven"
-    data-state-driven-key-value="belongs"
-    data-state-driven-state-outlet="#user_board_state"
-  >
+  <div class="me-3 dropdown">
     <i class="bi bi-three-dots-vertical" type="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
     <ul class="dropdown-menu">
       <li>
