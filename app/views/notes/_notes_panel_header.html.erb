@@ -7,7 +7,7 @@
   } %>
   <span id="notes_header_board_name" class="normal-height text-truncate mx-3 fw-semibold my-1"><%= @board.name %></span>
   <span class="ms-auto"></span>
-  <%= tag.span class: 'me-3 fw-semibold text-secondary', data: {
+  <%= tag.span class: "me-3 fw-semibold text-secondary #{@board.owner == current_user ? 'hidden' : ''}", data: {
     controller: 'state-driven',
     state_driven_state_outlet: '#user_board_state',
     state_driven_key_value: 'owned',
@@ -22,6 +22,11 @@
   >
     <i class="bi bi-three-dots-vertical" type="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
     <ul class="dropdown-menu">
+      <li>
+        <%= link_to 'Details', details_board_path(@board), class: 'dropdown-item', data: {
+          turbo_action: false
+        } %>
+      </li>
       <li
         data-controller="state-driven"
         data-state-driven-key-value="joined"
