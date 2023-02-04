@@ -1,4 +1,4 @@
-import { UseStateController } from "../base_classes/use_state_controller";
+import UseStateController from "../base_classes/use_state_controller";
 
 // Connects to data-controller="state-driven"
 export default class extends UseStateController {
