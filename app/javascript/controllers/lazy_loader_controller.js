@@ -37,7 +37,7 @@ export default class extends Controller {
         .then(() => this.observer.unobserve(this.element))
         .catch((e) => {
           this.hideIndicator();
-          console.log("Something goes wrong on lazy loading:", e);
+          console.error("Something goes wrong on lazy loading:", e);
           this.statusValue = "";
         });
     }
