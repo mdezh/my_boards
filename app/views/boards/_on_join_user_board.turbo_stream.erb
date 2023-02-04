@@ -1,5 +1,10 @@
-<%= turbo_stream.replace 'user_board_state' do %>
-  <%= render 'shared/state', id: 'user_board_state', value: {
+<%= turbo_stream.replace 'set_state' do %>
+  <%= render 'shared/set_state', state_id: 'details_state', value: {
+    show_details: false
+  } %>
+<% end %>
+<%= turbo_stream.replace 'set_state' do %>
+  <%= render 'shared/set_state', state_id: 'user_board_state', value: {
     belongs: true,
     owned: false,
     joined: true
