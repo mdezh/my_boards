@@ -3,10 +3,14 @@
     <%= tag.div class: 'd-flex w-100 justify-content-between align-items-center hover-trigger' do %>
       <%= tag.button board.name, data: {
         controller: 'set-state',
-        set_state_id_value: 'active_board_state',
         set_state_object_value: {
-          id: board.id,
-          path: root_path(board: board.id)
+          active_board_state: {
+            id: board.id,
+            path: root_path(board: board.id)
+          },
+          panel_state: {
+            active_panel: 'notes'
+          }
         },
         action: "set-state#fire"
       }, class: "h6 my-2 normal-height text-truncate btn btn-link stretched-link board-name" %>

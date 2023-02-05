@@ -15,10 +15,23 @@ export default class extends Controller {
   }
 
   fire() {
-    window.dispatchEvent(
-      new CustomEvent(`set_${this.idValue}`, {
-        detail: { ...this.objectValue },
-      })
+    this.createEvents().forEach((event) => window.dispatchEvent(event));
+  }
+
+  createEvents() {
+    if (this.hasIdValue) {
+      return [
+        new CustomEvent(`set_${this.idValue}`, {
+          detail: { ...this.objectValue },
+        }),
+      ];
+    }
+
+    return Object.keys(this.objectValue).map(
+      (key) =>
+        new CustomEvent(`set_${key}`, {
+          detail: { ...this.objectValue[key] },
+        })
     );
   }
 }

@@ -20,19 +20,21 @@ export default class StateController extends Controller {
       .trim();
   }
 
-  objectValueChanged(_next, prev) {
-    this.prevObject = { ...prev };
+  objectValueChanged() {
     this.fireState();
   }
 
   fireState() {
     const event = new CustomEvent(this.element.id, {
-      detail: { ...this.objectValue, _previous: { ...this.prevObject } },
+      detail: { ...this.objectValue },
     });
     window.dispatchEvent(event);
   }
 
   setState(e) {
-    this.objectValue = { ...this.objectValue, ...e.detail };
+    this.objectValue = {
+      ...this.objectValue,
+      ...e.detail,
+    };
   }
 }

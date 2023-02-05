@@ -6,15 +6,6 @@ export default class extends UseStateBaseController {
     // next line prevents unnecessary request after first load
     if (this.prevBoardId) {
       this.promoteToFrameVisit("notes_frame", this.state.path, "replace");
-      if (this.state.id != "0") {
-        window.dispatchEvent(
-          new CustomEvent("set_panel_state", {
-            detail: {
-              active_panel: "notes",
-            },
-          })
-        );
-      }
     }
     this.prevBoardId = this.state.id;
   }
