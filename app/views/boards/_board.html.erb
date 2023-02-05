@@ -6,6 +6,9 @@
     data-lazy-loader-src-value="<%= boards_path(cursor: @next_cursor) %>"
     data-lazy-loader-indicator-value="#boards_spinner"
   <% end %>
+  <% if defined?(auto_scroll) %>
+    data-controller="scroll-into-view"
+  <% end %>
 >
   <%= turbo_stream_from board %>
   <%= render "boards/board_inner", board: %>

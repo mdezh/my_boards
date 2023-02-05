@@ -41,10 +41,20 @@ class BoardsController < ApplicationController
 
   def create
     @board = current_user.boards.create(board_params)
-    if @board.errors.empty?
-      render partial: 'add_board_btn'
-    else
-      render partial: 'form', status: :unprocessable_entity
+    respond_to do |f|
+      f.turbo_stream do
+        if @board.errors.empty?
+          render turbo_stream: [
+            # despite we use broadcasting we still need next line since we want autoscroll new board into the viewport
+            turbo_stream.prepend('boards', partial: 'board', locals: { board: @board, auto_scroll: true }),
+            turbo_stream.replace('add_board_frame', partial: 'add_board_btn')
+          ]
+        else
+          render turbo_stream: [
+            turbo_stream.replace('add_board_frame', partial: 'form', status: :unprocessable_entity)
+          ]
+        end
+      end
     end
   end
 

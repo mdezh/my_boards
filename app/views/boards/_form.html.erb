@@ -22,7 +22,7 @@
     <% end %>
 
     <div class="mt-3">
-      <%= f.submit "Submit", id: dom_id(@board, :submit), class: "btn btn-primary shadow" %>
+      <%= f.submit "Submit", id: dom_id(@board, :submit), class: "btn btn-primary shadow", data: { turbo_stream: @board.new_record? } %>
       <%= link_to "Cancel", cancel_path, id: dom_id(@board, :cancel), class: "btn btn-secondary cancel-btn shadow" %>
     </div>
   <% end %>
