@@ -1,6 +1,6 @@
 import UseStateBaseController from "../base_classes/use_state_base_controller";
 
-// Connects to data-controller="select-board"
+// Connects to data-controller="load-notes"
 export default class extends UseStateBaseController {
   updateWithState() {
     // next line prevents unnecessary request after first load
