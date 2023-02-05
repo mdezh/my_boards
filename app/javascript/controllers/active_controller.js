@@ -15,6 +15,7 @@ export default class extends Controller {
       e?.id == this.activeValue &&
       document.querySelectorAll(`#${e.id}`).length == 0 // to prevent issues when element is duplicated by broadcasting
     ) {
+      this.activeValue = "";
       const turboFrame = document.querySelector(`#${this.frameValue}`);
       if (turboFrame) {
         this.promoteToFrameVisit(turboFrame, this.pathValue, "replace");
