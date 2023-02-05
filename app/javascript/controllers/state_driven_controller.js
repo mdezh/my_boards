@@ -4,7 +4,7 @@ import UseStateController from "../base_classes/use_state_controller";
 export default class extends UseStateController {
   static values = {
     ...super.values,
-    key: String,
+    key: { type: String, default: "counter" }, // for state-counter controller
     not: { type: Boolean, default: false },
     eql: { type: String, default: "" },
   };

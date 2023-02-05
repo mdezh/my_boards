@@ -47,7 +47,18 @@ class BoardsController < ApplicationController
           render turbo_stream: [
             # despite we use broadcasting we still need next line since we want autoscroll new board into the viewport
             turbo_stream.prepend('boards', partial: 'board', locals: { board: @board, auto_scroll: true }),
-            turbo_stream.replace('add_board_frame', partial: 'add_board_btn')
+            turbo_stream.replace('add_board_frame', partial: 'add_board_btn'),
+            turbo_stream.replace('set_state', partial: 'shared/set_state', locals: {
+                                   state_id: 'panel_state',
+                                   value: { active_panel: 'notes' }
+                                 }),
+            turbo_stream.replace('set_state', partial: 'shared/set_state', locals: {
+                                   state_id: 'active_board_state',
+                                   value: {
+                                     id: @board.id,
+                                     path: root_path(board: @board.id)
+                                   }
+                                 })
           ]
         else
           render turbo_stream: [

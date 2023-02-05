@@ -1,8 +1,10 @@
 <div class="row">
   <%= render 'shared/set_state' %>
+
   <%= render 'shared/state', id: 'user_state', value: {
     current_user: current_user.id
   } %>
+
   <%= render 'shared/state', id: 'panel_state', value: {
     active_panel: @active_board_id == '0' ? 'boards' : 'notes',
   } %>

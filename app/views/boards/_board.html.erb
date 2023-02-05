@@ -1,15 +1,17 @@
-<div id="<%= dom_id(board) %>" class="list-group-item"
-  data-empty-target="item"
-  data-active-target="item"
-  <% if @more_pages && board.id == @loading_trigger %>
-    data-controller="lazy-loader"
-    data-lazy-loader-src-value="<%= boards_path(cursor: @next_cursor) %>"
-    data-lazy-loader-indicator-value="#boards_spinner"
-  <% end %>
-  <% if defined?(auto_scroll) %>
-    data-controller="scroll-into-view"
-  <% end %>
->
+<%= tag.div id: dom_id(board), class: 'list-group-item', data: {
+  controller: 'delete-board state-driven count-me' + (defined?(auto_scroll) ? ' scroll-into-view' : '') +
+              (@more_pages && board.id == @loading_trigger ? ' lazy-loader' : ''),
+  count_me_counter_value: 'boards_counter',
+  delete_board_state_selector_value: '#active_board_state',
+  state_driven_state_selector_value: '#active_board_state',
+  state_driven_key_value: 'id',
+  state_driven_eql_value: board.id,
+  state_driven_not_value: true,
+  state_driven_hidden_class_value: 'selected-board',
+}.merge(@more_pages && board.id == @loading_trigger ? {
+  lazy_loader_src_value: boards_path(cursor: @next_cursor),
+  lazy_loader_indicator_value: '#boards_spinner',
+} : {}) do %>
   <%= turbo_stream_from board %>
   <%= render "boards/board_inner", board: %>
-</div>
+<% end %>

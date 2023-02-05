@@ -2,19 +2,33 @@
 
   <%= turbo_stream_from current_user %>
 
+  <%= render 'shared/state', id: 'active_board_state', value: {
+    id: @active_board_id, 
+    path: root_path(board: @active_board_id)
+  } %>
+
+  <%= render 'shared/state_counter', id: 'boards_counter', value: @boards.size %>
+
+  <%= tag.div class: 'hidden', data: {
+    controller: 'select-board',
+    select_board_state_selector_value: '#active_board_state'
+  } %>
+
   <div class="full-column d-flex flex-column">
     <%= render 'add_board_btn' %>
-    <div id="boards" class="overflow-auto shadow list-group list-group-flush flex-grow-1 mt-3 border rounded text-bg-light"
-      data-controller="empty active" data-empty-hidden-class="hidden" data-active-frame-value="notes_frame"
-      data-active-path-value="<%= root_path %>" data-active-selected-class="selected-board"
-      data-active-active-value="<%= @active_board_id.nil? ? '' : dom_id(Board.new(id: @active_board_id)) %>">
+    <div id="boards" class="overflow-auto shadow list-group list-group-flush flex-grow-1 mt-3 border rounded text-bg-light" >
       <%= render 'no_boards' %>
       <%= render @boards %>
-      <div id="boards_spinner" class="mt-5 text-secondary text-center invisible" style="margin-bottom: 50vh">
+      <%= tag.div id: 'boards_spinner', class: 'mt-5 text-secondary text-center invisible hidden', data: {
+        controller: 'state-driven',
+        state_driven_state_selector_value: '#boards_counter',
+        state_driven_eql_value: 0,
+        state_driven_not_value: true
+      }, style: 'margin-bottom: 50vh' do %>
         <div class="spinner-grow" role="status">
           <span class="visually-hidden">Loading...</span>
         </div>
-      </div>
+      <% end %>
     </div>
   </div>
 <% end %>
