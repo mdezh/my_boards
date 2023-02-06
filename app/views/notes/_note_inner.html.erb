@@ -7,7 +7,7 @@
     >
       <div class="d-flex flex-column w-100">
         <div class="note-content">
-          <span class="preserve-lines"><%= note.content %></span>
+          <span class="preserve-lines"><%= sanitize note.content %></span>
         </div>
         <div class="text-secondary d-flex flex-row-reverse">
           <small class="hidden" data-note-target="nick">
