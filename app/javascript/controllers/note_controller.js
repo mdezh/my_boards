@@ -6,10 +6,12 @@ export default class extends UseStateController {
     ...super.values,
     user: Number,
   };
-  static targets = ["edit", "delete", "nick"];
+  static targets = ["edit", "delete", "nick", "time"];
 
   updateWithState() {
     const { current_user, owned, joined, public_rw } = this.state;
+
+    this.removeClass(this.timeTarget, "invisible");
 
     if (current_user == this.userValue) {
       this.addClass(this.nickTarget, "hidden");

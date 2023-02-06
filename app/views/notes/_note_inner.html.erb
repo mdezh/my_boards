@@ -13,7 +13,9 @@
           <small class="hidden" data-note-target="nick">
             &nbspby <%= note.user.nickname %>
           </small>
-          <small><%= note.time_mark %></small>
+          <small class="invisible" data-note-target="time">
+            <%= note.time_mark %>
+          </small>
         </div>
       </div>
       <div class="hover-content-block shadow">
