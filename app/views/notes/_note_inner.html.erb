@@ -10,7 +10,7 @@
           <span class="preserve-lines"><%= note.content %></span>
         </div>
         <div class="text-secondary d-flex flex-row-reverse">
-          <small class="<%= note.user_id == current_user.id ? 'hidden' : '' %>" data-note-target="nick">
+          <small class="hidden" data-note-target="nick">
             &nbspby <%= note.user.nickname %>
           </small>
           <small><%= note.time_mark %></small>

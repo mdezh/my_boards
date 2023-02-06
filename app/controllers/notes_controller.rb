@@ -46,7 +46,8 @@ class NotesController < ApplicationController
           render turbo_stream: [
             # despite we use broadcasting we still need next line since we want autoscroll new note into the viewport
             turbo_stream.prepend('notes', partial: 'note', locals: { note: @note, auto_scroll: true }),
-            turbo_stream.replace('add_note', partial: 'add_form', locals: { board: @board })
+            turbo_stream.replace('add_note', partial: 'add_form',
+                                             locals: { board: @board, owned: @owned, joined: @joined })
           ]
         else
           head :ok
@@ -73,6 +74,10 @@ class NotesController < ApplicationController
   def set_board!
     board_id = (params[:board_id] || params[:board] || '0').to_i
     @board = board_id.zero? ? nil : Board.find(board_id)
+    return unless @board
+
+    @owned = @board.owned_by_user?(current_user)
+    @joined = @board.joined_by_user?(current_user)
   end
 
   def set_note!

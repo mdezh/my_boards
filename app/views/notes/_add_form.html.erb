@@ -1,5 +1,5 @@
 <%= form_with id: 'add_note', model: [board, board.notes.build],
-  class: "mt-2 d-flex #{(board.owned_by_user?(current_user) || (board.public_rw? && board.joined_by_user?(current_user))) ? '' : 'hidden'}",
+  class: "mt-2 d-flex #{(owned || (board.public_rw? && joined)) ? '' : 'hidden'}",
   data: {
     controller: 'add-note',
     add_note_state_outlet: '#board_state, #user_board_state'

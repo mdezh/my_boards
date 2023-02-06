@@ -5,7 +5,6 @@
 <% end %>
 <%= turbo_stream.replace 'set_state' do %>
   <%= render 'shared/set_state', state_id: 'user_board_state', value: {
-    belongs: true,
     owned: false,
     joined: true
   } %>
