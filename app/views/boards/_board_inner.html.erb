@@ -10,7 +10,7 @@
           },
           panel_state: {
             active_panel: 'notes'
-          }
+          },
         },
         action: "set-state#fire"
       }, class: "h6 my-2 normal-height text-truncate btn btn-link stretched-link board-name" %>
@@ -35,16 +35,5 @@
         </div>
       </div>
     <% end %>
-    <div class="card text-bg-light mt-3 hover-content-block w-75 shadow">
-      <div class="card-body">
-        <%= turbo_frame_tag dom_id(board, :details), loading: :lazy, src: details_board_path(board) do %>
-          <div class="text-center text-secondary">
-            <div class="spinner-grow" role="status">
-              <span class="visually-hidden">Loading...</span>
-            </div>
-          </div>
-        <% end %>
-      </div>
-    </div>
   </div>
 <% end %>
