@@ -1,7 +1,9 @@
-<%= tag.div class: 'hidden', data: {
+<%= tag.div class: 'hidden d-flex flex-grow-1 flex-column overflow-auto', data: {
   controller: 'state-driven',
   state_driven_state_selector_value: '#details_state',
   state_driven_key_value: 'show_details'
 } do %>
-  Hello from details!
+  <%= tag.div class: 'mx-3 mt-4' do %>
+    <%= turbo_frame_tag :board_details, src: details_board_path(board), loading: :lazy %>
+  <% end %>
 <% end %>

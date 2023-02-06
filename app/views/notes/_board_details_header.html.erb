@@ -1,0 +1,15 @@
+<%= tag.div class: 'hidden', data: {
+  controller: 'state-driven',
+  state_driven_state_selector_value: '#details_state',
+  state_driven_key_value: 'show_details'
+} do %>
+  <%= tag.div class: 'px-4 py-3 border border-bottom-0', style: 'background-color: white' do %>
+    <%= tag.i id: 'back_to_notes', class: 'tapable bi bi-arrow-left fs-3 text-secondary', data: {
+      controller: 'set-state',
+      set_state_object_value: { show_details: false },
+      set_state_id_value: 'details_state',
+      action: 'click->set-state#fire',
+    } %>
+  <%= tag.button "Edit", class: "btn btn-secondary float-end #{'disabled' unless owned}" %>
+  <% end %>
+<% end %>

@@ -1,20 +1,9 @@
 <div id="notes_panel_header" class="notes-panel-header">
   <%= tag.i id: 'back_to_boards', class: 'tapable bi bi-arrow-left ms-3 hidden-md', data: {
-    controller: 'set-state state-driven',
+    controller: 'set-state',
     set_state_object_value: { active_panel: 'boards' },
     set_state_id_value: 'panel_state',
     action: 'click->set-state#fire',
-    state_driven_state_selector_value: '#details_state',
-    state_driven_key_value: 'show_details',
-    state_driven_not_value: true,
-  } %>
-  <%= tag.i id: 'back_to_notes', class: 'tapable bi bi-arrow-left ms-3 hidden', data: {
-    controller: 'set-state state-driven',
-    set_state_object_value: { show_details: false },
-    set_state_id_value: 'details_state',
-    action: 'click->set-state#fire',
-    state_driven_state_selector_value: '#details_state',
-    state_driven_key_value: 'show_details',
   } %>
   <span id="notes_header_board_name" class="normal-height text-truncate mx-3 fw-semibold my-1"><%= @board.name %></span>
   <span class="ms-auto"></span>

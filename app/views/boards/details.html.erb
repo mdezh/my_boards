@@ -1,10 +1,10 @@
-<%= turbo_frame_tag dom_id(@board, :details) do %>
-  <h6 class="card-title fw-bold"><%= @board.name %></h6>
-  <p class="card-text">
-    <% if @board.description.blank? %>
-      <span class="text-secondary">No description</span>
-    <% else %>
-      <span class="preserve-lines"><%= @board.description %></span>
-    <% end %>
-  </p>
+<%= turbo_frame_tag :board_details, class: 'mx-2 mt-4' do %>
+  <%= tag.p class: 'fw-bold text-secondary fs-5 text-center' do %>
+    <%= @board.name %>
+  <% end %>
+  <% if @board.description.blank? %>
+    <p class="text-secondary">No description</p>
+  <% else %>
+    <p class="preserve-lines"><%= @board.description %></p>
+  <% end %>
 <% end %>

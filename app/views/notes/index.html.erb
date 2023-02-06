@@ -24,6 +24,7 @@
       <% rounded = 'rounded' %>
       <% if @board %>
         <%= render 'notes_panel_header' %>
+        <%= render 'board_details_header', board: @board, owned: @owned %>
         <% rounded = 'rounded-bottom' %>
       <% end %>
       <div class="d-flex flex-column-reverse flex-grow-1 overflow-auto shadow <%= rounded %> border text-bg-light">
@@ -44,7 +45,7 @@
               </div>
             </div>
           <% end %>
-          <%= render 'board_details' %>
+          <%= render 'board_details', board: @board %>
         <% else %>
           <%= render 'not_selected' %>
         <% end %>
