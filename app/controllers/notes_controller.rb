@@ -7,7 +7,7 @@ class NotesController < ApplicationController
 
   NOTES_PER_FIRST_PAGE = 30
   NOTES_PER_NEXT_PAGE = 10
-  TRIGGER_FROM_EDGE = 1
+  TRIGGER_FROM_EDGE = 2
 
   def index
     if request.headers.to_h['HTTP_TURBO_FRAME'].blank? &&
