@@ -11,6 +11,7 @@
 }.merge(@more_pages && board.id == @loading_trigger ? {
   lazy_loader_src_value: boards_path(cursor: @next_cursor),
   lazy_loader_indicator_value: '#boards_spinner',
+  lazy_loader_hidden_value: 'invisible hidden'
 } : {}) do %>
   <%= turbo_stream_from board %>
   <%= render "boards/board_inner", board: %>
