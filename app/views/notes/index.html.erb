@@ -21,15 +21,7 @@
     <%= render 'shared/state_counter', id: 'notes_counter', value: @notes.size %>
   <% end %>
 
-  <%= tag.div class: 'full-column d-flex flex-column', data: {
-    controller: 'set-state',
-    set_state_on_connect_value: true,
-    set_state_object_value: {
-      panel_state: {
-        active_panel: 'notes'
-      }
-    }
-  } do %>
+  <%= tag.div class: 'full-column d-flex flex-column' do %>
     <% rounded = 'rounded' %>
     <% if @board %>
       <%= render 'notes_panel_header' %>
@@ -39,10 +31,16 @@
     <div class="d-flex flex-column-reverse flex-grow-1 overflow-auto shadow <%= rounded %> border text-bg-light">
       <% if @board %>
         <%= tag.div class: 'd-flex flex-column-reverse flex-grow-1 overflow-auto', data: {
-          controller: 'state-driven',
+          controller: 'state-driven set-state',
           state_driven_state_selector_value: '#details_state',
           state_driven_key_value: 'show_details',
-          state_driven_not_value: true
+          state_driven_not_value: true,
+          set_state_on_connect_value: true,
+          set_state_object_value: {
+            panel_state: {
+              active_panel: 'notes'
+            }
+          }
         } do %>
           <%= render 'no_notes' %>
           <div id="notes" class="overflow-auto list-group list-group-flush d-flex flex-column-reverse" >
