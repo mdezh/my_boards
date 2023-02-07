@@ -8,6 +8,7 @@ export default class StateController extends Controller {
 
   connect() {
     this.addActions();
+    this.fireState();
   }
 
   addActions() {
@@ -18,10 +19,6 @@ export default class StateController extends Controller {
     ]
       .join(" ")
       .trim();
-  }
-
-  objectValueChanged() {
-    this.fireState();
   }
 
   fireState() {
@@ -36,5 +33,8 @@ export default class StateController extends Controller {
       ...this.objectValue,
       ...e.detail,
     };
+
+    // fire event manually instead of valueChanged() calling since we want guarantee to fire event even when the state remains the same
+    this.fireState();
   }
 }
