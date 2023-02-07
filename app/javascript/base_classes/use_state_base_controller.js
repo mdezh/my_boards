@@ -24,18 +24,22 @@ export default class UseStateBaseController extends Controller {
     if (this.hasStateSelectorValue) {
       elements = document.querySelectorAll(this.stateSelectorValue);
     } else {
-      elements = [this.element];
+      throw Error("State not defined or doesn't exist");
     }
 
     // dirty hack with duck typing
     return [...elements].map((element) => {
       const controllerName = element.dataset.controller
         .split(" ")
-        .find((name) => name.startsWith("state")); // expect state or state-counter
-      if (!controllerName) throw Error("Failed to find state controller");
-      const stateObject =
-        element.dataset[camelize(controllerName) + "ObjectValue"];
-      if (stateObject === undefined) throw Error("Failed to find state object");
+        .find((name) => ["state", "state-counter"].includes(name));
+      if (!controllerName)
+        throw Error(
+          `Failed to find state controller in '${element.dataset.controller}'`
+        );
+      const stateObjectName = camelize(controllerName) + "ObjectValue";
+      const stateObject = element.dataset[stateObjectName];
+      if (stateObject === undefined)
+        throw Error(`Failed to find state object '${stateObjectName}'`);
       return {
         element,
         objectValue: JSON.parse(stateObject),
