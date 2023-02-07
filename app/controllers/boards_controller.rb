@@ -1,5 +1,6 @@
 class BoardsController < ApplicationController
-  before_action :turbo_frame_only, only: %i[index show new edit cancel_new]
+  before_action :turbo_only, only: %i[index]
+  before_action :turbo_frame_only, only: %i[show new edit cancel_new]
   before_action :set_board!, only: %i[show edit update destroy details join leave]
   before_action :authorize_board!
   after_action :verify_authorized
