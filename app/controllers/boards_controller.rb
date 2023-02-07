@@ -72,7 +72,7 @@ class BoardsController < ApplicationController
 
   def update
     if @board.update(board_params)
-      head :ok
+      render 'details'
     else
       render partial: 'form_edit', status: :unprocessable_entity
     end

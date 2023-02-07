@@ -21,7 +21,7 @@
 
     <div class="mt-3">
       <%= f.submit "Submit", id: dom_id(@board, :submit), class: "btn btn-primary" %>
-      <%= link_to "Cancel", board_path(@board), id: dom_id(@board, :cancel), class: "btn btn-secondary cancel-btn" %>
+      <%= link_to "Cancel", details_board_path(@board), id: dom_id(@board, :cancel), class: "btn btn-secondary cancel-btn" %>
     </div>
   <% end %>
 <% end %>

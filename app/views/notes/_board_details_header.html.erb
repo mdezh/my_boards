@@ -11,6 +11,8 @@
       action: 'click->set-state#fire',
     } %>
     <span class="fs-5 text-secondary">Details</span>
-    <%= tag.button "Edit", class: "btn btn-secondary #{'disabled' unless owned}" %>
+    <%= link_to "Edit", edit_board_path(board), class: "btn btn-secondary #{'disabled' unless owned}", data: {
+      turbo_frame: 'board_details'
+    } %>
   <% end %>
 <% end %>
