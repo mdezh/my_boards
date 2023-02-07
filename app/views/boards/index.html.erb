@@ -19,12 +19,7 @@
     <div id="boards" class="overflow-auto shadow list-group list-group-flush flex-grow-1 mt-3 border rounded text-bg-light" >
       <%= render 'no_boards' %>
       <%= render @boards %>
-      <%= tag.div id: 'boards_spinner', class: 'mt-5 text-secondary text-center invisible hidden', data: {
-        controller: 'state-driven',
-        state_driven_state_selector_value: '#boards_counter',
-        state_driven_eql_value: 0,
-        state_driven_not_value: true
-      }, style: 'margin-bottom: 50vh' do %>
+      <%= tag.div id: 'boards_spinner', class: 'mt-5 text-secondary text-center invisible hidden' do %>
         <div class="spinner-grow" role="status">
           <span class="visually-hidden">Loading...</span>
         </div>
