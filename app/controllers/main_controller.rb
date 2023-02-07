@@ -8,7 +8,7 @@ class MainController < ApplicationController
         return
       end
     end
-    return if request.headers.to_h['HTTP_TURBO_FRAME'].nil?
+    return unless helpers.turbo_frame?
 
     NotesController.dispatch(:index, request, response)
   end

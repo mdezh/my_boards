@@ -1,4 +1,6 @@
 class NotesController < ApplicationController
+  before_action :turbo_only, only: %i[index]
+  before_action :turbo_frame_only, only: %i[show edit]
   before_action :set_board!, only: %i[index create]
   before_action :set_note!, only: %i[destroy edit update show]
   before_action :authorize_note!, only: %i[destroy edit update show]
@@ -10,12 +12,6 @@ class NotesController < ApplicationController
   TRIGGER_FROM_EDGE = 2
 
   def index
-    if request.headers.to_h['HTTP_TURBO_FRAME'].blank? &&
-       request.headers.to_h['HTTP_ACCEPT'] != 'text/vnd.turbo-stream.html'
-      redirect_to root_path(board: @board&.id || 0)
-      return
-    end
-
     if @board.nil?
       @notes = []
       return

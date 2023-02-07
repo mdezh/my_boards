@@ -1,4 +1,5 @@
 class BoardsController < ApplicationController
+  before_action :turbo_frame_only, only: %i[index show new edit cancel_new]
   before_action :set_board!, only: %i[show edit update destroy details join leave]
   before_action :authorize_board!
   after_action :verify_authorized
@@ -28,11 +29,7 @@ class BoardsController < ApplicationController
   end
 
   def show
-    if request.headers.to_h['HTTP_TURBO_FRAME'].present?
-      render @board
-    else
-      redirect_to root_path
-    end
+    render @board
   end
 
   def new
