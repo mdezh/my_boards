@@ -3,9 +3,19 @@ import UseStateBaseController from "../base_classes/use_state_base_controller";
 // Connects to data-controller="load-notes"
 export default class extends UseStateBaseController {
   updateWithState() {
-    // the first check prevents unnecessary request after first load
-    if (this.prevBoardId != undefined && this.prevBoardId != this.state.id) {
-      this.promoteToFrameVisit("notes_frame", this.state.path, "replace");
+    // next line prevents unnecessary request after first load
+    if (this.prevBoardId != undefined) {
+      if (this.prevBoardId != this.state.id) {
+        this.promoteToFrameVisit("notes_frame", this.state.path, "replace");
+      } else {
+        window.dispatchEvent(
+          new CustomEvent("set_panel_state", {
+            detail: {
+              active_panel: "notes",
+            },
+          })
+        );
+      }
     }
     this.prevBoardId = this.state.id;
   }
