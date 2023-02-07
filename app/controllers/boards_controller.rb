@@ -62,7 +62,7 @@ class BoardsController < ApplicationController
           ]
         else
           render turbo_stream: [
-            turbo_stream.replace('add_board_frame', partial: 'form', status: :unprocessable_entity)
+            turbo_stream.replace('add_board_frame', partial: 'form_new', status: :unprocessable_entity)
           ]
         end
       end
@@ -77,7 +77,7 @@ class BoardsController < ApplicationController
     if @board.update(board_params)
       head :ok
     else
-      render partial: 'form', status: :unprocessable_entity
+      render partial: 'form_edit', status: :unprocessable_entity
     end
   end
 

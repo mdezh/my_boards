@@ -1,6 +1,4 @@
-<% cancel_path = @board.new_record? ? cancel_new_board_path : board_path(@board) %>
-
-<%= turbo_frame_tag(@board.new_record? ? 'add_board_frame' : dom_id(@board, :inner)) do %>
+<%= turbo_frame_tag dom_id(@board, :inner) do %>
   <%= form_with(model: @board) do |f| %>
     <% invalid = @board.errors.include?(:name) %>
     <%= f.text_field :name, autofocus: true, class: "shadow form-control #{'is-invalid' if invalid}", placeholder: "Board name",
@@ -22,8 +20,8 @@
     <% end %>
 
     <div class="mt-3">
-      <%= f.submit "Submit", id: dom_id(@board, :submit), class: "btn btn-primary shadow", data: { turbo_stream: @board.new_record? } %>
-      <%= link_to "Cancel", cancel_path, id: dom_id(@board, :cancel), class: "btn btn-secondary cancel-btn shadow" %>
+      <%= f.submit "Submit", id: dom_id(@board, :submit), class: "btn btn-primary shadow" %>
+      <%= link_to "Cancel", board_path(@board), id: dom_id(@board, :cancel), class: "btn btn-secondary cancel-btn shadow" %>
     </div>
   <% end %>
 <% end %>
