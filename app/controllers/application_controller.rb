@@ -3,4 +3,5 @@ class ApplicationController < ActionController::Base
   include Authorization
   include CurrentUser
   include TimeZone
+  include Formats
 end
