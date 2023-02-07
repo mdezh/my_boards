@@ -22,11 +22,6 @@
       <% end %>
       <div class="hover-content-block shadow">
         <div class="btn-group" role="group">
-          <%= link_to "", edit_board_path(board), class: "btn btn-secondary btn-sm bi bi-pen", role: "button", data: {
-            controller: 'clicker',
-            clicker_selector_value: '.cancel-btn',
-            action: "clicker#click"
-          } %>
           <%= link_to "", board, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
             class: "btn btn-danger btn-sm bi bi-trash", role: "button" %>
         </div>
