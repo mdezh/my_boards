@@ -8,7 +8,7 @@ class MainController < ApplicationController
         return
       end
     end
-    return unless helpers.turbo?
+    return unless helpers.turbo_frame?
 
     NotesController.dispatch(:index, request, response)
   end
