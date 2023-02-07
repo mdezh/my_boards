@@ -1,5 +1,5 @@
 <%= turbo_frame_tag :board_details, class: 'mx-2 mt-4' do %>
-  <%= tag.p class: 'fw-bold text-secondary fs-5 text-center' do %>
+  <%= tag.p class: 'fw-bold fs-5' do %>
     <%= @board.name %>
   <% end %>
   <% if @board.description.blank? %>
@@ -7,4 +7,16 @@
   <% else %>
     <p class="preserve-lines"><%= @board.description %></p>
   <% end %>
+  <p class="mt-5">
+    <strong>
+      Owner:
+    </strong>
+    <%= @board.owner.nickname %>
+  </p>
+  <p>
+    <strong>
+      Sharing status:
+    </strong>
+    <%= @board.sharing_status %>
+  </p>
 <% end %>
