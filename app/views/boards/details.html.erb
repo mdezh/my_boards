@@ -17,6 +17,24 @@
     <strong>
       Sharing status:
     </strong>
-    <%= @board.sharing_status %>
+    <%= @board.sharing_status_humanized %>
+  </p>
+  <p class="mt-5">
+    <strong>
+      Created at:
+    </strong>
+    <%= @board.created_at %>
+  </p>
+  <p>
+    <strong>
+      Last update:
+    </strong>
+    <%= @board.last_update %>
+  </p>
+  <p>
+    <strong>
+      Number of notes:
+    </strong>
+    <%= @board.notes.count %>
   </p>
 <% end %>

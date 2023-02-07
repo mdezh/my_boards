@@ -1,4 +1,6 @@
 class Board < ApplicationRecord
+  include Presenter
+
   has_many :notes, dependent: :destroy
   has_many :relations, dependent: :destroy
   has_many :users, through: :relations
