@@ -1,5 +1,5 @@
 <% if defined?(value) %>
-  <%= tag.div class: 'hidden', data: {
+  <%= tag.div id: "#{defined?(id) ? id : 'set_state' }", class: 'hidden', data: {
     controller: 'set-state',
     set_state_object_value: value,
     set_state_on_connect_value: true

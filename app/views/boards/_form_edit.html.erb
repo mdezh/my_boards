@@ -3,7 +3,7 @@
     details_state: {
       editing: true
     }
-  } %>
+  }, id: 'set_editing_state' %>
 
   <%= form_with(model: @board) do |f| %>
     <% invalid = @board.errors.include?(:name) %>
