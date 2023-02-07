@@ -18,10 +18,12 @@ export default class extends StateController {
   }
 
   incCounter() {
-    this.objectValue = { counter: this.objectValue.counter + 1 };
+    const counter = this.objectValue.counter + 1;
+    this.updateState({ counter });
   }
 
   decCounter() {
-    this.objectValue = { counter: this.objectValue.counter - 1 };
+    const counter = this.objectValue.counter - 1;
+    this.updateState({ counter });
   }
 }

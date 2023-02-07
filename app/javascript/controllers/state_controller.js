@@ -8,7 +8,6 @@ export default class StateController extends Controller {
 
   connect() {
     this.addActions();
-    this.fireState();
   }
 
   addActions() {
@@ -22,19 +21,29 @@ export default class StateController extends Controller {
   }
 
   fireState() {
+    const value = { ...this.objectValue };
+    delete value._trigger;
     const event = new CustomEvent(this.element.id, {
-      detail: { ...this.objectValue },
+      detail: value,
     });
     window.dispatchEvent(event);
   }
 
   setState(e) {
+    this.updateState(e.detail);
+  }
+
+  updateState(changes) {
+    // use _trigger to guarantee event firing even when the state remains the same
+    let _trigger = 1 + this.objectValue._trigger ?? 0;
     this.objectValue = {
       ...this.objectValue,
-      ...e.detail,
+      ...changes,
+      _trigger,
     };
+  }
 
-    // fire event manually instead of valueChanged() calling since we want guarantee to fire event even when the state remains the same
+  objectValueChanged() {
     this.fireState();
   }
 }
