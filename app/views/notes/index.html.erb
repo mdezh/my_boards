@@ -14,7 +14,8 @@
     } %>
 
     <%= render 'shared/state', id: 'details_state', value: {
-      show_details: false
+      show_details: false,
+      editing: false
     } %>
 
     <%= render 'shared/state_counter', id: 'notes_counter', value: @notes.size %>

@@ -1,4 +1,10 @@
 <%= turbo_frame_tag :board_details do %>
+  <%= render 'shared/set_state', value: {
+    details_state: {
+      editing: true
+    }
+  } %>
+
   <%= form_with(model: @board) do |f| %>
     <% invalid = @board.errors.include?(:name) %>
     <%= f.text_field :name, autofocus: true, class: "form-control #{'is-invalid' if invalid}", placeholder: "Board name",
@@ -21,7 +27,7 @@
 
     <div class="mt-3">
       <%= f.submit "Submit", id: dom_id(@board, :submit), class: "btn btn-primary" %>
-      <%= link_to "Cancel", details_board_path(@board), id: dom_id(@board, :cancel), class: "btn btn-secondary cancel-btn" %>
+      <%= link_to "Cancel", details_board_path(@board), id: 'board_details_cancel', class: "btn btn-secondary cancel-btn" %>
     </div>
   <% end %>
 <% end %>

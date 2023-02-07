@@ -1,9 +1,16 @@
 <div id="notes_panel_header" class="notes-panel-header">
   <%= tag.i id: 'back_to_boards', class: 'tapable bi bi-arrow-left ms-3 hidden-md', data: {
-    controller: 'set-state',
-    set_state_object_value: { active_panel: 'boards' },
-    set_state_id_value: 'panel_state',
-    action: 'click->set-state#fire',
+    controller: 'set-state clicker',
+    set_state_object_value: {
+      panel_state: {
+        active_panel: 'boards'
+      },
+      details_state: {
+        show_details: false
+      }
+    },
+    clicker_selector_value: '#board_details_cancel',
+    action: 'click->set-state#fire click->clicker#click',
   } %>
   <span id="notes_header_board_name" class="normal-height text-truncate mx-3 fw-semibold my-1"><%= @board.name %></span>
   <span class="ms-auto"></span>
@@ -31,12 +38,13 @@
       </li>
       <li>
         <%= tag.button 'Notes', class: 'dropdown-item', data: {
-          controller: 'set-state state-driven',
+          controller: 'set-state state-driven clicker',
           set_state_id_value: 'details_state',
           set_state_object_value: { show_details: false },
-          action: 'click->set-state#fire',
           state_driven_state_selector_value: '#details_state',
           state_driven_key_value: 'show_details',
+          clicker_selector_value: '#board_details_cancel',
+          action: 'click->set-state#fire click->clicker#click',
         } %>
       </li>
       <li
