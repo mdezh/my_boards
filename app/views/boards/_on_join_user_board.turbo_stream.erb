@@ -1,11 +1,11 @@
 <%= turbo_stream.replace 'set_state' do %>
-  <%= render 'shared/set_state', state_id: 'details_state', value: {
-    show_details: false
-  } %>
-<% end %>
-<%= turbo_stream.replace 'set_state' do %>
-  <%= render 'shared/set_state', state_id: 'user_board_state', value: {
-    owned: false,
-    joined: true
+  <%= render 'shared/set_state', value: {
+    details_state: {
+      show_details: false
+    },
+    user_board_state: {
+      owned: false,
+      joined: true
+    }
   } %>
 <% end %>
