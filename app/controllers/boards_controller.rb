@@ -5,7 +5,7 @@ class BoardsController < ApplicationController
   before_action :authorize_board!
   after_action :verify_authorized
 
-  BOARDS_PER_FIRST_PAGE = 30
+  BOARDS_PER_FIRST_PAGE = 20
   BOARDS_PER_NEXT_PAGE = 10
   TRIGGER_FROM_BOTTOM = 3
 

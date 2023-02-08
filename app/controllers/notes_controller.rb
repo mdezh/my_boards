@@ -7,7 +7,7 @@ class NotesController < ApplicationController
   before_action :authorize_board!, only: %i[index create]
   after_action :verify_authorized
 
-  NOTES_PER_FIRST_PAGE = 30
+  NOTES_PER_FIRST_PAGE = 20
   NOTES_PER_NEXT_PAGE = 10
   TRIGGER_FROM_EDGE = 2
 
