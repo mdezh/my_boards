@@ -12,11 +12,11 @@
       action: 'click->set-state#fire click->clicker#click',
     } %>
     <span class="fs-5 text-secondary">Details</span>
-    <%= link_to "Edit", edit_board_path(board), class: "btn btn-secondary #{'disabled' unless owned}", data: {
+    <%= link_to "Edit", edit_board_path(board), class: "btn btn-secondary disabled", data: {
       turbo_frame: 'board_details',
       controller: 'state-driven',
       state_driven_state_selector_value: '#user_board_state, #details_state',
-      state_driven_keys_value: %w[owned !editing],
+      state_driven_keys_value: %w[owned !editing loaded],
       state_driven_hidden_class_value: 'disabled',
       state_driven_and_value: true
     } %>

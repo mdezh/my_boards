@@ -1,7 +1,8 @@
 <%= turbo_frame_tag :board_details, class: 'mx-2 mt-4' do %>
   <%= render 'shared/set_state', value: {
     details_state: {
-      editing: false
+      editing: false,
+      loaded: true
     }
   }, id: 'set_editing_state' %>
 
