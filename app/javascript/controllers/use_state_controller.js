@@ -1,76 +1,46 @@
 import { Controller } from "@hotwired/stimulus";
-
-const camelize = (s) => s.replace(/-./g, (x) => x[1].toUpperCase());
+import { fire } from "helpers";
 
 // Connects to data-controller="use-state"
 export default class UseStateController extends Controller {
-  // use state outlets or stateSelectorValue (there are issues with outlets sometimes,
-  // also selector is useful for state controller children classes)
-  // if no outlets and no selector, controller will try to use this.element as state source
-  static outlets = ["state"];
   static values = {
-    stateSelector: String,
+    use: Array,
   };
 
   connect() {
-    this.initActionsAndState();
+    this.state = {};
+    this._addActions();
+    this._requestState();
   }
 
-  getStateSources() {
-    if (this.hasStateOutlet) {
-      return this.stateOutlets;
-    }
+  refresh(e) {
+    if (e.detail == undefined) return;
 
-    let elements;
-    if (this.hasStateSelectorValue) {
-      elements = document.querySelectorAll(this.stateSelectorValue);
-    } else {
-      throw Error("State not defined or doesn't exist");
-    }
-
-    // dirty hack with duck typing
-    return [...elements].map((element) => {
-      const controllerName = element.dataset.controller
-        .split(" ")
-        .find((name) => ["state", "state-counter"].includes(name));
-      if (!controllerName)
-        throw Error(
-          `Failed to find state controller in '${element.dataset.controller}'`
-        );
-      const stateObjectName = camelize(controllerName) + "ObjectValue";
-      const stateObject = element.dataset[stateObjectName];
-      if (stateObject === undefined)
-        throw Error(`Failed to find state object '${stateObjectName}'`);
-      return {
-        element,
-        objectValue: JSON.parse(stateObject),
-      };
-    });
+    this.state = Object.assign(this.state, { [e.type]: e.detail });
+    this._handleStateChange();
   }
 
-  initActionsAndState() {
-    const sources = this.getStateSources();
-
-    const actions = sources.map(
-      (source) => `${source.element.id}@window->${this.identifier}#refresh`
+  _addActions() {
+    const actions = this.useValue.map(
+      (id) => `${id}@window->${this.identifier}#refresh`
     );
 
     this.element.dataset.action = [this.element.dataset.action, ...actions]
       .join(" ")
       .trim();
-
-    const states = sources.map((source) => source.objectValue);
-
-    // use instance state variable since we can receive updates from severals state sources
-    this.state = states.reduce((acc, state) => Object.assign(acc, state), {});
-
-    this.updateWithState();
   }
 
-  refresh(e) {
-    this.state = Object.assign(this.state, e.detail);
-    this.updateWithState();
+  _requestState() {
+    this.useValue.forEach((id) => fire(`fire_${id}`, this.element.id));
   }
 
-  updateWithState() { }
+  _handleStateChange() {
+    if (Object.keys(this.state).length < this.useValue.length) return;
+
+    this._updateWithState();
+  }
+
+  _updateWithState() {
+    throw Error("Not implemented");
+  }
 }
