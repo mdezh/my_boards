@@ -4,10 +4,13 @@ import { fire } from "helpers";
 // Connects to data-controller="use-state"
 export default class UseStateController extends Controller {
   static values = {
-    use: Array,
+    use: { type: Array, default: [] },
   };
 
   connect() {
+    if (this.useValue.length == 0) {
+      throw Error(`State dependencies are not defined`);
+    }
     this.state = {};
     this._addActions();
     this._requestState();
