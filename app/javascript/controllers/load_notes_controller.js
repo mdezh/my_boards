@@ -1,7 +1,7 @@
-import UseStateBaseController from "../base_classes/use_state_base_controller";
+import UseStateController from "controllers/use_state_controller";
 
 // Connects to data-controller="load-notes"
-export default class extends UseStateBaseController {
+export default class extends UseStateController {
   updateWithState() {
     // next line prevents unnecessary request after first load
     if (this.prevBoardId != undefined) {

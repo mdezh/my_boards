@@ -1,6 +1,7 @@
-import UseStateBaseController from "./use_state_base_controller";
+import UseStateController from "controllers/use_state_controller";
 
-export default class UseStateController extends UseStateBaseController {
+// Connects to data-controller="use-state-to-toggle"
+export default class UseStateToToggleController extends UseStateController {
   static values = {
     ...super.values,
     hiddenClass: { type: String, default: "hidden" },

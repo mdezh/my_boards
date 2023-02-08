@@ -1,8 +1,7 @@
-import { Controller } from "@hotwired/stimulus";
-import UseStateBaseController from "../base_classes/use_state_base_controller";
+import UseStateController from "controllers/use_state_controller";
 
 // Connects to data-controller="delete-board"
-export default class extends UseStateBaseController {
+export default class extends UseStateController {
   disconnect() {
     const id = this.element.id.split("_").slice(-1);
     if (

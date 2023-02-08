@@ -1,7 +1,7 @@
-import UseStateController from "../base_classes/use_state_controller";
+import UseStateToToggleController from "controllers/use_state_to_toggle_controller";
 
 // Connects to data-controller="state-driven"
-export default class extends UseStateController {
+export default class extends UseStateToToggleController {
   static values = {
     ...super.values,
     key: { type: String, default: "counter" }, // for state-counter controller

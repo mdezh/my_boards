@@ -1,4 +1,4 @@
-import StateController from "./state_controller";
+import StateController from "controllers/state_controller";
 
 // Connects to data-controller="state-counter"
 export default class extends StateController {

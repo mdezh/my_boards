@@ -2,7 +2,8 @@ import { Controller } from "@hotwired/stimulus";
 
 const camelize = (s) => s.replace(/-./g, (x) => x[1].toUpperCase());
 
-export default class UseStateBaseController extends Controller {
+// Connects to data-controller="use-state"
+export default class UseStateController extends Controller {
   // use state outlets or stateSelectorValue (there are issues with outlets sometimes,
   // also selector is useful for state controller children classes)
   // if no outlets and no selector, controller will try to use this.element as state source
