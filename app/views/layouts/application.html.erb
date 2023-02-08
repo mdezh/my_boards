@@ -30,7 +30,7 @@
   </body>
 
   <script type="text/javascript">
-    document.querySelector('html').style.display = 'block';
+    document.querySelector('html').style.display = 'initial';
     document.oncontextmenu = () => false;
     document.addEventListener('turbo:before-fetch-request', (event) => {
       const timeZone = Intl?.DateTimeFormat()?.resolvedOptions()?.timeZone;

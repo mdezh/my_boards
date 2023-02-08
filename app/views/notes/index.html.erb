@@ -1,5 +1,11 @@
 <%= turbo_frame_tag 'notes_frame' do %>
 
+  <%= render 'shared/set_state', value: {
+    initial_state: {
+      notes_loaded: true
+    }
+  }, id: 'set_notes_loaded' %>
+
   <% if @board %>
     <%= turbo_stream_from [@board, :notes] %>
     <%= turbo_stream_from [current_user, @board] %>

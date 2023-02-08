@@ -2,6 +2,12 @@
 
   <%= turbo_stream_from current_user %>
 
+  <%= render 'shared/set_state', value: {
+    initial_state: {
+      boards_loaded: true
+    }
+  }, id: 'set_boards_loaded' %>
+
   <%= render 'shared/state', id: 'active_board_state', value: {
     id: @active_board_id, 
     path: root_path(board: @active_board_id)

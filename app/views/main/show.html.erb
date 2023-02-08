@@ -1,6 +1,16 @@
-<div class="row">
-  <%= render 'shared/set_state' %>
+<%= render 'shared/set_state' %>
 
+<%= render 'shared/state', id: 'initial_state', value: {
+  boards_loaded: false,
+  notes_loaded: false
+} %>
+
+<%= tag.div class: 'row', data: {
+  controller: 'state-driven',
+  state_driven_state_selector_value: '#initial_state',
+  state_driven_keys_value: %w[boards_loaded notes_loaded],
+  state_driven_and_value: true
+} do %>
   <%= render 'shared/state', id: 'user_state', value: {
     current_user: current_user.id
   } %>
@@ -28,4 +38,4 @@
   } do %>
     <%= turbo_frame_tag 'notes_frame', src: board_notes_path(board_id: @active_board_id) %>
   <% end %>
-</div>
+<% end %>
