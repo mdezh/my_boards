@@ -35,7 +35,7 @@ export default class StateController extends Controller {
 
   updateState(changes) {
     // use _trigger to guarantee event firing even when the state remains the same
-    let _trigger = 1 + this.objectValue._trigger ?? 0;
+    let _trigger = 1 + (this.objectValue._trigger ?? 0);
     this.objectValue = {
       ...this.objectValue,
       ...changes,
