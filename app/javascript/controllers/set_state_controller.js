@@ -1,37 +1,24 @@
 import { Controller } from "@hotwired/stimulus";
+import { fire } from "helpers";
 
 // Connects to data-controller="set-state"
 export default class extends Controller {
   static values = {
-    object: Object,
-    id: String,
+    change: Object,
     onConnect: { type: Boolean, default: false },
   };
 
   connect() {
     if (this.onConnectValue) {
+      // here will be a race condition if the state storage is created by the same render
+      // so state should already exists on the page
       this.fire();
     }
   }
 
   fire() {
-    this.createEvents().forEach((event) => window.dispatchEvent(event));
-  }
-
-  createEvents() {
-    if (this.hasIdValue) {
-      return [
-        new CustomEvent(`set_${this.idValue}`, {
-          detail: { ...this.objectValue },
-        }),
-      ];
-    }
-
-    return Object.keys(this.objectValue).map(
-      (key) =>
-        new CustomEvent(`set_${key}`, {
-          detail: { ...this.objectValue[key] },
-        })
-    );
+    Object.keys(this.changeValue).forEach((key) => {
+      fire(`set_${key}`, this.changeValue[key]);
+    });
   }
 }
