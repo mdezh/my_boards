@@ -30,6 +30,8 @@ export default class StateController extends Controller {
   }
 
   objectValueChanged() {
+    if (this.objectValue.state == undefined) return;
+
     this._fireStateWithName(this.element.id);
   }
 
