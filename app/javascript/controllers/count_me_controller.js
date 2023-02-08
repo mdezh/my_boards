@@ -1,4 +1,5 @@
 import { Controller } from "@hotwired/stimulus";
+import { fire } from "helpers";
 
 // Connects to data-controller="count-me"
 export default class extends Controller {
@@ -7,14 +8,10 @@ export default class extends Controller {
   };
 
   connect() {
-    this.fireEvent(`inc_${this.counterValue}`);
+    fire(`inc_${this.counterValue}`);
   }
 
   disconnect() {
-    this.fireEvent(`dec_${this.counterValue}`);
-  }
-
-  fireEvent(name) {
-    window.dispatchEvent(new CustomEvent(name, {}));
+    fire(`dec_${this.counterValue}`);
   }
 }
