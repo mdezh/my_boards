@@ -3,11 +3,27 @@ import StateController from "controllers/state_controller";
 // Connects to data-controller="state-counter"
 export default class extends StateController {
   static values = {
-    object: { type: Object, default: { counter: 0 } },
+    ...super.values,
+    init: { type: Number, default: 0 },
   };
 
-  addActions() {
-    super.addActions();
+  connect() {
+    super.connect();
+    if (typeof this.objectValue.state != "number") {
+      throw Error(`Wrong initial value for counter: ${this.initValue}`);
+    }
+  }
+
+  incCounter() {
+    this._updateState(this.objectValue.state + 1);
+  }
+
+  decCounter() {
+    this._updateState(this.objectValue.state - 1);
+  }
+
+  _addActions() {
+    super._addActions();
     this.element.dataset.action = [
       this.element.dataset.action,
       `inc_${this.element.id}@window->${this.identifier}#incCounter`,
@@ -15,15 +31,5 @@ export default class extends StateController {
     ]
       .join(" ")
       .trim();
-  }
-
-  incCounter() {
-    const counter = this.objectValue.counter + 1;
-    this.updateState({ counter });
-  }
-
-  decCounter() {
-    const counter = this.objectValue.counter - 1;
-    this.updateState({ counter });
   }
 }
