@@ -15,4 +15,6 @@ export default class extends UseStateController {
       });
     }
   }
+
+  _updateWithState() { }
 }

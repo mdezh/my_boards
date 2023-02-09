@@ -12,6 +12,7 @@ export default class UseStateController extends Controller {
       throw Error(`State dependencies are not defined`);
     }
     this.state = {};
+    this.statesInUse = new Set();
     this._addActions();
   }
 
@@ -20,17 +21,23 @@ export default class UseStateController extends Controller {
   }
 
   refresh(e) {
-    if (e.detail == null || e.detail.value == null || e.detail.name == null)
-      return;
+    if (e.detail == null) return;
 
-    this.state = Object.assign(this.state, { [e.detail.name]: e.detail.value });
+    const { name, value } = e.detail;
+    if (value == null || name == null) return;
+
+    this.statesInUse.add(name);
+    this.state = Object.assign(
+      this.state,
+      typeof value == "object" ? value : { [name]: value }
+    );
     this._handleStateChange();
   }
 
   _addActions() {
     const actions = this.useValue.map(
-      (state_id) =>
-        `${state_id}@window->${this.identifier}#refresh ${state_id}_to_${this.element.id}@window->${this.identifier}#refresh`
+      (id) =>
+        `${id}@window->${this.identifier}#refresh ${id}_to_${this.element.id}@window->${this.identifier}#refresh`
     );
 
     this.element.dataset.action = [this.element.dataset.action, ...actions]
@@ -43,7 +50,7 @@ export default class UseStateController extends Controller {
   }
 
   _handleStateChange() {
-    if (Object.keys(this.state).length < this.useValue.length) return;
+    if (this.statesInUse.size < this.useValue.length) return;
 
     this._updateWithState();
   }

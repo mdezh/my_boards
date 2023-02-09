@@ -4,7 +4,7 @@ import { parse, fire } from "helpers";
 // Connects to data-controller="state"
 export default class StateController extends Controller {
   static values = {
-    init: { type: String, default: "false" },
+    init: { type: String, default: "null" },
     object: { type: Object, default: {} },
   };
 
@@ -30,10 +30,6 @@ export default class StateController extends Controller {
   }
 
   objectValueChanged() {
-    if (this.objectValue.state == undefined) {
-      return;
-    }
-
     this._fireStateWithName(this.element.id);
   }
 
@@ -70,6 +66,10 @@ export default class StateController extends Controller {
   }
 
   _fireStateWithName(eventName) {
+    if (this.objectValue.state == null) {
+      return;
+    }
+
     fire(eventName, {
       name: this.element.id,
       value: this.objectValue.state,

@@ -50,16 +50,7 @@ export default class Show extends UseStateController {
   }
 
   _buildCheckFunction() {
-    const keys = (state) =>
-      "{ " +
-      Object.keys(state)
-        .map((key) =>
-          typeof state[key] != "object" || state[key] == null
-            ? key
-            : `${key}: ${keys(state[key])}`
-        )
-        .join(", ") +
-      " }";
+    const keys = (state) => "{ " + Object.keys(state).join(", ") + " }";
 
     this.checkFunction = new Function(
       "state",
