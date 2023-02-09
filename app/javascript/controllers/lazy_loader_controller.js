@@ -6,8 +6,8 @@ export default class extends Controller {
     src: String,
     status: String,
     indicator: String,
-    hidden: { type: String, default: "invisible" },
   };
+  static classes = ["hidden"];
 
   connect() {
     this.observer = new IntersectionObserver((entries) => {
@@ -32,23 +32,23 @@ export default class extends Controller {
         },
       })
         .then((r) => r.text())
-        .then((html) => (Turbo.renderStreamMessage(html), this.hideIndicator()))
+        .then((html) => Turbo.renderStreamMessage(html))
         .then(() => (this.statusValue = "complete"))
         .then(() => this.observer.unobserve(this.element))
         .catch((e) => {
-          this.hideIndicator();
           console.error("Something goes wrong on lazy loading:", e);
           this.statusValue = "";
-        });
+        })
+        .finally(() => this.hideIndicator());
     }
   }
 
   showIndicator() {
-    this.indicator?.classList.remove(...this.hiddenValue.split(" "));
+    this.indicator?.classList.remove(...this.hiddenClasses);
   }
 
   hideIndicator() {
-    this.indicator?.classList.add(...this.hiddenValue.split(" "));
+    this.indicator?.classList.add(...this.hiddenClasses);
   }
 
   disconnect() {
