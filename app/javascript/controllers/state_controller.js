@@ -8,7 +8,7 @@ export default class StateController extends Controller {
     object: { type: Object, default: {} },
   };
 
-  connect() {
+  initialize() {
     this.objectValue = {
       state: parse(this.initValue),
       trigger: 0,
@@ -30,7 +30,9 @@ export default class StateController extends Controller {
   }
 
   objectValueChanged() {
-    if (this.objectValue.state == undefined) return;
+    if (this.objectValue.state == undefined) {
+      return;
+    }
 
     this._fireStateWithName(this.element.id);
   }
@@ -54,11 +56,17 @@ export default class StateController extends Controller {
   _addActions() {
     this.element.dataset.action = [
       this.element.dataset.action,
-      `fire_${this.element.id}@window->${this.identifier}#fireState`,
-      `set_${this.element.id}@window->${this.identifier}#setState`,
+      ...this._getNewActions(),
     ]
       .join(" ")
       .trim();
+  }
+
+  _getNewActions() {
+    return [
+      `fire_${this.element.id}@window->${this.identifier}#fireState`,
+      `set_${this.element.id}@window->${this.identifier}#setState`,
+    ];
   }
 
   _fireStateWithName(eventName) {
