@@ -2,7 +2,7 @@ import UseStateController from "controllers/use_state_controller";
 
 // Connects to data-controller="show"
 export default class Show extends UseStateController {
-  static classes = ["show", "hide"];
+  static classes = ["shown", "hidden"];
   static values = {
     ...super.values,
     check: String,
@@ -13,8 +13,8 @@ export default class Show extends UseStateController {
   initialize() {
     super.initialize();
 
-    this.classesToShow = this.hasShowClass ? this.showClasses : [];
-    this.classesToHide = this.hasHideClass ? this.hideClasses : ["hidden"];
+    this.classesToShow = this.hasShownClass ? this.shownClasses : [];
+    this.classesToHide = this.hasHiddenClass ? this.hiddenClasses : ["hidden"];
 
     this.elements = this.hasSelectorValue
       ? Array.from(document.querySelectorAll(this.selectorValue))
