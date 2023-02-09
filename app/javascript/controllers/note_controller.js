@@ -8,8 +8,11 @@ export default class extends UseStateController {
   };
   static targets = ["edit", "delete", "nick", "time"];
 
-  updateWithState() {
-    const { current_user, owned, joined, public_rw } = this.state;
+  _updateWithState() {
+    const { user_state, board_state, user_board_state } = this.state;
+    const { current_user } = user_state;
+    const { owned, joined } = user_board_state;
+    const { public_rw } = board_state;
 
     this.removeClass(this.timeTarget, "invisible");
 

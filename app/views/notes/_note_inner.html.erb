@@ -1,10 +1,11 @@
 <%= turbo_frame_tag dom_id(note, :inner) do %>
   <div class="hover-wrapper">
-    <div class="d-flex align-items-center hover-trigger"
-      data-controller="clicker note" data-clicker-selector-value=".cancel-btn"
-      data-note-state-outlet="#user_state, #board_state, #user_board_state"
-      data-note-user-value="<%= note.user_id %>"
-    >
+    <%= tag.div class: 'd-flex align-items-center hover-trigger', data: {
+      controller: 'clicker note',
+      clicker_selector_value: '.cancel-btn',
+      note_use_value: %w[user_state board_state user_board_state],
+      note_user_value: note.user_id
+    } do %>
       <div class="d-flex flex-column w-100">
         <div class="note-content">
           <span class="preserve-lines"><%= sanitize note.content %></span>
@@ -26,6 +27,7 @@
             class: "btn btn-danger btn-sm bi bi-trash", role: "button" %>
         </div>
       </div>
+    <% end %>
     </div>
   </div>
 <% end %>
