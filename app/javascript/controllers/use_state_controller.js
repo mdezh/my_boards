@@ -52,7 +52,7 @@ export default class UseStateController extends Controller {
   _handleStateChange() {
     if (this.statesInUse.size < this.useValue.length) return;
 
-    this._updateWithState();
+    setTimeout(() => this._updateWithState(), 0);
   }
 
   _updateWithState() {
