@@ -1,8 +1,8 @@
 import StateController from "controllers/state_controller";
-import { fire } from "helpers";
 
 // Connects to data-controller="state-counter"
 export default class extends StateController {
+  static targets = ["item"];
   static values = {
     ...super.values,
     init: { type: Number, default: 0 },
@@ -15,23 +15,11 @@ export default class extends StateController {
     }
   }
 
-  connect() {
-    fire(`${this.element.id}_count`);
-  }
-
-  incCounter() {
+  itemTargetConnected() {
     this._updateState(this.objectValue.state + 1);
   }
 
-  decCounter() {
+  itemTargetDisconnected() {
     this._updateState(this.objectValue.state - 1);
-  }
-
-  _getNewActions() {
-    return [
-      ...super._getNewActions(),
-      `inc_${this.element.id}@window->${this.identifier}#incCounter`,
-      `dec_${this.element.id}@window->${this.identifier}#decCounter`,
-    ];
   }
 }

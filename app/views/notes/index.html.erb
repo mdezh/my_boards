@@ -24,8 +24,6 @@
       editing: false,
       loaded: false
     } %>
-
-    <%= render 'shared/state_counter', id: 'notes_counter' %>
   <% end %>
 
   <%= tag.div class: 'full-column d-flex flex-column' do %>
@@ -49,7 +47,9 @@
           }
         } do %>
           <%= render 'no_notes' %>
-          <div id="notes" class="overflow-auto list-group list-group-flush d-flex flex-column-reverse" >
+          <div id="notes" class="overflow-auto list-group list-group-flush d-flex flex-column-reverse"
+            data-controller="state-counter"
+          >
             <%= render @notes %>
             <div id="notes_spinner" class="my-4 text-secondary text-center invisible hidden">
               <div class="spinner-grow" role="status">
