@@ -1,5 +1,7 @@
 <%= turbo_stream.replace 'set_state' do %>
-  <%= render 'shared/set_state', state_id: 'panel_state', value: {
-    active_panel: 'boards',
+  <%= render 'shared/set_state', value: {
+    panel_state: {
+      active_panel: 'boards'
+    }
   } %>
 <% end %>

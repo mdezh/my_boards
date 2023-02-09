@@ -1,7 +1,7 @@
 <div id="notes_panel_header" class="notes-panel-header">
   <%= tag.i id: 'back_to_boards', class: 'tapable bi bi-arrow-left ms-3 hidden-md', data: {
     controller: 'set-state clicker',
-    set_state_object_value: {
+    set_state_change_value: {
       panel_state: {
         active_panel: 'boards'
       },
@@ -14,11 +14,10 @@
   } %>
   <span id="notes_header_board_name" class="normal-height text-truncate mx-3 fw-semibold my-1"><%= @board.name %></span>
   <span class="ms-auto"></span>
-  <%= tag.span class: "me-3 fw-semibold text-secondary #{@board.owner == current_user ? 'hidden' : ''}", data: {
-    controller: 'state-driven',
-    state_driven_state_outlet: '#user_board_state',
-    state_driven_key_value: 'owned',
-    state_driven_not_value: true
+  <%= tag.span id: 'board_owner_nickname', class: "me-3 fw-semibold text-secondary #{@board.owner == current_user ? 'hidden' : ''}", data: {
+    controller: 'show',
+    show_use_value: ['user_board_state'],
+    show_check_value: '!owned'
   } do %>
     @<%= @board.owner.nickname %>
   <% end %>
@@ -26,43 +25,40 @@
     <i class="bi bi-three-dots-vertical" type="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
     <ul class="dropdown-menu">
       <li>
-        <%= tag.button 'Details', class: 'dropdown-item', data: {
-          controller: 'set-state state-driven',
-          set_state_id_value: 'details_state',
-          set_state_object_value: { show_details: true },
+        <%= tag.button 'Details', id: 'to_details_menu', class: 'dropdown-item', data: {
+          controller: 'set-state show',
+          set_state_change_value: { details_state: { show_details: true }},
           action: 'click->set-state#fire',
-          state_driven_state_selector_value: '#details_state',
-          state_driven_key_value: 'show_details',
-          state_driven_not_value: true
+          show_use_value: ['details_state'],
+          show_check_value: '!show_details'
         } %>
       </li>
       <li>
-        <%= tag.button 'Notes', class: 'dropdown-item', data: {
-          controller: 'set-state state-driven clicker',
-          set_state_id_value: 'details_state',
-          set_state_object_value: { show_details: false },
-          state_driven_state_selector_value: '#details_state',
-          state_driven_key_value: 'show_details',
+        <%= tag.button 'Notes', id: 'to_notes_menu', class: 'dropdown-item', data: {
+          controller: 'set-state show clicker',
+          set_state_change_value: { details_state: { show_details: false }},
+          show_use_value: ['details_state'],
+          show_check_value: 'show_details',
           clicker_selector_value: '#board_details_cancel',
           action: 'click->set-state#fire click->clicker#click',
         } %>
       </li>
-      <li
-        data-controller="state-driven"
-        data-state-driven-key-value="joined"
-        data-state-driven-state-outlet="#user_board_state"
-      >
+      <%= tag.li id: 'leave_board', data: {
+        controller: 'show',
+        show_use_value: ['user_board_state'],
+        show_check_value: 'joined'
+      } do %>
         <%= link_to 'Leave', leave_board_path(@board), class: 'dropdown-item link-danger',
           data: { turbo_method: 'put', turbo_confirm: "Are you sure?" } %>
-      </li>
-      <li
-        data-controller="state-driven"
-        data-state-driven-key-value="owned"
-        data-state-driven-state-outlet="#user_board_state"
-      >
+      <% end %>
+      <%= tag.li id: 'delete_board', data: {
+        controller: 'show',
+        show_use_value: ['user_board_state'],
+        show_check_value: 'owned'
+      } do %>
         <%= link_to 'Delete', board_path(@board), class: 'dropdown-item link-danger',
           data: { turbo_method: 'delete', turbo_confirm: "Are you sure?" } %>
-      </li>
+      <% end %>
     </ul>
   </div>
 </div>

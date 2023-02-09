@@ -3,10 +3,9 @@
   method: 'put', form: { data: {
     type: 'turbo_stream',
   }}, data: {
-    controller: 'state-driven',
-    state_driven_keys_value: %w[owned joined],
-    state_driven_not_value: true,
-    state_driven_state_outlet: '#user_board_state'
+    controller: 'hide',
+    hide_use_value: ['user_board_state'],
+    hide_check_value: 'owned || joined'
   } do %>
   <strong>Join</strong>
 <% end %>

@@ -3,7 +3,7 @@
     <%= tag.div class: 'd-flex w-100 justify-content-between align-items-center hover-trigger' do %>
       <%= tag.button board.name, data: {
         controller: 'set-state',
-        set_state_object_value: {
+        set_state_change_value: {
           active_board_state: {
             id: board.id,
             path: root_path(board: board.id)
@@ -12,11 +12,9 @@
         action: "set-state#fire"
       }, class: "h6 my-2 normal-height text-truncate btn btn-link stretched-link board-name" %>
       <%= tag.small class: 'text-secondary hidden', data: {
-        controller: 'state-driven',
-        state_driven_key_value: 'current_user',
-        state_driven_eql_value: board.owner_id,
-        state_driven_not_value: true,
-        state_driven_state_outlet: '#user_state'
+        controller: 'hide',
+        hide_use_value: ['user_state'],
+        hide_check_value: "current_user == #{board.owner_id}"
       } do %>
         @<%= board.owner.nickname %>
       <% end %>

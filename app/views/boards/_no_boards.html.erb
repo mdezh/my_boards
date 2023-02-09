@@ -1,7 +1,6 @@
 <%= tag.div id: 'no_boards', class: "#{@boards.size.zero? ? '' : 'hidden'} flex-grow-1 d-flex align-items-center", data: {
-  controller: 'state-driven',
-  state_driven_state_selector_value: '#boards_counter',
-  state_driven_eql_value: 0
+  controller: 'hide',
+  hide_use_value: ['boards_counter']
 } do %>
   <div class="w-100 text-center text-secondary">
     No boards yet

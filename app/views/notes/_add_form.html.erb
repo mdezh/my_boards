@@ -3,7 +3,7 @@
   data: {
     controller: 'show',
     show_use_value: %w[board_state user_board_state],
-    show_check_value: 'user_board_state.owned || (user_board_state.joined && board_state.public_rw)'
+    show_check_value: 'owned || (joined && public_rw)'
   } do |f| %>
   <div class="input-group">
     <%= f.text_area :content, class: "form-control growing-text shadow", placeholder: 'New note', rows: 1, data: {

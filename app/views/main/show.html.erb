@@ -5,11 +5,10 @@
   notes_loaded: false
 } %>
 
-<%= tag.div class: 'row', data: {
-  controller: 'state-driven',
-  state_driven_state_selector_value: '#initial_state',
-  state_driven_keys_value: %w[boards_loaded notes_loaded],
-  state_driven_and_value: true
+<%= tag.div id: 'main_row', class: 'row', data: {
+  controller: 'show',
+  show_use_value: ['initial_state'],
+  show_check_value: 'boards_loaded && notes_loaded'
 } do %>
   <%= render 'shared/state', id: 'user_state', value: {
     current_user: current_user.id
@@ -19,22 +18,20 @@
     active_panel: @active_board_id == '0' ? 'boards' : 'notes',
   } %>
 
-  <%= tag.div class: 'col-md-5 col-xl-4 hidden-below-md', data: {
-    controller: 'state-driven',
-    state_driven_state_outlet: '#panel_state',
-    state_driven_key_value: 'active_panel',
-    state_driven_eql_value: 'boards',
-    state_driven_hidden_class_value: 'hidden-below-md'
+  <%= tag.div id: 'boards_col', class: 'col-md-5 col-xl-4 hidden-below-md', data: {
+    controller: 'show',
+    show_use_value: ['panel_state'],
+    show_check_value: 'active_panel == "boards"',
+    show_hidden_class: 'hidden-below-md'
   } do %>
     <%= turbo_frame_tag 'boards_frame', src: boards_path(board: @active_board_id) %>
   <% end %>
 
-  <%= tag.div class: 'col-md-7 col-xl-8 hidden-below-md', data: {
-    controller: 'state-driven',
-    state_driven_state_outlet: '#panel_state',
-    state_driven_key_value: 'active_panel',
-    state_driven_eql_value: 'notes',
-    state_driven_hidden_class_value: 'hidden-below-md'
+  <%= tag.div id: 'notes_col', class: 'col-md-7 col-xl-8 hidden-below-md', data: {
+    controller: 'show',
+    show_use_value: ['panel_state'],
+    show_check_value: 'active_panel == "notes"',
+    show_hidden_class: 'hidden-below-md'
   } do %>
     <%= turbo_frame_tag 'notes_frame', src: board_notes_path(board_id: @active_board_id) %>
   <% end %>
