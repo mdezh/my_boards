@@ -7,25 +7,30 @@ export default class UseStateController extends Controller {
     use: { type: Array, default: [] },
   };
 
-  connect() {
+  initialize() {
     if (this.useValue.length == 0) {
       throw Error(`State dependencies are not defined`);
     }
     this.state = {};
     this._addActions();
+  }
+
+  connect() {
     this._requestState();
   }
 
   refresh(e) {
-    if (e.detail == undefined) return;
+    if (e.detail == null || e.detail.value == null || e.detail.name == null)
+      return;
 
-    this.state = Object.assign(this.state, { [e.type]: e.detail });
+    this.state = Object.assign(this.state, { [e.detail.name]: e.detail.value });
     this._handleStateChange();
   }
 
   _addActions() {
     const actions = this.useValue.map(
-      (id) => `${id}@window->${this.identifier}#refresh`
+      (id) =>
+        `${id}@window->${this.identifier}#refresh ${id}_to_${this.element.id}@window->${this.identifier}#refresh`
     );
 
     this.element.dataset.action = [this.element.dataset.action, ...actions]
