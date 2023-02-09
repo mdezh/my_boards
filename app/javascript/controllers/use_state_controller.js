@@ -29,8 +29,8 @@ export default class UseStateController extends Controller {
 
   _addActions() {
     const actions = this.useValue.map(
-      (id) =>
-        `${id}@window->${this.identifier}#refresh ${id}_to_${this.element.id}@window->${this.identifier}#refresh`
+      (state_id) =>
+        `${state_id}@window->${this.identifier}#refresh ${state_id}_to_${this.element.id}@window->${this.identifier}#refresh`
     );
 
     this.element.dataset.action = [this.element.dataset.action, ...actions]
