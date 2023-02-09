@@ -1,8 +1,9 @@
 <%= form_with id: 'add_note', model: [board, board.notes.build],
   class: "mt-2 d-flex #{(owned || (board.public_rw? && joined)) ? '' : 'hidden'}",
   data: {
-    controller: 'add-note',
-    add_note_state_outlet: '#board_state, #user_board_state'
+    controller: 'show',
+    show_use_value: %w[board_state user_board_state],
+    show_check_value: 'user_board_state.owned || (user_board_state.joined && board_state.public_rw)'
   } do |f| %>
   <div class="input-group">
     <%= f.text_area :content, class: "form-control growing-text shadow", placeholder: 'New note', rows: 1, data: {
