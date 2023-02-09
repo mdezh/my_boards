@@ -61,7 +61,10 @@ export default class StateController extends Controller {
       .trim();
   }
 
-  _fireStateWithName(name) {
-    fire(name, this.objectValue.state);
+  _fireStateWithName(eventName) {
+    fire(eventName, {
+      name: this.element.id,
+      value: this.objectValue.state,
+    });
   }
 }
