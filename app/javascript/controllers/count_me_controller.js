@@ -7,11 +7,28 @@ export default class extends Controller {
     counter: String,
   };
 
+  initialize() {
+    this._addActions();
+  }
+
   connect() {
+    this.fireInc();
+  }
+
+  fireInc() {
     fire(`inc_${this.counterValue}`);
   }
 
   disconnect() {
     fire(`dec_${this.counterValue}`);
+  }
+
+  _addActions() {
+    this.element.dataset.action = [
+      this.element.dataset.action,
+      `${this.counterValue}_count@window->${this.identifier}#fireInc`,
+    ]
+      .join(" ")
+      .trim();
   }
 }
