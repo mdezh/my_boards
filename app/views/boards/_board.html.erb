@@ -2,7 +2,7 @@
   controller: 'delete-board state-driven count-me' + (defined?(auto_scroll) ? ' scroll-into-view' : '') +
               (@more_pages && board.id == @loading_trigger ? ' lazy-loader' : ''),
   count_me_counter_value: 'boards_counter',
-  delete_board_state_selector_value: '#active_board_state',
+  delete_board_use_value: %w[active_board_state],
   state_driven_state_selector_value: '#active_board_state',
   state_driven_key_value: 'id',
   state_driven_eql_value: board.id,
