@@ -18,6 +18,12 @@
     load_notes_use_value: ['active_board_state']
   } %>
 
+  <%= tag.div id: 'select_board', class: 'hidden', data: {
+    controller: 'select-board',
+    select_board_use_value: ['active_board_state'],
+    select_board_active_class: 'selected-board'
+  } %>
+
   <div class="full-column d-flex flex-column">
     <%= render 'add_board_btn' %>
     <div id="boards" class="overflow-auto shadow list-group list-group-flush flex-grow-1 mt-3 border rounded text-bg-light"
