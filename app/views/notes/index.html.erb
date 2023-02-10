@@ -46,7 +46,7 @@
             }
           }
         } do %>
-          <%= render 'no_notes' %>
+          <%= render 'no_notes', hidden: @notes.present? %>
           <div id="notes" class="overflow-auto list-group list-group-flush d-flex flex-column-reverse"
             data-controller="state-counter"
           >

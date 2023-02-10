@@ -1,4 +1,4 @@
-<%= tag.div id: 'no_notes', class: 'flex-grow-1 d-flex align-items-center hidden', data: {
+<%= tag.div id: 'no_notes', class: 'flex-grow-1 d-flex align-items-center' + (hidden ? ' hidden' : ''), data: {
   controller: 'hide',
   hide_use_value: ['notes'],
 } do %>
