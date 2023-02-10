@@ -50,7 +50,7 @@
           <div id="notes" class="overflow-auto list-group list-group-flush d-flex flex-column-reverse"
             data-controller="state-counter"
           >
-            <%= render @notes %>
+            <%= render @notes, user_id: current_user.id %>
             <div id="notes_spinner" class="my-4 text-secondary text-center invisible">
               <div class="spinner-grow" role="status">
                 <span class="visually-hidden">Loading...</span>

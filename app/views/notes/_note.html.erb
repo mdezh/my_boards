@@ -11,5 +11,5 @@
   lazy_loader_indicator_value: '#notes_spinner',
   lazy_loader_hidden_class: 'invisible'
 } : {}) do %>
-  <%= render "notes/note_inner", note: %>
+  <%= render "notes/note_inner", note:, user_id: defined?(user_id) ? user_id : 0 %>
 <% end %>
