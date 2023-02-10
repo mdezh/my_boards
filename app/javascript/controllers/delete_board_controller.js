@@ -16,5 +16,5 @@ export default class extends UseStateController {
     }
   }
 
-  _updateWithState() { }
+  _updateWithState(_state) { }
 }

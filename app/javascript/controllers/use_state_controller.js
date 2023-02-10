@@ -12,7 +12,7 @@ export default class UseStateController extends Controller {
       throw Error(`State dependencies are not defined`);
     }
     this.state = {};
-    this.statesInUse = new Set();
+    this.receivedStates = new Set();
     this._addActions();
   }
 
@@ -26,7 +26,7 @@ export default class UseStateController extends Controller {
     const { name, value } = e.detail;
     if (value == null || name == null) return;
 
-    this.statesInUse.add(name);
+    this.receivedStates.add(name);
     this.state = Object.assign(
       this.state,
       typeof value == "object" ? value : { [name]: value }
@@ -35,14 +35,19 @@ export default class UseStateController extends Controller {
   }
 
   _addActions() {
+    const dataset = this.element.dataset;
+
+    if (dataset.actionsAdded?.includes(this.identifier)) return;
+
+    dataset.actionsAdded = (
+      (dataset.actionsAdded ?? "") + ` ${this.identifier}`
+    ).trim();
     const actions = this.useValue.map(
       (id) =>
         `${id}@window->${this.identifier}#refresh ${id}_to_${this.element.id}@window->${this.identifier}#refresh`
     );
 
-    this.element.dataset.action = [this.element.dataset.action, ...actions]
-      .join(" ")
-      .trim();
+    dataset.action = [dataset.action, ...actions].join(" ").trim();
   }
 
   _requestState() {
@@ -50,12 +55,12 @@ export default class UseStateController extends Controller {
   }
 
   _handleStateChange() {
-    if (this.statesInUse.size < this.useValue.length) return;
+    if (this.receivedStates.size < this.useValue.length) return;
 
-    setTimeout(() => this._updateWithState(), 0);
+    setTimeout(() => this._updateWithState(this.state), 0);
   }
 
-  _updateWithState() {
+  _updateWithState(_state) {
     throw Error("Not implemented");
   }
 }

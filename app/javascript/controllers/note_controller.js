@@ -8,43 +8,41 @@ export default class extends UseStateController {
   };
   static targets = ["edit", "delete", "nick", "time"];
 
-  _updateWithState() {
-    const { current_user, owned, joined, public_rw } = this.state;
-
-    this.removeClass(this.timeTarget, "invisible");
+  _updateWithState({ current_user, owned, joined, public_rw }) {
+    this._removeClass(this.timeTarget, "invisible");
 
     if (current_user == this.userValue) {
-      this.addClass(this.nickTarget, "hidden");
+      this._addClass(this.nickTarget, "hidden");
     } else {
-      this.removeClass(this.nickTarget, "hidden");
+      this._removeClass(this.nickTarget, "hidden");
     }
 
     if (current_user == this.userValue && (owned || (joined && public_rw))) {
-      this.removeClass(this.editTarget, "disabled");
+      this._removeClass(this.editTarget, "disabled");
     } else {
-      this.addClass(this.editTarget, "disabled");
+      this._addClass(this.editTarget, "disabled");
     }
 
     if (owned || (current_user == this.userValue && joined && public_rw)) {
-      this.removeClass(this.deleteTarget, "disabled");
+      this._removeClass(this.deleteTarget, "disabled");
     } else {
-      this.addClass(this.deleteTarget, "disabled");
+      this._addClass(this.deleteTarget, "disabled");
     }
 
     if (owned || (joined && public_rw)) {
-      this.removeClass(this.editTarget, "hidden");
-      this.removeClass(this.deleteTarget, "hidden");
+      this._removeClass(this.editTarget, "hidden");
+      this._removeClass(this.deleteTarget, "hidden");
     } else {
-      this.addClass(this.editTarget, "hidden");
-      this.addClass(this.deleteTarget, "hidden");
+      this._addClass(this.editTarget, "hidden");
+      this._addClass(this.deleteTarget, "hidden");
     }
   }
 
-  addClass(target, value) {
+  _addClass(target, value) {
     target.classList.add(value);
   }
 
-  removeClass(target, value) {
+  _removeClass(target, value) {
     target.classList.remove(value);
   }
 }

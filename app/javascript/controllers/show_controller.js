@@ -30,8 +30,8 @@ export default class Show extends UseStateController {
     }
   }
 
-  _updateWithState() {
-    const checkResult = this._check();
+  _updateWithState(state) {
+    const checkResult = this._check(state);
     if (checkResult === this.prevCheckResult) return;
 
     if (checkResult) {
@@ -43,18 +43,20 @@ export default class Show extends UseStateController {
     this.prevCheckResult = checkResult;
   }
 
-  _check() {
-    if (!this.checkFunction) this._buildCheckFunction();
+  _check(state) {
+    if (!this.checkFunction) {
+      this.checkFunction = this._buildCheckFunction(state);
+    }
 
-    return this.checkFunction(this.state);
+    return this.checkFunction(state);
   }
 
-  _buildCheckFunction() {
-    const keys = (state) => "{ " + Object.keys(state).join(", ") + " }";
+  _buildCheckFunction(state) {
+    const keys = (stateObj) => "{ " + Object.keys(stateObj).join(", ") + " }";
 
-    this.checkFunction = new Function(
+    return new Function(
       "state",
-      `const ${keys(this.state)} = state; return ${this.checkValue};`
+      `const ${keys(state)} = state; return ${this.checkValue};`
     );
   }
 

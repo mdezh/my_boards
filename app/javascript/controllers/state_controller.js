@@ -5,14 +5,17 @@ import { parse, fire } from "helpers";
 export default class StateController extends Controller {
   static values = {
     init: { type: String, default: "null" },
-    object: { type: Object, default: {} },
+    object: Object,
   };
 
   initialize() {
-    this.objectValue = {
-      state: parse(this.initValue),
-      trigger: 0,
-    };
+    // next line prevents state reinitialization after bw/fw navigation
+    if (!this.hasObjectValue) {
+      this.objectValue = {
+        state: parse(this.initValue),
+        trigger: 0,
+      };
+    }
     this._addActions();
   }
 
@@ -50,10 +53,14 @@ export default class StateController extends Controller {
   }
 
   _addActions() {
-    this.element.dataset.action = [
-      this.element.dataset.action,
-      ...this._getNewActions(),
-    ]
+    const dataset = this.element.dataset;
+
+    if (dataset.actionsAdded?.includes(this.identifier)) return;
+
+    dataset.actionsAdded = (
+      (dataset.actionsAdded ?? "") + ` ${this.identifier}`
+    ).trim();
+    dataset.action = [dataset.action, ...this._getNewActions()]
       .join(" ")
       .trim();
   }
