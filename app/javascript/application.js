@@ -9,3 +9,11 @@ import "bootstrap";
 
 // import "./init_tooltips";
 // import "./init_popovers";
+
+import { parse, fire } from "helpers";
+
+Turbo.StreamActions.event = function() {
+  const name = this.getAttribute("name");
+  const value = parse(this.getAttribute("value"));
+  fire(name, value);
+};
