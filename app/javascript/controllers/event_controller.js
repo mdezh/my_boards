@@ -17,11 +17,20 @@ export default class extends Controller {
   }
 
   connect() {
-    this.onConnectValue && this._fire();
+    if (this.onConnectValue) {
+      // a race condition is possible here if the listener is not connected yet
+      this._fire();
+      // next line prevents repeating fire after bw/fw navigation
+      this.onConnectValue = false;
+    }
   }
 
   disconnect() {
-    this.onDisconnectValue && this._fire();
+    if (this.onDisconnectValue) {
+      this._fire();
+      // next line prevents repeating fire after bw/fw navigation
+      this.onDisconnectValue = false;
+    }
   }
 
   fire(e) {

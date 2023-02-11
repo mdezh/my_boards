@@ -1,8 +1,9 @@
 <% if defined?(value) %>
+  <% raw_events = value.map { |k, v| ["set_#{k}", v] }.to_h %>
   <%= tag.div id: "#{defined?(id) ? id : 'set_state' }", class: 'hidden', data: {
-    controller: 'set-state',
-    set_state_change_value: value,
-    set_state_on_connect_value: true
+    controller: 'event',
+    event_payload_value: raw_events,
+    event_on_connect_value: true
   } %>
 <% else %>
   <div id="set_state" class="hidden"></div>

@@ -1,16 +1,16 @@
 <div id="notes_panel_header" class="notes-panel-header">
   <%= tag.i id: 'back_to_boards', class: 'tapable bi bi-arrow-left ms-3 hidden-md', data: {
-    controller: 'set-state clicker',
-    set_state_change_value: {
-      panel_state: {
+    controller: 'event clicker',
+    event_payload_value: {
+      set_panel_state: {
         active_panel: 'boards'
       },
-      details_state: {
+      set_details_state: {
         show_details: false
       }
     },
     clicker_selector_value: '#board_details_cancel',
-    action: 'click->set-state#fire click->clicker#click',
+    action: 'click->event#fire click->clicker#click',
   } %>
   <span id="notes_header_board_name" class="normal-height text-truncate mx-3 fw-semibold my-1"><%= @board.name %></span>
   <span class="ms-auto"></span>
@@ -26,21 +26,21 @@
     <ul class="dropdown-menu">
       <li>
         <%= tag.button 'Details', id: 'to_details_menu', class: 'dropdown-item', data: {
-          controller: 'set-state show',
-          set_state_change_value: { details_state: { show_details: true }},
-          action: 'click->set-state#fire',
+          controller: 'event show',
+          event_payload_value: { set_details_state: { show_details: true }},
+          action: 'click->event#fire',
           show_use_value: 'details_state',
           show_check_value: '!show_details'
         } %>
       </li>
       <li>
         <%= tag.button 'Notes', id: 'to_notes_menu', class: 'dropdown-item', data: {
-          controller: 'set-state show clicker',
-          set_state_change_value: { details_state: { show_details: false }},
+          controller: 'event show clicker',
+          event_payload_value: { set_details_state: { show_details: false }},
           show_use_value: 'details_state',
           show_check_value: 'show_details',
           clicker_selector_value: '#board_details_cancel',
-          action: 'click->set-state#fire click->clicker#click',
+          action: 'click->event#fire click->clicker#click',
         } %>
       </li>
       <%= tag.li id: 'leave_board', data: {
