@@ -45,12 +45,8 @@ class BoardsController < ApplicationController
           render turbo_stream: [
             turbo_stream.replace('set_state', partial: 'shared/set_state', locals: {
                                    value: {
-                                     panel_state: {
-                                       active_panel: 'none'
-                                     },
                                      active_board_state: {
-                                       id: @board.id,
-                                       path: root_path(board: @board.id)
+                                       id: @board.id
                                      }
                                    }
                                  }),

@@ -9,13 +9,7 @@
   }, id: 'set_boards_loaded' %>
 
   <%= render 'shared/state', id: 'active_board_state', value: {
-    id: @active_board_id, 
-    path: root_path(board: @active_board_id)
-  } %>
-
-  <%= tag.div class: 'hidden', data: {
-    controller: 'load-notes',
-    load_notes_use_value: 'active_board_state'
+    id: @active_board_id
   } %>
 
   <%= tag.div id: 'select_board', class: 'hidden', data: {

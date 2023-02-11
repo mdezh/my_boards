@@ -3,17 +3,19 @@ import { promoteToFrameVisit, fire } from "helpers";
 
 // Connects to data-controller="load-notes"
 export default class extends UseStateController {
-  _updateWithState({ id, path }) {
-    // next line prevents unnecessary request after first load
-    if (this.prevId != null) {
-      if (this.prevId != id) {
-        promoteToFrameVisit("notes_frame", path, "replace");
-      } else {
-        fire("set_panel_state", {
-          active_panel: "notes",
-        });
-      }
+  static values = {
+    ...super.values,
+    path: String,
+    id: Number,
+  };
+
+  load() {
+    if (this.state?.id != this.idValue) {
+      promoteToFrameVisit("notes_frame", this.pathValue, "advance");
+      fire("set_active_board_state", { id: this.idValue });
+    } else {
+      fire("set_panel_state", { active_panel: "notes" });
     }
-    this.prevId = id;
   }
+  _updateWithState(_state) { }
 }
