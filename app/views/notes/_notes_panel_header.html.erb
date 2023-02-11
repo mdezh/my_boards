@@ -56,8 +56,18 @@
         show_use_value: 'user_board_state',
         show_check_value: 'owned'
       } do %>
-        <%= link_to 'Delete', board_path(@board), class: 'dropdown-item link-danger',
-          data: { turbo_method: 'delete', turbo_confirm: "Are you sure?" } %>
+        <%= link_to 'Delete', board_path(@board), class: 'dropdown-item link-danger', data: {
+          turbo_method: 'delete',
+          controller: 'event',
+          event_payload_value: {
+            delete_board: @board.id,
+            set_panel_state: {
+              active_panel: 'boards'
+            }
+          },
+          event_confirm_value: 'Are you sure?',
+          action: 'event#fire'
+        } %>
       <% end %>
     </ul>
   </div>

@@ -3,7 +3,6 @@
     <%= tag.div class: 'd-flex w-100 justify-content-between align-items-center hover-trigger' do %>
       <%= tag.button board.name, data: {
         controller: 'load-notes',
-        load_notes_use_value: 'active_board_state',
         load_notes_id_value: board.id,
         load_notes_path_value: root_path(board: board.id),
         action: "click->load-notes#load"
@@ -17,7 +16,15 @@
       <% end %>
       <div class="hover-content-block shadow">
         <div class="btn-group" role="group">
-          <%= link_to "", board, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
+          <%= link_to "", board, data: {
+            turbo_method: :delete,
+            controller: 'event',
+            event_payload_value: {
+              delete_board: board.id,
+            },
+            event_confirm_value: 'Are you sure?',
+            action: 'event#fire'
+          },
             class: "btn btn-danger btn-sm bi bi-trash", role: "button" %>
         </div>
       </div>

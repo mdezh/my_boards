@@ -1,9 +1,12 @@
+<% controllers = []
+  controllers << 'scroll-into-view' if defined?(auto_scroll)
+  controllers << 'lazy-loader' if @more_pages && board.id == @loading_trigger
+%>
 <%= tag.div id: dom_id(board), class: 'list-group-item', data: {
-  controller: 'delete-board' + (defined?(auto_scroll) ? ' scroll-into-view' : '') +
-              (@more_pages && board.id == @loading_trigger ? ' lazy-loader' : ''),
-  delete_board_use_value: 'active_board_state',
   state_counter_target: 'item'
-}.merge(@more_pages && board.id == @loading_trigger ? {
+}.merge(controllers.present? ? {
+  controller: controllers.join(' ')
+} : {}).merge(controllers.include?('lazy-loader') ? {
   lazy_loader_src_value: boards_path(cursor: @next_cursor),
   lazy_loader_indicator_value: '#boards_spinner',
   lazy_loader_hidden_class: 'invisible hidden'
