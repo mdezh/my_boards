@@ -24,9 +24,7 @@ export default class Show extends UseStateController {
       : [];
 
     if (!this.hasCheckValue) {
-      this.checkValue = this.useValue
-        .map((state) => String(state))
-        .join(" && ");
+      this.checkValue = this.useValue.split(" ").join(" && ");
     }
   }
 

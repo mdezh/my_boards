@@ -1,6 +1,6 @@
 <%= tag.div id: 'details_header', class: 'hidden', data: {
   controller: 'show',
-  show_use_value: ['details_state'],
+  show_use_value: 'details_state',
   show_check_value: 'show_details'
 } do %>
   <%= tag.div class: 'px-4 py-3 border border-bottom-0 shadow d-flex justify-content-between align-items-center', style: 'background-color: white' do %>
@@ -14,7 +14,7 @@
     <%= link_to "Edit", edit_board_path(board), id: 'edit_details_btn', class: "btn btn-secondary disabled", data: {
       turbo_frame: 'board_details',
       controller: 'show',
-      show_use_value: %w[user_board_state details_state],
+      show_use_value: 'user_board_state details_state',
       show_check_value: 'owned && !editing && loaded',
       show_hidden_class: 'disabled'
     } %>

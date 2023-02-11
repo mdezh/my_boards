@@ -16,7 +16,7 @@
   <span class="ms-auto"></span>
   <%= tag.span id: 'board_owner_nickname', class: "me-3 fw-semibold text-secondary #{@board.owner == current_user ? 'hidden' : ''}", data: {
     controller: 'show',
-    show_use_value: ['user_board_state'],
+    show_use_value: 'user_board_state',
     show_check_value: '!owned'
   } do %>
     @<%= @board.owner.nickname %>
@@ -29,7 +29,7 @@
           controller: 'set-state show',
           set_state_change_value: { details_state: { show_details: true }},
           action: 'click->set-state#fire',
-          show_use_value: ['details_state'],
+          show_use_value: 'details_state',
           show_check_value: '!show_details'
         } %>
       </li>
@@ -37,7 +37,7 @@
         <%= tag.button 'Notes', id: 'to_notes_menu', class: 'dropdown-item', data: {
           controller: 'set-state show clicker',
           set_state_change_value: { details_state: { show_details: false }},
-          show_use_value: ['details_state'],
+          show_use_value: 'details_state',
           show_check_value: 'show_details',
           clicker_selector_value: '#board_details_cancel',
           action: 'click->set-state#fire click->clicker#click',
@@ -45,7 +45,7 @@
       </li>
       <%= tag.li id: 'leave_board', data: {
         controller: 'show',
-        show_use_value: ['user_board_state'],
+        show_use_value: 'user_board_state',
         show_check_value: 'joined'
       } do %>
         <%= link_to 'Leave', leave_board_path(@board), class: 'dropdown-item link-danger',
@@ -53,7 +53,7 @@
       <% end %>
       <%= tag.li id: 'delete_board', data: {
         controller: 'show',
-        show_use_value: ['user_board_state'],
+        show_use_value: 'user_board_state',
         show_check_value: 'owned'
       } do %>
         <%= link_to 'Delete', board_path(@board), class: 'dropdown-item link-danger',

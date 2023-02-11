@@ -4,11 +4,11 @@ import { fire } from "helpers";
 // Connects to data-controller="use-state"
 export default class UseStateController extends Controller {
   static values = {
-    use: { type: Array, default: [] },
+    use: String,
   };
 
   initialize() {
-    if (this.useValue.length == 0) {
+    if (!this.hasUseValue) {
       throw Error(`State dependencies are not defined`);
     }
     this.state = {};
@@ -42,20 +42,24 @@ export default class UseStateController extends Controller {
     dataset.actionsAdded = (
       (dataset.actionsAdded ?? "") + ` ${this.identifier}`
     ).trim();
-    const actions = this.useValue.map(
-      (id) =>
-        `${id}@window->${this.identifier}#refresh ${id}_to_${this.element.id}@window->${this.identifier}#refresh`
-    );
+    const actions = this.useValue
+      .split(" ")
+      .map(
+        (id) =>
+          `${id}@window->${this.identifier}#refresh ${id}_to_${this.element.id}@window->${this.identifier}#refresh`
+      );
 
     dataset.action = [dataset.action, ...actions].join(" ").trim();
   }
 
   _requestState() {
-    this.useValue.forEach((id) => fire(`fire_${id}`, this.element.id));
+    this.useValue
+      .split(" ")
+      .forEach((id) => fire(`fire_${id}`, this.element.id));
   }
 
   _handleStateChange() {
-    if (this.receivedStates.size < this.useValue.length) return;
+    if (this.receivedStates.size < this.useValue.split(" ").length) return;
 
     setTimeout(() => this._updateWithState(this.state), 0);
   }

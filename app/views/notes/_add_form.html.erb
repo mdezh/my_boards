@@ -2,7 +2,7 @@
   class: "mt-2 d-flex #{(owned || (board.public_rw? && joined)) ? '' : 'hidden'}",
   data: {
     controller: 'show',
-    show_use_value: %w[board_state user_board_state],
+    show_use_value: 'board_state user_board_state',
     show_check_value: 'owned || (joined && public_rw)'
   } do |f| %>
   <div class="input-group">

@@ -1,7 +1,7 @@
 <%= tag.div id: dom_id(board), class: 'list-group-item', data: {
   controller: 'delete-board' + (defined?(auto_scroll) ? ' scroll-into-view' : '') +
               (@more_pages && board.id == @loading_trigger ? ' lazy-loader' : ''),
-  delete_board_use_value: %w[active_board_state],
+  delete_board_use_value: 'active_board_state',
   state_counter_target: 'item'
 }.merge(@more_pages && board.id == @loading_trigger ? {
   lazy_loader_src_value: boards_path(cursor: @next_cursor),

@@ -37,7 +37,7 @@
       <% if @board %>
         <%= tag.div class: 'd-flex flex-column-reverse flex-grow-1 overflow-auto', data: {
           controller: 'hide set-state',
-          hide_use_value: ['details_state'],
+          hide_use_value: 'details_state',
           hide_check_value: 'show_details',
           set_state_on_connect_value: true,
           set_state_change_value: {
@@ -66,7 +66,7 @@
     <% if @board %>
       <%= tag.div data: {
         controller: 'hide',
-        hide_use_value: ['details_state'],
+        hide_use_value: 'details_state',
         hide_check_value: 'show_details',
       } do %>
         <%= render 'add_form', board: @board, owned: @owned, joined: @joined %>
