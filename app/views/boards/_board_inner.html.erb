@@ -2,10 +2,14 @@
   <div class="hover-wrapper">
     <%= tag.div class: 'd-flex w-100 justify-content-between align-items-center hover-trigger' do %>
       <%= tag.button board.name, data: {
-        controller: 'load-notes',
-        load_notes_id_value: board.id,
-        load_notes_path_value: root_path(board: board.id),
-        action: "click->load-notes#load"
+        controller: 'event',
+        event_payload_value: {
+          notes_loader: {
+            id: board.id,
+            path: root_path(board: board.id)
+          }
+        },
+        action: 'event#fire'
       }, class: "h6 my-2 normal-height text-truncate btn btn-link stretched-link board-name" %>
       <%= tag.small class: 'text-secondary hidden', data: {
         controller: 'hide',

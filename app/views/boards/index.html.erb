@@ -12,6 +12,10 @@
     id: @active_board_id
   } %>
 
+  <%= tag.div id: 'notes_loader', class: 'hidden', data: {
+    controller: 'notes-loader',
+  } %>
+
   <%= tag.div id: 'delete_board', class: 'hidden', data: {
     controller: 'delete-board',
   } %>

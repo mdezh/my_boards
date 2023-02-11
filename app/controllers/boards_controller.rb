@@ -43,16 +43,14 @@ class BoardsController < ApplicationController
       f.turbo_stream do
         if @board.errors.empty?
           render turbo_stream: [
-            turbo_stream.replace('set_state', partial: 'shared/set_state', locals: {
-                                   value: {
-                                     active_board_state: {
-                                       id: @board.id
-                                     }
-                                   }
-                                 }),
+            turbo_stream.replace('add_board_frame', partial: 'add_board_btn'),
+            helpers.turbo_stream_action_tag(
+              'event',
+              name: 'notes_loader',
+              value: ActiveSupport::JSON.encode({ id: @board.id, path: root_path(board: @board.id) })
+            ),
             # despite we use broadcasting we still need next line since we want autoscroll new board into the viewport
-            turbo_stream.prepend('boards', partial: 'board', locals: { board: @board, auto_scroll: true }),
-            turbo_stream.replace('add_board_frame', partial: 'add_board_btn')
+            turbo_stream.prepend('boards', partial: 'board', locals: { board: @board, auto_scroll: true })
           ]
         else
           render turbo_stream: [
