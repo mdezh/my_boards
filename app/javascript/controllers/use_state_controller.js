@@ -42,14 +42,19 @@ export default class UseStateController extends Controller {
     dataset.actionsAdded = (
       (dataset.actionsAdded ?? "") + ` ${this.identifier}`
     ).trim();
-    const actions = this.useValue
+
+    dataset.action = [dataset.action, ...this._getNewActions()]
+      .join(" ")
+      .trim();
+  }
+
+  _getNewActions() {
+    return this.useValue
       .split(" ")
       .map(
         (id) =>
           `${id}@window->${this.identifier}#refresh ${id}_to_${this.element.id}@window->${this.identifier}#refresh`
       );
-
-    dataset.action = [dataset.action, ...actions].join(" ").trim();
   }
 
   _requestState() {
@@ -64,7 +69,5 @@ export default class UseStateController extends Controller {
     setTimeout(() => this._updateWithState(this.state), 0);
   }
 
-  _updateWithState(_state) {
-    throw Error("Not implemented");
-  }
+  _updateWithState(_state) { }
 }
