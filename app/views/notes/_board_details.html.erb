@@ -4,6 +4,6 @@
   show_check_value: 'show_details'
 } do %>
   <%= tag.div class: 'mx-3 mt-4' do %>
-    <%= turbo_frame_tag :board_details, src: details_board_path(board), loading: :lazy %>
+    <%= turbo_frame_tag :board_details, src: details_board_path(board) %>
   <% end %>
 <% end %>
