@@ -13,8 +13,12 @@ class BoardsController < ApplicationController
     @active_board_id = params[:board]
     @cursor = params[:cursor]&.to_i || (Board.last&.id || 0) + 1
     amount = params[:cursor] ? BOARDS_PER_NEXT_PAGE : BOARDS_PER_FIRST_PAGE
-    @boards = policy_scope(Board).where('board_id < ?',
-                                        @cursor).select('boards.*, relations.id as position').order(position: :desc).includes(:owner).take(amount)
+    @boards = policy_scope(Board)
+              .where('board_id < ?', @cursor)
+              .select('boards.*, relations.id as position')
+              .order(position: :desc)
+              .includes(:owner)
+              .take(amount)
     @next_cursor = @boards.last&.id
     @loading_trigger = if @boards.empty?
                          nil
@@ -44,13 +48,13 @@ class BoardsController < ApplicationController
         if @board.errors.empty?
           render turbo_stream: [
             turbo_stream.replace('add_board_frame', partial: 'add_board_btn'),
+            # despite we use broadcasting we still need next line since we want autoscroll new board into the viewport
+            turbo_stream.prepend('boards', partial: 'board', locals: { board: @board, auto_scroll: true }),
             helpers.turbo_stream_action_tag(
               'event',
               name: 'notes_loader',
               value: ActiveSupport::JSON.encode({ id: @board.id, path: root_path(board: @board.id) })
-            ),
-            # despite we use broadcasting we still need next line since we want autoscroll new board into the viewport
-            turbo_stream.prepend('boards', partial: 'board', locals: { board: @board, auto_scroll: true })
+            )
           ]
         else
           render turbo_stream: [

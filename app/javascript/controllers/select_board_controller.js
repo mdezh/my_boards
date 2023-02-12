@@ -3,6 +3,14 @@ import UseStateController from "controllers/use_state_controller";
 // Connects to data-controller="select-board"
 export default class extends UseStateController {
   static classes = ["active"];
+  static targets = ["board"];
+
+  boardTargetConnected(e) {
+    const { id } = this.state;
+    if (e.id != this._getBoardElementId(id)) return;
+
+    this._updateWithState({ id });
+  }
 
   _updateWithState({ id }) {
     if (this.prevId) {
@@ -13,7 +21,11 @@ export default class extends UseStateController {
   }
 
   _classList(boardId) {
-    const id = `board_${boardId}`;
+    const id = this._getBoardElementId(boardId);
     return document.getElementById(id)?.classList;
+  }
+
+  _getBoardElementId(boardId) {
+    return `board_${boardId}`;
   }
 }

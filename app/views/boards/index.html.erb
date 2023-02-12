@@ -22,15 +22,15 @@
 
   <%= tag.div id: 'select_board', class: 'hidden', data: {
     controller: 'select-board',
-    select_board_use_value: 'active_board_state',
-    select_board_active_class: 'selected-board'
   } %>
 
   <div class="full-column d-flex flex-column">
     <%= render 'add_board_btn' %>
-    <div id="boards" class="overflow-auto shadow list-group list-group-flush flex-grow-1 mt-3 border rounded text-bg-light"
-      data-controller="state-counter"
-    >
+    <%= tag.div id: 'boards', class: 'overflow-auto shadow list-group list-group-flush flex-grow-1 mt-3 border rounded text-bg-light', data: {
+      controller: 'state-counter select-board',
+      select_board_use_value: 'active_board_state',
+      select_board_active_class: 'selected-board'
+    } do %>
       <%= render 'no_boards' %>
       <%= render @boards %>
       <%= tag.div id: 'boards_spinner', class: 'my-4 text-secondary text-center invisible hidden' do %>
@@ -38,6 +38,6 @@
           <span class="visually-hidden">Loading...</span>
         </div>
       <% end %>
-    </div>
+    <% end %>
   </div>
 <% end %>

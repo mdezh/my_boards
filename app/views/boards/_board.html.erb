@@ -3,7 +3,8 @@
   controllers << 'lazy-loader' if @more_pages && board.id == @loading_trigger
 %>
 <%= tag.div id: dom_id(board), class: 'list-group-item', data: {
-  state_counter_target: 'item'
+  state_counter_target: 'item',
+  select_board_target: 'board'
 }.merge(controllers.present? ? {
   controller: controllers.join(' ')
 } : {}).merge(controllers.include?('lazy-loader') ? {
