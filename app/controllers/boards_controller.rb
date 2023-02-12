@@ -50,11 +50,9 @@ class BoardsController < ApplicationController
             turbo_stream.replace('add_board_frame', partial: 'add_board_btn'),
             # despite we use broadcasting we still need next line since we want autoscroll new board into the viewport
             turbo_stream.prepend('boards', partial: 'board', locals: { board: @board, auto_scroll: true }),
-            helpers.turbo_stream_action_tag(
-              'event',
-              name: 'notes_loader',
-              value: ActiveSupport::JSON.encode({ id: @board.id, path: root_path(board: @board.id) })
-            )
+            turbo_stream.event(name: 'notes_loader',
+                               detail: ActiveSupport::JSON.encode({ id: @board.id,
+                                                                    path: root_path(board: @board.id) }))
           ]
         else
           render turbo_stream: [

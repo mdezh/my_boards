@@ -14,6 +14,6 @@ import { parse, fire } from "helpers";
 
 Turbo.StreamActions.event = function() {
   const name = this.getAttribute("name");
-  const value = parse(this.getAttribute("value"));
-  fire(name, value);
+  const detail = parse(this.getAttribute("detail"));
+  fire(name, detail);
 };
