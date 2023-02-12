@@ -1,6 +1,6 @@
 module TurboStreamActionsHelper
-  def event(name:, detail:)
-    turbo_stream_action_tag :event, name:, detail: ActiveSupport::JSON.encode(detail)
+  def event(details:)
+    turbo_stream_action_tag :event, details: ActiveSupport::JSON.encode(details)
   end
 end
 

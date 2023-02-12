@@ -13,7 +13,6 @@ import "bootstrap";
 import { parse, fire } from "helpers";
 
 Turbo.StreamActions.event = function() {
-  const name = this.getAttribute("name");
-  const detail = parse(this.getAttribute("detail"));
-  fire(name, detail);
+  const details = parse(this.getAttribute("details"));
+  Object.keys(details).forEach((key) => fire(key, details[key]));
 };
