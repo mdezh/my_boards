@@ -7,12 +7,7 @@ import "helpers";
 import "@popperjs/core";
 import "bootstrap";
 
+import "turbo_actions";
+
 // import "./init_tooltips";
 // import "./init_popovers";
-
-import { parse, fire } from "helpers";
-
-Turbo.StreamActions.event = function() {
-  const details = parse(this.getAttribute("details"));
-  Object.keys(details).forEach((key) => fire(key, details[key]));
-};

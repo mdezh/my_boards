@@ -9,3 +9,4 @@ pin '@popperjs/core', to: 'popper.js', preload: true
 
 pin_all_from 'app/javascript/controllers', under: 'controllers'
 pin_all_from 'app/javascript/helpers', under: 'helpers'
+pin_all_from 'app/javascript/turbo_actions', under: 'turbo_actions'
