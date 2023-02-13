@@ -11,10 +11,4 @@ module BoardPresenter
       'wrong value'
     end
   end
-
-  def last_update
-    return updated_at unless notes.present?
-
-    [notes.last.updated_at, updated_at].max
-  end
 end
