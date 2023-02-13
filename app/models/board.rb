@@ -1,5 +1,6 @@
 class Board < ApplicationRecord
   include Presenter
+  include BroadcastCustomActions
 
   has_many :notes, dependent: :destroy
   has_many :relations, dependent: :destroy
@@ -69,7 +70,10 @@ class Board < ApplicationRecord
   end
 
   def destroy_board(board)
-    broadcast_render_to [Current.user, board], partial: 'boards/destroy'
+    broadcast_custom_action_to [Current.user, board], action: :event, details: {
+      set_panel_state: { active_panel: 'boards' },
+      notes_loader: { id: 0, path: '/' }
+    }
     broadcast_remove_to(board)
   end
 
