@@ -11,4 +11,8 @@ module BoardPresenter
       'wrong value'
     end
   end
+
+  def created_at_formatted
+    DatetimeService.format_datetime(created_at)
+  end
 end
