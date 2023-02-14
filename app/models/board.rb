@@ -43,7 +43,7 @@ class Board < ApplicationRecord
     use_current_user = true
 
     if Current.user.nil?
-      raise 'Current.user is necessary for board validation on create, but is is nil' unless relations.present?
+      raise 'Current.user is necessary for board validation on create, but it is nil' unless relations.present?
 
       use_current_user = false
     end
