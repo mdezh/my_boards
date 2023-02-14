@@ -7,7 +7,7 @@ class Board < ApplicationRecord
   has_many :users, through: :relations
   belongs_to :owner, class_name: 'User', foreign_key: 'owner_id', default: -> { Current.user }
 
-  enum sharing_status: %i[forbidden public_ro public_rw invite_ro invite_rw]
+  enum sharing_status: %i[forbidden public_ro public_rw]
 
   scope :published, -> { Board.public_ro.or(Board.public_rw) }
 
