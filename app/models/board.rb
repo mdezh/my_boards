@@ -60,8 +60,7 @@ class Board < ApplicationRecord
   end
 
   def add_board(board)
-    user = board.relations.find_by(role: :owner).user
-    broadcast_prepend_later_to(user) unless user.nil?
+    broadcast_prepend_later_to(board.owner)
   end
 
   def update_board(board)
