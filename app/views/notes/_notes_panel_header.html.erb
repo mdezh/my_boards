@@ -12,7 +12,7 @@
     clicker_selector_value: '#board_details_cancel',
     action: 'click->event#fire click->clicker#click',
   } %>
-  <span id="notes_header_board_name" class="normal-height text-truncate mx-3 fw-semibold my-1"><%= @board.name %></span>
+  <span class="bc-board-name normal-height text-truncate mx-3 fw-semibold my-1"><%= @board.name %></span>
   <span class="ms-auto"></span>
   <%= tag.span id: 'board_owner_nickname', class: "me-3 fw-semibold text-secondary #{@board.owner == current_user ? 'hidden' : ''}", data: {
     controller: 'show',

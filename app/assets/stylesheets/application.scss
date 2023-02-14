@@ -101,6 +101,14 @@ main {
   }
 }
 
+.prev-empty {
+  display: none;
+}
+
+*:empty + .prev-empty {
+  display: initial;
+}
+
 .notes-panel-header {
   @extend .border;
   @extend .border-bottom-0;

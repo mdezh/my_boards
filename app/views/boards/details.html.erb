@@ -6,14 +6,15 @@
     }
   }, id: 'set_editing_state' %>
 
-  <%= tag.p class: 'fw-bold fs-5' do %>
+  <%= tag.p class: 'bc-board-name fw-bold fs-5' do %>
     <%= @board.name %>
   <% end %>
-  <% if @board.description.blank? %>
-    <p class="text-secondary">No description</p>
-  <% else %>
-    <p class="preserve-lines"><%= @board.description %></p>
-  <% end %>
+
+  <p>
+    <span class="bc-board-description preserve-lines"><%= @board.description %></span>
+    <span class="prev-empty text-secondary">No description</span>
+  </p>
+
   <p class="mt-5">
     <strong>
       Owner:
