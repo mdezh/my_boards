@@ -1,11 +1,10 @@
-import UseStateController from "controllers/use_state_controller";
+import CheckStateController from "controllers/check_state_controller";
 
 // Connects to data-controller="show"
-export default class Show extends UseStateController {
+export default class ShowController extends CheckStateController {
   static classes = ["shown", "hidden"];
   static values = {
     ...super.values,
-    check: String,
     selector: String,
     oppositeSelector: String,
   };
@@ -22,40 +21,14 @@ export default class Show extends UseStateController {
     this.oppositeElements = this.hasOppositeSelectorValue
       ? Array.from(document.querySelectorAll(this.oppositeSelectorValue))
       : [];
-
-    if (!this.hasCheckValue) {
-      this.checkValue = this.useValue.split(" ").join(" && ");
-    }
   }
 
-  _updateWithState(state) {
-    const checkResult = this._check(state);
-    if (checkResult === this.prevCheckResult) return;
-
+  _onCheckResultChange(checkResult) {
     if (checkResult) {
       this._showHide(this.elements, this.oppositeElements);
     } else {
       this._showHide(this.oppositeElements, this.elements);
     }
-
-    this.prevCheckResult = checkResult;
-  }
-
-  _check(state) {
-    if (!this.checkFunction) {
-      this.checkFunction = this._buildCheckFunction(state);
-    }
-
-    return this.checkFunction(state);
-  }
-
-  _buildCheckFunction(state) {
-    const keys = (stateObj) => "{ " + Object.keys(stateObj).join(", ") + " }";
-
-    return new Function(
-      "state",
-      `const ${keys(state)} = state; return ${this.checkValue};`
-    );
   }
 
   _showHide(elementsToShow, elementsToHide) {

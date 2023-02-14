@@ -1,7 +1,7 @@
-import Show from "controllers/show_controller";
+import ShowController from "controllers/show_controller";
 
 // Connects to data-controller="hide"
-export default class extends Show {
+export default class extends ShowController {
   _check(state) {
     return !super._check(state);
   }
