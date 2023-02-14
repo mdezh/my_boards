@@ -70,6 +70,8 @@ class Board < ApplicationRecord
     broadcast_update_later_to [board, :notes], target: nil, targets: '.bc-board-description', html: board.description
     broadcast_update_later_to [board, :notes], target: nil, targets: '.bc-board-sharing-status',
                                                html: board.sharing_status_humanized
+    broadcast_replace_later_to [board, :notes], target: 'set_state', partial: 'shared/set_state',
+                                                locals: { value: { board_state: { public_rw: board.public_rw? } } }
   end
 
   def destroy_board(board)
