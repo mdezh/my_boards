@@ -1,7 +1,11 @@
 <%= turbo_stream.replace 'set_state' do %>
-  <%= render 'shared/set_state', value: {
-    panel_state: {
+  <%= render 'shared/event', value: {
+    set_panel_state: {
       active_panel: 'boards'
+    },
+    notes_loader: {
+      id: 0,
+      path: root_path
     }
   } %>
 <% end %>

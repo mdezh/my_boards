@@ -1,0 +1,9 @@
+<% if defined?(value) %>
+  <%= tag.div id: "#{defined?(id) ? id : 'set_state' }", class: 'hidden', data: {
+    controller: 'event',
+    event_payload_value: value,
+    event_on_connect_value: true
+  } %>
+<% else %>
+  <div id="set_state" class="hidden"></div>
+<% end %>
