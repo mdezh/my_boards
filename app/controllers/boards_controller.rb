@@ -67,6 +67,13 @@ class BoardsController < ApplicationController
 
   def update
     if @board.update(board_params)
+      if @board.forbidden?
+        @board.relations.subscriber.destroy_all
+        @board.broadcast_remove_to [@board, :joined]
+        @board.broadcast_render_later_to [@board, :notes, :joined],
+                                         partial: 'boards/on_leave_user_board',
+                                         locals: { board: @board }
+      end
       render 'details'
     else
       render partial: 'form_edit', status: :unprocessable_entity
@@ -83,8 +90,11 @@ class BoardsController < ApplicationController
     if relation.save
       relation.broadcast_render_later_to [current_user, @board], partial: 'boards/on_join_user_board',
                                                                  locals: { board: @board }
-      relation.broadcast_render_later_to current_user, partial: 'boards/on_join_user',
-                                                       locals: { board: @board }
+      relation.broadcast_render_later_to current_user,
+                                         partial: 'boards/on_join_user',
+                                         locals: { board: @board, current_user_id: current_user.id }
+      relation.broadcast_update_later_to [@board, :notes], target: nil, targets: '.bc-board-users-count',
+                                                           html: @board.users.count
     else
       head :unprocessable_entity
     end

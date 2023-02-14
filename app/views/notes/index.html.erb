@@ -8,6 +8,7 @@
 
   <% if @board %>
     <%= turbo_stream_from [@board, :notes] %>
+    <%= turbo_stream_from [@board, :notes, :joined] if @joined %>
     <%= turbo_stream_from [current_user, @board] %>
 
     <%= render 'shared/state', id: 'board_state', value: {

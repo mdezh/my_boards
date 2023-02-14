@@ -13,5 +13,6 @@
   lazy_loader_hidden_class: 'invisible hidden'
 } : {}) do %>
   <%= turbo_stream_from board %>
+  <%= turbo_stream_from [board, :joined] if defined?(current_user_id) && current_user_id != board.owner_id  %>
   <%= render "boards/board_inner", board: %>
 <% end %>

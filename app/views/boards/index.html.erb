@@ -28,7 +28,7 @@
       select_board_active_class: 'selected-board'
     } do %>
       <%= render 'no_boards' %>
-      <%= render @boards %>
+      <%= render @boards, current_user_id: current_user.id %>
       <%= tag.div id: 'boards_spinner', class: 'my-4 text-secondary text-center invisible hidden' do %>
         <div class="spinner-grow" role="status">
           <span class="visually-hidden">Loading...</span>
