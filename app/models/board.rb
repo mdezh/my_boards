@@ -64,7 +64,8 @@ class Board < ApplicationRecord
   end
 
   def update_board(board)
-    broadcast_replace_later_to(board)
+    broadcast_replace_later_to board, target: ActionView::RecordIdentifier.dom_id(board, :inner),
+                                      partial: 'boards/board_inner', locals: { board: }
     broadcast_update_later_to [board, :notes], target: nil, targets: '.bc-board-name', html: board.name
     broadcast_update_later_to [board, :notes], target: nil, targets: '.bc-board-description', html: board.description
     broadcast_update_later_to [board, :notes], target: nil, targets: '.bc-board-sharing-status',
