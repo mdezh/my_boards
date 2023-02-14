@@ -109,6 +109,14 @@ main {
   display: initial;
 }
 
+.has-prev {
+  display: none !important;
+}
+
+* + .has-prev {
+  display: initial !important;
+}
+
 .notes-panel-header {
   @extend .border;
   @extend .border-bottom-0;
