@@ -8,8 +8,15 @@
 
   <% if @board %>
     <%= turbo_stream_from [@board, :notes] %>
-    <%= turbo_stream_from [@board, :notes, :joined] if @joined %>
     <%= turbo_stream_from [current_user, @board] %>
+
+    <%= tag.div id: 'stream-for-non-owned', data: {
+      controller: 'connect-children',
+      connect_children_use_value: 'user_board_state',
+      connect_children_check_value: '!owned',
+    } do %>
+      <%= turbo_stream_from [@board, :notes, :joined] %>
+    <% end %>
 
     <%= render 'shared/state', id: 'board_state', value: {
       public_rw: @board.public_rw?,
