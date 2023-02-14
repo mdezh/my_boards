@@ -109,6 +109,6 @@ class BoardsController < ApplicationController
   end
 
   def board_params
-    params.require(:board).permit(:name, :description)
+    params.require(:board).permit(:name, :description, :sharing_status)
   end
 end

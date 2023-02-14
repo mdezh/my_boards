@@ -68,6 +68,8 @@ class Board < ApplicationRecord
     broadcast_replace_later_to(board)
     broadcast_update_later_to [board, :notes], target: nil, targets: '.bc-board-name', html: board.name
     broadcast_update_later_to [board, :notes], target: nil, targets: '.bc-board-description', html: board.description
+    broadcast_update_later_to [board, :notes], target: nil, targets: '.bc-board-sharing-status',
+                                               html: board.sharing_status_humanized
   end
 
   def destroy_board(board)
