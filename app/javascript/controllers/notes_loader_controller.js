@@ -18,7 +18,7 @@ export default class extends UseStateController {
       document
         .querySelectorAll(".cancel-btn-details")
         .forEach((btn) => btn.click());
-      fire("set_panel_state", { active_panel: "notes" });
+      id && fire("set_panel_state", { active_panel: "notes" });
     }
   }
 
