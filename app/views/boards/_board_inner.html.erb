@@ -11,7 +11,7 @@
         },
         action: 'event#fire'
       }, class: "h6 my-2 normal-height text-truncate btn btn-link stretched-link board-name" %>
-      <%= tag.small class: 'text-secondary hidden', data: {
+      <%= tag.small id: 'owner_nickname', class: 'text-secondary hidden', data: {
         controller: 'hide',
         hide_use_value: 'user_state',
         hide_check_value: "current_user == #{board.owner_id}"
