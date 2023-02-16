@@ -1,0 +1,41 @@
+version: "3.7"
+
+services:
+  caddy:
+    image: caddy:2.6.3-alpine
+    container_name: caddy
+    restart: unless-stopped
+    depends_on:
+      - my_boards
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - app_static:/srv
+      - caddy_data:/data
+      - caddy_config:/config
+    networks:
+      - inner
+    environment:
+      SITE_ADDRESS: ${SITE_ADDRESS}
+
+  my_boards:
+    build: .
+    container_name: my_boards
+    restart: unless-stopped
+    volumes:
+      - app_static:/rails/public
+    networks:
+      - inner
+
+volumes:
+  caddy_data:
+    external: true
+  caddy_config:
+  app_static:
+
+networks:
+  inner:
+    driver: bridge

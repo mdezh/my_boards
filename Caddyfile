@@ -1,0 +1,8 @@
+{$SITE_ADDRESS}
+
+root * /srv
+file_server
+@notStatic {
+  not file
+}
+reverse_proxy @notStatic my_boards:3000
