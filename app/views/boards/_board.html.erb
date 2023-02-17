@@ -2,8 +2,7 @@
   controllers << 'scroll-into-view' if defined?(auto_scroll)
   controllers << 'lazy-loader' if @more_pages && board.id == @loading_trigger
 %>
-<%= tag.div id: dom_id(board), class: 'list-group-item', data: {
-  state_counter_target: 'item',
+<%= tag.div id: dom_id(board), class: 'item list-group-item', data: {
   select_board_target: 'board'
 }.merge(controllers.present? ? {
   controller: controllers.join(' ')

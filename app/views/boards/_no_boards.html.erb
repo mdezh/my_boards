@@ -1,7 +1,4 @@
-<%= tag.div id: 'no_boards', class: "#{@boards.size.zero? ? '' : 'hidden'} flex-grow-1 d-flex align-items-center", data: {
-  controller: 'hide',
-  hide_use_value: 'boards'
-} do %>
+<%= tag.div id: 'no_boards', class: "flex-grow-1 d-flex align-items-center no-items-before" do %>
   <div class="w-100 text-center text-secondary">
     No boards yet
   </div>

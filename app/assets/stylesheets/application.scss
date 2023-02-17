@@ -117,6 +117,10 @@ main {
   display: initial !important;
 }
 
+.item ~ .no-items-before {
+  display: none !important;
+}
+
 .notes-panel-header {
   @extend .border;
   @extend .border-bottom-0;
