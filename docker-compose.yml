@@ -27,6 +27,7 @@ services:
     restart: unless-stopped
     volumes:
       - app_static:/rails/public
+      - ../sqlite/my_boards:/rails/sqlite
     networks:
       - inner
 
