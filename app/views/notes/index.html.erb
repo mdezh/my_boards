@@ -43,10 +43,12 @@
     <% end %>
     <div class="d-flex flex-column-reverse flex-grow-1 overflow-auto shadow <%= rounded %> border text-bg-light">
       <% if @board %>
-        <%= tag.div id: 'notes', class: 'd-flex flex-column-reverse list-group list-group-flush flex-grow-1 overflow-auto', data: {
+        <%= tag.div id: 'notes', class: 'notes-panel-elem d-flex flex-column-reverse list-group list-group-flush flex-grow-1 overflow-auto', data: {
           controller: 'hide event',
           hide_use_value: 'details_state',
           hide_check_value: 'show_details',
+          hide_selector_value: '.notes-panel-elem',
+          hide_opposite_selector_value: '.details-elem',
           event_on_connect_value: true,
           event_payload_value: {
             set_panel_state: {
@@ -68,14 +70,10 @@
       <% end %>
     </div>
     <% if @board %>
-      <%= tag.div data: {
-        controller: 'hide',
-        hide_use_value: 'details_state',
-        hide_check_value: 'show_details',
-      } do %>
+      <%= tag.div class: 'notes-panel-elem' do %>
         <%= render 'add_form', board: @board, owned: @owned, joined: @joined %>
+        <%= render 'boards/join_btn', board: @board, belongs: @owned || @joined %>
       <% end %>
-      <%= render 'boards/join_btn', board: @board, belongs: @owned || @joined %>
     <% end %>
  <% end %>
 
