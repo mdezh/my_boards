@@ -32,13 +32,15 @@ export default class ShowController extends CheckStateController {
   }
 
   _showHide(elementsToShow, elementsToHide) {
-    elementsToShow.forEach((elem) => {
-      elem.classList.add(...this.classesToShow);
-      elem.classList.remove(...this.classesToHide);
-    });
-    elementsToHide.forEach((elem) => {
-      elem.classList.add(...this.classesToHide);
-      elem.classList.remove(...this.classesToShow);
+    window.requestAnimationFrame(() => {
+      elementsToShow.forEach((elem) => {
+        elem.classList.add(...this.classesToShow);
+        elem.classList.remove(...this.classesToHide);
+      });
+      elementsToHide.forEach((elem) => {
+        elem.classList.add(...this.classesToHide);
+        elem.classList.remove(...this.classesToShow);
+      });
     });
   }
 }

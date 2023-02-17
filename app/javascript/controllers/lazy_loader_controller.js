@@ -44,11 +44,15 @@ export default class extends Controller {
   }
 
   showIndicator() {
-    this.indicator?.classList.remove(...this.hiddenClasses);
+    window.requestAnimationFrame(() => {
+      this.indicator?.classList.remove(...this.hiddenClasses);
+    });
   }
 
   hideIndicator() {
-    this.indicator?.classList.add(...this.hiddenClasses);
+    window.requestAnimationFrame(() => {
+      this.indicator?.classList.add(...this.hiddenClasses);
+    });
   }
 
   disconnect() {
