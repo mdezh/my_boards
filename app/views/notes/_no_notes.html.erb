@@ -1,7 +1,4 @@
-<%= tag.div id: 'no_notes', class: 'flex-grow-1 d-flex align-items-center' + (hidden ? ' hidden' : ''), data: {
-  controller: 'hide',
-  hide_use_value: 'notes',
-} do %>
+<%= tag.div id: 'no_notes', class: 'flex-grow-1 d-flex align-items-center no-items-before' do %>
   <div class="w-100 text-center text-secondary">
     No notes on the board yet
   </div>

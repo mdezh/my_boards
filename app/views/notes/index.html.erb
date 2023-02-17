@@ -43,7 +43,7 @@
     <% end %>
     <div class="d-flex flex-column-reverse flex-grow-1 overflow-auto shadow <%= rounded %> border text-bg-light">
       <% if @board %>
-        <%= tag.div class: 'd-flex flex-column-reverse flex-grow-1 overflow-auto', data: {
+        <%= tag.div id: 'notes', class: 'd-flex flex-column-reverse list-group list-group-flush flex-grow-1 overflow-auto', data: {
           controller: 'hide event',
           hide_use_value: 'details_state',
           hide_check_value: 'show_details',
@@ -54,17 +54,13 @@
             }
           }
         } do %>
-          <%= render 'no_notes', hidden: @notes.present? %>
-          <div id="notes" class="overflow-auto list-group list-group-flush d-flex flex-column-reverse"
-            data-controller="state-counter"
-          >
-            <%= render @notes, user_id: current_user.id %>
-            <div id="notes_spinner" class="has-prev my-4 text-secondary text-center invisible">
-              <div class="spinner-grow" role="status">
-                <span class="visually-hidden">Loading...</span>
-              </div>
+          <%= render @notes, user_id: current_user.id %>
+          <div id="notes_spinner" class="has-prev my-4 text-secondary text-center invisible">
+            <div class="spinner-grow" role="status">
+              <span class="visually-hidden">Loading...</span>
             </div>
           </div>
+          <%= render 'no_notes', hidden: @notes.present? %>
         <% end %>
         <%= render 'board_details', board: @board %>
       <% else %>
