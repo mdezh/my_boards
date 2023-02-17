@@ -110,11 +110,11 @@ main {
 }
 
 .has-prev {
-  display: none !important;
+  display: none;
 }
 
 * + .has-prev {
-  display: initial !important;
+  display: initial;
 }
 
 .item ~ .no-items-before {
