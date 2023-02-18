@@ -25,6 +25,12 @@
     <i class="bi bi-three-dots-vertical" type="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
     <ul class="dropdown-menu">
       <li>
+        <%= tag.button 'Copy link', id: 'copy_link_menu', class: 'dropdown-item', data: {
+          controller: 'clipboard',
+          action: 'click->clipboard#copyLocation'
+        } %>
+      </li>
+      <li>
         <%= tag.button 'Details', id: 'to_details_menu', class: 'dropdown-item', data: {
           controller: 'event show',
           event_payload_value: { set_details_state: { show_details: true }},
