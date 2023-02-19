@@ -59,7 +59,7 @@ main {
 }
 
 .full-column {
-  height: calc(100vh - 10rem);
+  height: calc(100dvh - 6.2rem);
 }
 
 .growing-text {
@@ -88,10 +88,6 @@ main {
 }
 
 @include media-breakpoint-up(md) {
-  .full-column {
-    height: calc(100vh - 6rem);
-  }
-
   .hidden-below-md {
     display: block !important;
   }
