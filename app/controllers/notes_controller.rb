@@ -59,7 +59,11 @@ class NotesController < ApplicationController
 
   def update
     if @note.update(note_params)
-      head :ok
+      render turbo_stream: turbo_stream.replace(
+        helpers.dom_id(@note),
+        partial: 'notes/note',
+        locals: { note: @note, user_id: current_user.id }
+      )
     else
       render 'edit', status: :unprocessable_entity
     end

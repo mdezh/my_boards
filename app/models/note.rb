@@ -25,7 +25,8 @@ class Note < ApplicationRecord
   end
 
   def update_note(note)
-    broadcast_replace_later_to [note.board, :notes]
+    broadcast_replace_later_to [note.board, :notes], target: ActionView::RecordIdentifier.dom_id(note, :inner_show),
+                                                     partial: 'notes/note_inner_show', locals: { note:, user_id: 0 }
   end
 
   def destroy_note(note)

@@ -1,0 +1,32 @@
+<%= tag.div id: dom_id(note, :inner_show) do %>
+  <div class="hover-wrapper">
+    <%= tag.div class: 'd-flex align-items-center hover-trigger', data: {
+      controller: 'clicker note',
+      clicker_selector_value: '.cancel-btn',
+      note_use_value: 'user_state board_state user_board_state',
+      note_user_value: note.user_id
+    } do %>
+      <div class="d-flex flex-column w-100">
+        <div class="note-content">
+          <span class="preserve-lines"><%= sanitize note.content %></span>
+        </div>
+        <div class="text-secondary d-flex flex-row-reverse">
+          <small class="<%= 'hidden' if user_id == 0 || user_id == note.user_id %>" data-note-target="nick">
+            &nbsp;by <%= note.user.nickname %>
+          </small>
+          <small class="<%= 'invisible' if user_id == 0 %>" data-note-target="time">
+            <%= note.time_mark %>
+          </small>
+        </div>
+      </div>
+      <div class="hover-content-block shadow">
+        <div class="btn-group" role="group">
+          <%= link_to "", edit_note_path(note), class: "btn btn-secondary btn-sm bi bi-pen",
+            role: "button", data: { note_target: 'edit', action: "click->clicker#click" } %>
+          <%= link_to "", note, data: { note_target: 'delete', turbo_method: :delete, turbo_confirm: "Are you sure?" },
+            class: "btn btn-danger btn-sm bi bi-trash", role: "button" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>
