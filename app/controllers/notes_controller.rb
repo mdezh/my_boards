@@ -7,31 +7,19 @@ class NotesController < ApplicationController
   before_action :authorize_board!, only: %i[index create]
   after_action :verify_authorized
 
-  NOTES_PER_FIRST_PAGE = 20
-  NOTES_PER_NEXT_PAGE = 10
-  TRIGGER_FROM_EDGE = 2
-
   def index
-    if @board.nil?
-      @notes = []
-      return
-    end
+    @notes = [] and return unless @board
 
-    @cursor = params[:cursor]&.to_i || (Note.last&.id || 0) + 1
-    amount = params[:cursor] ? NOTES_PER_NEXT_PAGE : NOTES_PER_FIRST_PAGE
-    @notes = @board.notes.where('id < ?', @cursor).order(id: :desc).includes(:user).take(amount)
-    @next_cursor = @notes.last&.id
-    @loading_trigger = if @notes.empty?
-                         nil
-                       else
-                         @notes.count < TRIGGER_FROM_EDGE ? @notes.last.id : @notes[-TRIGGER_FROM_EDGE].id
-                       end
-    @more_pages = @next_cursor.present? && @notes.count == amount
-    return unless params[:cursor]
+    cursor = params[:cursor]&.to_i
 
-    render turbo_stream: turbo_stream.after(
-      Note.new(id: @cursor), partial: 'note', collection: @notes
+    scroller = InfiniteScrollService.new(trigger_shift: -2, order: :desc)
+    @notes, @next_cursor, @loading_trigger = scroller.page_from(
+      @board.notes.includes(:user),
+      cursor
     )
+    return unless cursor
+
+    render turbo_stream: turbo_stream.before('notes_spinner', partial: 'note', collection: @notes)
   end
 
   def create
