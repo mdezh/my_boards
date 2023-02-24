@@ -28,7 +28,7 @@
     <% end %>
 
     <%= f.label :sharing_status, 'Sharing status', class: 'mt-3 form-label' %>
-    <%= f.select :sharing_status, Board.sharing_statuses.map { |status, _v| [BoardService.humanize_sharing_status(status), status] },
+    <%= f.select :sharing_status, Board.sharing_statuses.map { |status, _v| [SharingStatusService.humanize(status), status] },
       {}, class: 'form-select'
     %>
 

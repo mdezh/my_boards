@@ -1,6 +1,6 @@
 module BoardPresenter
   def sharing_status_humanized
-    BoardService.humanize_sharing_status(sharing_status)
+    SharingStatusService.humanize(sharing_status)
   end
 
   def created_at_formatted

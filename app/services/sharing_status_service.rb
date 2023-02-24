@@ -1,5 +1,5 @@
-class BoardService
-  def self.humanize_sharing_status(sharing_status)
+class SharingStatusService
+  def self.humanize(sharing_status)
     case sharing_status
     when 'forbidden'
       'private'
