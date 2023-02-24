@@ -5,32 +5,18 @@ class BoardsController < ApplicationController
   before_action :authorize_board!
   after_action :verify_authorized
 
-  BOARDS_PER_FIRST_PAGE = 20
-  BOARDS_PER_NEXT_PAGE = 10
-  TRIGGER_FROM_BOTTOM = 3
-
   def index
     @active_board_id = params[:board]
-    @cursor = params[:cursor]&.to_i || (Board.last&.id || 0) + 1
-    amount = params[:cursor] ? BOARDS_PER_NEXT_PAGE : BOARDS_PER_FIRST_PAGE
-    @boards = policy_scope(Board)
-              .where('board_id < ?', @cursor)
-              .select('boards.*, relations.id as position')
-              .order(position: :desc)
-              .includes(:owner)
-              .take(amount)
-    @next_cursor = @boards.last&.id
-    @loading_trigger = if @boards.empty?
-                         nil
-                       else
-                         @boards.count < TRIGGER_FROM_BOTTOM ? @boards.first.id : @boards[-TRIGGER_FROM_BOTTOM].id
-                       end
-    @more_pages = @next_cursor.present? && @boards.count == amount
-    return unless params[:cursor]
+    cursor = params[:cursor]&.to_i
 
-    render turbo_stream: turbo_stream.after(
-      Board.new(id: @cursor), partial: 'board', collection: @boards
+    scroller = InfiniteScrollService.new(trigger_shift: -3, cursor_column: :position, order: :desc)
+    @boards, @next_cursor, @loading_trigger = scroller.page_from(
+      policy_scope(Board).select('boards.*, relations.id as position').includes(:owner),
+      cursor
     )
+    return unless cursor
+
+    render turbo_stream: turbo_stream.before('boards_spinner', partial: 'board', collection: @boards)
   end
 
   def show
