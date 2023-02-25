@@ -31,7 +31,7 @@ class NotesController < ApplicationController
 
   def destroy
     @note.destroy
-    head :ok
+    render turbo_stream: turbo_stream.remove(@note)
   end
 
   def update
