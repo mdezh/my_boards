@@ -17,6 +17,8 @@ class Board < ApplicationRecord
 
   before_validation :prepare_fields
 
+  after_update ->(board) { board.relations.subscriber.delete_all if board.forbidden? }
+
   after_create_commit ->(board) { add_board board }
   after_update_commit ->(board) { update_board board }
   after_destroy_commit ->(board) { destroy_board board }
@@ -72,6 +74,14 @@ class Board < ApplicationRecord
                                                html: board.sharing_status_humanized
     broadcast_replace_later_to [board, :notes], target: 'set_state', partial: 'shared/set_state',
                                                 locals: { value: { board_state: { public_rw: board.public_rw? } } }
+    return unless board.forbidden?
+
+    broadcast_remove_to [board, :joined]
+    broadcast_render_later_to [board, :notes, :joined],
+                              partial: 'boards/on_leave_user_board',
+                              locals: { board: }
+    broadcast_update_later_to [board, :notes], target: nil, targets: '.bc-board-users-count',
+                                               html: board.users.count
   end
 
   def destroy_board(board)
