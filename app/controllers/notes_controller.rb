@@ -24,20 +24,9 @@ class NotesController < ApplicationController
 
   def create
     @note = @board.notes.build(note_params)
-    respond_to do |f|
-      f.turbo_stream do
-        if @note.save
-          render turbo_stream: [
-            # despite we use broadcasting we still need next line since we want autoscroll new note into the viewport
-            turbo_stream.prepend('notes', partial: 'note', locals: { note: @note, auto_scroll: true }),
-            turbo_stream.replace('add_note', partial: 'add_form',
-                                             locals: { board: @board, owned: @owned, joined: @joined })
-          ]
-        else
-          head :ok
-        end
-      end
-    end
+    return if @note.save
+
+    head :ok
   end
 
   def destroy

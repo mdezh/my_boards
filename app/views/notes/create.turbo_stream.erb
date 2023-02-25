@@ -1,0 +1,2 @@
+<%= turbo_stream.prepend 'notes', partial: 'note', locals: { note: @note, auto_scroll: true } %>
+<%= turbo_stream.replace 'add_note', partial: 'add_form', locals: { board: @board, owned: @owned, joined: @joined } %>
