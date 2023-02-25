@@ -1,0 +1,3 @@
+<%= turbo_stream.replace 'add_board_frame', partial: 'add_board_btn' %>
+<%= turbo_stream.prepend 'boards', partial: 'board', locals: { board: @board, auto_scroll: true } %>
+<%= turbo_stream.event details: { notes_loader: { id: @board.id, path: root_path(board: @board.id) } } %>
