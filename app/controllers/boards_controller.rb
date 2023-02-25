@@ -50,7 +50,6 @@ class BoardsController < ApplicationController
 
   def destroy
     @board.destroy
-    head :ok
   end
 
   def join
