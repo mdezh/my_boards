@@ -69,7 +69,7 @@ class BoardsController < ApplicationController
   end
 
   def leave
-    Relation.where(user_id: current_user.id, board_id: @board.id).subscriber.destroy_all
+    Relation.where(user_id: current_user.id, board_id: @board.id).subscriber.delete_all
     @board.broadcast_render_later_to current_user, partial: 'boards/on_leave_user',
                                                    locals: { board: @board }
     @board.broadcast_render_later_to [current_user, @board], partial: 'boards/on_leave_user_board',
