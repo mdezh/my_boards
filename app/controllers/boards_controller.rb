@@ -55,17 +55,14 @@ class BoardsController < ApplicationController
 
   def join
     relation = current_user.relations.build(board: @board, role: Relation.roles[:subscriber])
-    if relation.save
-      relation.broadcast_render_later_to [current_user, @board], partial: 'boards/on_join_user_board',
-                                                                 locals: { board: @board }
-      relation.broadcast_render_later_to current_user,
-                                         partial: 'boards/on_join_user',
-                                         locals: { board: @board, current_user_id: current_user.id }
-      relation.broadcast_update_later_to [@board, :notes], target: nil, targets: '.bc-board-users-count',
-                                                           html: @board.users.count
-    else
-      head :unprocessable_entity
-    end
+    head :unprocessable_entity and return unless relation.save
+
+    @board.broadcast_render_later_to [current_user, @board], partial: 'boards/on_join_user_board',
+                                                             locals: { board: @board }
+    @board.broadcast_render_later_to current_user, partial: 'boards/on_join_user',
+                                                   locals: { board: @board, current_user_id: current_user.id }
+    @board.broadcast_update_later_to [@board, :notes], target: nil, targets: '.bc-board-users-count',
+                                                       html: @board.users.count
   end
 
   def leave
@@ -74,6 +71,8 @@ class BoardsController < ApplicationController
                                                    locals: { board: @board }
     @board.broadcast_render_later_to [current_user, @board], partial: 'boards/on_leave_user_board',
                                                              locals: { board: @board }
+    @board.broadcast_update_later_to [@board, :notes], target: nil, targets: '.bc-board-users-count',
+                                                       html: @board.users.count
   end
 
   private
