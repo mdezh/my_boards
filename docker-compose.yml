@@ -13,6 +13,7 @@ services:
       - "443:443/udp"
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile
+      - /var/log/caddy:/var/log/caddy
       - app_static:/srv
       - caddy_data:/data
       - caddy_config:/config
