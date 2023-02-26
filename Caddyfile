@@ -1,8 +1,15 @@
-{$SITE_ADDRESS}
-
-root * /srv
-file_server
-@notStatic {
-  not file
+{$SITE_ADDRESS} {
+  root * /srv
+  file_server
+  @notStatic {
+    not file
+  }
+  reverse_proxy @notStatic my_boards:3000
+  log {
+    output file /var/log/caddy/{$SITE_ADDRESS}-access.log {
+      roll_size 10mb
+      roll_keep 15
+      roll_keep_for 1500h
+    }
+  }
 }
-reverse_proxy @notStatic my_boards:3000
